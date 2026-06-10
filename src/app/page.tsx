@@ -5,6 +5,7 @@ import SpectalExperience from "@/components/canvas/SpectalExperience";
 import Preloader from "@/components/ui/Preloader";
 import AudioEngine from "@/components/audio/AudioEngine";
 import Footer from "@/components/layout/Footer";
+import RotatingArch from "@/components/ui/RotatingArch";
 
 export default function Home() {
   return (
@@ -276,6 +277,7 @@ export default function Home() {
         {/* Section 8: Work Teaser — removed text overlay */}
         <section id="work-teaser" className="w-full min-h-[50vh] pointer-events-none" />
 
+        <RotatingArch />
         <Footer />
       </div>
     </main>
