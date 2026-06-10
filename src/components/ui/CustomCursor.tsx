@@ -14,18 +14,16 @@ export default function CustomCursor() {
 
     const handleMouseOver = (e: MouseEvent) => {
       // Expand cursor when hovering over clickable elements or elements with 'data-interactive'
-      const target = e.target as HTMLElement;
-      if (
-        target.tagName.toLowerCase() === "a" ||
-        target.tagName.toLowerCase() === "button" ||
-        target.closest("a") ||
-        target.closest("button") ||
-        target.dataset.interactive
-      ) {
-        setIsHovering(true);
-      } else {
-        setIsHovering(false);
-      }
+      const target = e.target as HTMLElement | null;
+      if (!target) return;
+
+      const isInteractive = 
+        target.tagName?.toLowerCase() === "a" ||
+        target.tagName?.toLowerCase() === "button" ||
+        (typeof target.closest === "function" && (target.closest("a") || target.closest("button"))) ||
+        (target.dataset && target.dataset.interactive);
+
+      setIsHovering(!!isInteractive);
     };
 
     window.addEventListener("mousemove", updateMousePosition);

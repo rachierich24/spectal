@@ -9,24 +9,11 @@ export default function Preloader() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Artificial minimum delay for dramatic effect
-    const timer = setTimeout(() => {
-      if (progress === 100) {
+    if (progress === 100) {
+      const timer = setTimeout(() => {
         setLoading(false);
-      }
-    }, 2000);
-
-    if (progress === 100) {
-      // If loaded quickly, still ensure we wait the 2 seconds
-    }
-    
-    return () => clearTimeout(timer);
-  }, [progress]);
-
-  // Fallback if 100% is reached after 2 seconds
-  useEffect(() => {
-    if (progress === 100) {
-      setTimeout(() => setLoading(false), 2000);
+      }, 1500); // 1.5s delay for smooth theatrical transition
+      return () => clearTimeout(timer);
     }
   }, [progress]);
 

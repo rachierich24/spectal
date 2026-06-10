@@ -3,6 +3,7 @@
 import { useRef, useMemo } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
+import { scrollStore } from "@/lib/scrollStore";
 
 const waveVertexShader = `
   uniform float uTime;
@@ -93,9 +94,7 @@ export default function EnergyWaves() {
   );
 
   useFrame((state) => {
-    const scrollY = window.scrollY;
-    const windowHeight = window.innerHeight;
-    const scrollProgress = scrollY / windowHeight;
+    const scrollProgress = scrollStore.progress;
 
     if (meshRef.current) {
       const isVisible = scrollProgress > 1.0 && scrollProgress < 4.0;

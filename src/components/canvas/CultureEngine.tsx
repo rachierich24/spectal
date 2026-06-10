@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
+import { scrollStore } from "@/lib/scrollStore";
 
 export default function CultureEngine() {
   const engineRef = useRef<THREE.Group>(null);
@@ -13,9 +14,7 @@ export default function CultureEngine() {
   const coreRef = useRef<THREE.Mesh>(null);
 
   useFrame((state) => {
-    const scrollY = window.scrollY;
-    const windowHeight = window.innerHeight;
-    const scrollProgress = scrollY / windowHeight;
+    const scrollProgress = scrollStore.progress;
 
     if (engineRef.current) {
       const isVisible = scrollProgress > 4.5 && scrollProgress < 7.5;

@@ -1,8 +1,9 @@
 "use client";
 
-import { useRef, useMemo } from "react";
+import { useRef, useMemo, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
+import { scrollStore } from "@/lib/scrollStore";
 
 export default function ConstellationGalaxy() {
   const groupRef = useRef<THREE.Group>(null);
@@ -31,7 +32,7 @@ export default function ConstellationGalaxy() {
   }, [starCount]);
 
   // Set initial instance matrices
-  useMemo(() => {
+  useEffect(() => {
     if (!starsRef.current) return;
     particles.forEach((particle, i) => {
       dummy.position.set(particle.x, particle.y, particle.z);
@@ -45,9 +46,7 @@ export default function ConstellationGalaxy() {
   }, [particles, dummy]);
 
   useFrame((state) => {
-    const scrollY = window.scrollY;
-    const windowHeight = window.innerHeight;
-    const scrollProgress = scrollY / windowHeight;
+    const scrollProgress = scrollStore.progress;
 
     if (groupRef.current) {
       const isVisible = scrollProgress > 2.5 && scrollProgress < 5.5;

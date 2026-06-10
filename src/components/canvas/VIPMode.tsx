@@ -20,9 +20,22 @@ export default function VIPMode() {
       }
     };
 
+    const handleToggleVip = () => {
+      setIsVip((prev) => !prev);
+    };
+
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    window.addEventListener("toggle-vip", handleToggleVip);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("toggle-vip", handleToggleVip);
+    };
   }, []);
+
+  useEffect(() => {
+    // Dispatch event to notify Header about the VIP state change
+    window.dispatchEvent(new CustomEvent("vip-changed", { detail: isVip }));
+  }, [isVip]);
 
   useEffect(() => {
     // Traverse the scene and set wireframe to true on all materials

@@ -3,6 +3,7 @@
 import { useRef, useMemo, useEffect, useState } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
+import { scrollStore } from "@/lib/scrollStore";
 
 const particleVertexShader = `
   uniform float uTime;
@@ -151,9 +152,7 @@ export default function ArrivalStar() {
   );
 
   useFrame((state) => {
-    const scrollY = window.scrollY;
-    const windowHeight = window.innerHeight;
-    const scrollProgress = Math.min(scrollY / windowHeight, 1.0);
+    const scrollProgress = Math.min(scrollStore.progress, 1.0);
 
     if (materialRef.current) {
       materialRef.current.uniforms.uTime.value = state.clock.elapsedTime;
@@ -181,27 +180,19 @@ export default function ArrivalStar() {
       <bufferGeometry>
         <bufferAttribute
           attach="attributes-position"
-          count={geometryData.count}
-          array={geometryData.positions}
-          itemSize={3}
+          args={[geometryData.positions, 3]}
         />
         <bufferAttribute
           attach="attributes-originalPosition"
-          count={geometryData.count}
-          array={geometryData.positions}
-          itemSize={3}
+          args={[geometryData.positions, 3]}
         />
         <bufferAttribute
           attach="attributes-color"
-          count={geometryData.count}
-          array={geometryData.colors}
-          itemSize={3}
+          args={[geometryData.colors, 3]}
         />
         <bufferAttribute
           attach="attributes-explosionDirection"
-          count={geometryData.count}
-          array={geometryData.directions}
-          itemSize={3}
+          args={[geometryData.directions, 3]}
         />
       </bufferGeometry>
       <shaderMaterial

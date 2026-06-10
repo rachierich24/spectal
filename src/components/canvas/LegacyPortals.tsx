@@ -4,15 +4,14 @@ import { useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
 import { MeshPortalMaterial, Environment, Text } from "@react-three/drei";
 import * as THREE from "three";
+import { scrollStore } from "@/lib/scrollStore";
 
 export default function LegacyPortals() {
   const groupRef = useRef<THREE.Group>(null);
   
   // Section 5 is active around scrollProgress 4.5 to 5.5
   useFrame(() => {
-    const scrollY = window.scrollY;
-    const windowHeight = window.innerHeight;
-    const scrollProgress = scrollY / windowHeight;
+    const scrollProgress = scrollStore.progress;
 
     if (groupRef.current) {
       const isVisible = scrollProgress > 3.5 && scrollProgress < 6.5;
@@ -55,12 +54,22 @@ export default function LegacyPortals() {
   );
 }
 
-function PortalItem({ position, rotation, title, color }: any) {
+interface PortalItemProps {
+  position: [number, number, number];
+  rotation: [number, number, number];
+  title: string;
+  color: string;
+}
+
+function PortalItem({ position, rotation, title, color }: PortalItemProps) {
   const portalRef = useRef<any>(null);
   const meshRef = useRef<THREE.Mesh>(null);
   const [hovered, setHover] = useState(false);
 
   useFrame((state, delta) => {
+    const scrollProgress = scrollStore.progress;
+    if (scrollProgress < 3.5 || scrollProgress > 6.5) return;
+
     if (portalRef.current) {
       // Animate portal blend when hovered
       const targetBlend = hovered ? 1 : 0;
@@ -83,7 +92,7 @@ function PortalItem({ position, rotation, title, color }: any) {
         onPointerOut={() => setHover(false)}
       >
         <planeGeometry args={[2.5, 3.5]} />
-        <MeshPortalMaterial ref={portalRef} blend={0}>
+        <MeshPortalMaterial ref={portalRef} blend={0} blur={0} resolution={512}>
           <color attach="background" args={[color]} />
           <Environment preset="city" />
           <ambientLight intensity={0.5} />

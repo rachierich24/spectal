@@ -66,6 +66,7 @@ export default function AudioEngine() {
   useEffect(() => {
     let lastScrollY = window.scrollY;
     let ticking = false;
+    let timeoutId: any = null;
 
     const handleScroll = () => {
       if (!ticking) {
@@ -85,14 +86,22 @@ export default function AudioEngine() {
             oscRef.current.frequency.setTargetAtTime(targetFreq, now, 0.1);
             gainRef.current.gain.setTargetAtTime(targetGain, now, 0.1);
 
+            // Debounce the return-to-baseline
+            if (timeoutId) {
+              clearTimeout(timeoutId);
+            }
+
             // Return to baseline when stopping
-            setTimeout(() => {
+            timeoutId = setTimeout(() => {
               if (audioCtxRef.current && oscRef.current && gainRef.current) {
                 const future = audioCtxRef.current.currentTime;
-                oscRef.current.frequency.setTargetAtTime(55, future, 0.5);
-                gainRef.current.gain.setTargetAtTime(0.1, future, 0.5);
+                const currentProgress = window.scrollY / window.innerHeight;
+                if (currentProgress < 6.5) {
+                  oscRef.current.frequency.setTargetAtTime(55, future, 0.5);
+                  gainRef.current.gain.setTargetAtTime(0.1, future, 0.5);
+                }
               }
-            }, 100);
+            }, 150);
             
             // Silence section cutoff
             const windowHeight = window.innerHeight;
@@ -110,7 +119,12 @@ export default function AudioEngine() {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
   }, []);
 
   return null; // This is a headless component

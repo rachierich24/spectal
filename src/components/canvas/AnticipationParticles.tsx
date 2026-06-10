@@ -3,6 +3,7 @@
 import { useRef, useMemo, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
+import { scrollStore } from "@/lib/scrollStore";
 
 const particleVertexShader = `
   uniform float uTime;
@@ -105,9 +106,7 @@ export default function AnticipationParticles() {
   );
 
   useFrame((state) => {
-    const scrollY = window.scrollY;
-    const windowHeight = window.innerHeight;
-    const scrollProgress = scrollY / windowHeight;
+    const scrollProgress = scrollStore.progress;
 
     if (pointsRef.current) {
       const isVisible = scrollProgress > 0.5 && scrollProgress < 2.5;
@@ -138,21 +137,15 @@ export default function AnticipationParticles() {
       <bufferGeometry>
         <bufferAttribute
           attach="attributes-position"
-          count={particleCount}
-          array={positions}
-          itemSize={3}
+          args={[positions, 3]}
         />
         <bufferAttribute
           attach="attributes-targetPosition1"
-          count={particleCount}
-          array={target1}
-          itemSize={3}
+          args={[target1, 3]}
         />
         <bufferAttribute
           attach="attributes-targetPosition2"
-          count={particleCount}
-          array={target2}
-          itemSize={3}
+          args={[target2, 3]}
         />
       </bufferGeometry>
       <shaderMaterial
