@@ -3,12 +3,13 @@
 import { useEffect, useState } from "react";
 
 const NAV_ITEMS = [
-  { label: "Summit", href: "#arrival" },
-  { label: "Metrics", href: "#anticipation" },
-  { label: "Tracks", href: "#energy" },
-  { label: "Talent", href: "#impact" },
-  { label: "Archives", href: "#legacy" },
-  { label: "Schedule", href: "#culture-engine" },
+  { label: "Summit", href: "/#arrival" },
+  { label: "Metrics", href: "/#anticipation" },
+  { label: "Tracks", href: "/#energy" },
+  { label: "Work", href: "/work" },
+  { label: "Talent", href: "/#impact" },
+  { label: "Archives", href: "/#legacy" },
+  { label: "Schedule", href: "/#culture-engine" },
 ];
 
 export default function Header() {
@@ -49,7 +50,7 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between pointer-events-auto">
         {/* Brand Logo */}
         <a
-          href="#arrival"
+          href="/"
           data-interactive="true"
           className="group text-2xl font-bold tracking-[0.2em] transition-all duration-300 ease-out"
         >

@@ -4,6 +4,7 @@ import Scene from "@/components/canvas/Scene";
 import SpectalExperience from "@/components/canvas/SpectalExperience";
 import Preloader from "@/components/ui/Preloader";
 import AudioEngine from "@/components/audio/AudioEngine";
+import Footer from "@/components/layout/Footer";
 
 export default function Home() {
   return (
@@ -282,6 +283,32 @@ export default function Home() {
             </p>
           </div>
         </section>
+
+        {/* Section 8: Work Teaser */}
+        <section id="work-teaser" className="w-full min-h-[50vh] flex flex-col items-center justify-center bg-[#050505] pointer-events-none relative z-20 py-24 border-t border-white/5">
+          <div className="max-w-4xl w-full mx-auto px-6 text-center flex flex-col items-center select-none">
+            <span className="text-xs font-mono tracking-[0.4em] text-spectal-red mb-6">
+              08 // PORTFOLIO
+            </span>
+            <h2 className="text-4xl md:text-6xl font-medium mix-blend-difference text-white leading-tight mb-6">
+              FROM <span className="text-spectal-mint font-serif italic text-white/95">POP-UPS</span> TO LARGE SCALE <span className="text-spectal-red">PRODUCTIONS</span>.
+            </h2>
+            <p className="text-sm font-light text-spectal-mint/70 mb-10 max-w-lg">
+              We turn ideas into moments that people actually talk about.
+            </p>
+            <div className="pointer-events-auto">
+              <a
+                href="/work"
+                data-interactive="true"
+                className="px-8 py-4 bg-transparent border border-white/20 text-white text-xs font-mono tracking-widest uppercase hover:bg-white hover:text-black transition-all duration-300 rounded-none font-bold inline-block"
+              >
+                View Our Work
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <Footer />
       </div>
     </main>
   );
