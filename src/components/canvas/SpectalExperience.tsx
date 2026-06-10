@@ -4,7 +4,6 @@ import ArrivalStar from "./ArrivalStar";
 import EnergyWaves from "./EnergyWaves";
 import ConstellationGalaxy from "./ConstellationGalaxy";
 import LegacyPortals from "./LegacyPortals";
-import CultureEngine from "./CultureEngine";
 import VIPMode from "./VIPMode";
 
 export default function SpectalExperience() {
@@ -23,9 +22,6 @@ export default function SpectalExperience() {
       
       {/* Section 5: Legacy Portals */}
       <LegacyPortals />
-      
-      {/* Section 6: Culture Engine */}
-      <CultureEngine />
     </>
   );
 }

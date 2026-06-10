@@ -1,17 +1,25 @@
 "use client";
 
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Scene from "@/components/canvas/Scene";
 import SpectalExperience from "@/components/canvas/SpectalExperience";
 import Preloader from "@/components/ui/Preloader";
-import AudioEngine from "@/components/audio/AudioEngine";
 import Footer from "@/components/layout/Footer";
-import RotatingArch from "@/components/ui/RotatingArch";
+import { useExperience } from "@/lib/experienceStore";
 
 export default function Home() {
+  const [hoveredProjectImage, setHoveredProjectImage] = useState<string | null>(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const { setEnergy } = useExperience();
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    setMousePos({ x: e.clientX, y: e.clientY });
+  };
+
   return (
-    <main className="relative w-full overflow-hidden">
+    <main className="relative w-full overflow-hidden" onMouseMove={handleMouseMove}>
       <Preloader />
-      <AudioEngine />
       
       {/* Global 3D Canvas Background */}
       <Scene>
@@ -112,7 +120,10 @@ export default function Home() {
             {/* Bento Grid layout */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6 w-full">
               {/* Image 1: Mainstage (7-col card) */}
-              <div className="md:col-span-7 group relative overflow-hidden bg-white/5 border border-white/10 rounded-2xl h-[400px] transition-all duration-500 hover:border-spectal-red/40 hover:shadow-[0_0_30px_rgba(201,73,61,0.1)]">
+              <div 
+                data-cursor="VIEW"
+                className="md:col-span-7 group relative overflow-hidden bg-white/5 border border-white/10 rounded-2xl h-[400px] transition-all duration-500 hover:border-spectal-red/40 hover:shadow-[0_0_30px_rgba(201,73,61,0.1)]"
+              >
                 <div 
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105"
                   style={{ backgroundImage: `url('/event_mainstage.png')` }}
@@ -126,7 +137,10 @@ export default function Home() {
               </div>
               
               {/* Image 2: Spatial (5-col card) */}
-              <div className="md:col-span-5 group relative overflow-hidden bg-white/5 border border-white/10 rounded-2xl h-[400px] transition-all duration-500 hover:border-spectal-mint/40 hover:shadow-[0_0_30px_rgba(221,236,196,0.1)]">
+              <div 
+                data-cursor="VIEW"
+                className="md:col-span-5 group relative overflow-hidden bg-white/5 border border-white/10 rounded-2xl h-[400px] transition-all duration-500 hover:border-spectal-mint/40 hover:shadow-[0_0_30px_rgba(221,236,196,0.1)]"
+              >
                 <div 
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105"
                   style={{ backgroundImage: `url('/event_spatial.png')` }}
@@ -140,7 +154,10 @@ export default function Home() {
               </div>
 
               {/* Image 3: Hackathon (5-col card) */}
-              <div className="md:col-span-5 group relative overflow-hidden bg-white/5 border border-white/10 rounded-2xl h-[350px] transition-all duration-500 hover:border-spectal-mint/40 hover:shadow-[0_0_30px_rgba(221,236,196,0.1)]">
+              <div 
+                data-cursor="VIEW"
+                className="md:col-span-5 group relative overflow-hidden bg-white/5 border border-white/10 rounded-2xl h-[350px] transition-all duration-500 hover:border-spectal-mint/40 hover:shadow-[0_0_30px_rgba(221,236,196,0.1)]"
+              >
                 <div 
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105"
                   style={{ backgroundImage: `url('/event_hackathon.png')` }}
@@ -154,7 +171,10 @@ export default function Home() {
               </div>
 
               {/* Image 4: Networking (7-col card) */}
-              <div className="md:col-span-7 group relative overflow-hidden bg-white/5 border border-white/10 rounded-2xl h-[350px] transition-all duration-500 hover:border-spectal-red/40 hover:shadow-[0_0_30px_rgba(201,73,61,0.1)]">
+              <div 
+                data-cursor="VIEW"
+                className="md:col-span-7 group relative overflow-hidden bg-white/5 border border-white/10 rounded-2xl h-[350px] transition-all duration-500 hover:border-spectal-red/40 hover:shadow-[0_0_30px_rgba(201,73,61,0.1)]"
+              >
                 <div 
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105"
                   style={{ backgroundImage: `url('/event_networking.png')` }}
@@ -189,7 +209,13 @@ export default function Home() {
 
             {/* List Table of Projects */}
             <div className="w-full flex flex-col divide-y divide-white/10 mt-6">
-              <div className="py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 group cursor-pointer hover:bg-white/[0.02] px-6 transition-all duration-300">
+              <div 
+                data-interactive="true"
+                data-cursor="EXPLORE"
+                onMouseEnter={() => setHoveredProjectImage("/event_spatial.png")}
+                onMouseLeave={() => setHoveredProjectImage(null)}
+                className="py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 group cursor-pointer hover:bg-white/[0.02] px-6 transition-all duration-300 pointer-events-auto"
+              >
                 <div className="flex items-center gap-8">
                   <span className="text-sm font-mono text-spectal-red">01 / PROJECT</span>
                   <h3 className="text-2xl md:text-4xl font-bold text-white tracking-tight group-hover:text-spectal-red transition-colors duration-300">HYPER-TRUSS</h3>
@@ -200,7 +226,13 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 group cursor-pointer hover:bg-white/[0.02] px-6 transition-all duration-300">
+              <div 
+                data-interactive="true"
+                data-cursor="EXPLORE"
+                onMouseEnter={() => setHoveredProjectImage("/event_mainstage.png")}
+                onMouseLeave={() => setHoveredProjectImage(null)}
+                className="py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 group cursor-pointer hover:bg-white/[0.02] px-6 transition-all duration-300 pointer-events-auto"
+              >
                 <div className="flex items-center gap-8">
                   <span className="text-sm font-mono text-white">02 / PROJECT</span>
                   <h3 className="text-2xl md:text-4xl font-bold text-white tracking-tight group-hover:text-spectal-mint transition-colors duration-300">WAVE-SYNTH</h3>
@@ -211,7 +243,13 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 group cursor-pointer hover:bg-white/[0.02] px-6 transition-all duration-300">
+              <div 
+                data-interactive="true"
+                data-cursor="EXPLORE"
+                onMouseEnter={() => setHoveredProjectImage("/event_hackathon.png")}
+                onMouseLeave={() => setHoveredProjectImage(null)}
+                className="py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 group cursor-pointer hover:bg-white/[0.02] px-6 transition-all duration-300 pointer-events-auto"
+              >
                 <div className="flex items-center gap-8">
                   <span className="text-sm font-mono text-spectal-red">03 / PROJECT</span>
                   <h3 className="text-2xl md:text-4xl font-bold text-white tracking-tight group-hover:text-spectal-red transition-colors duration-300">CHROMA-FLUX</h3>
@@ -228,9 +266,6 @@ export default function Home() {
         {/* Section 5: Legacy — scroll spacer for WebGL galaxy */}
         <section id="legacy" className="w-full min-h-screen pointer-events-none" />
 
-        {/* Section 6: Culture Engine — extended scroll spacer for WebGL culture animation */}
-        <section id="culture-engine" className="w-full min-h-[200vh] pointer-events-none" />
-
         {/* Section 7: Registration Portal (Silence) */}
         <section id="silence" className="w-full h-screen flex flex-col items-center justify-center bg-black pointer-events-none relative z-20 py-24">
           <div className="max-w-xl w-full mx-auto px-6 text-center flex flex-col items-center select-none">
@@ -240,7 +275,7 @@ export default function Home() {
             <h2 className="text-4xl md:text-6xl font-serif text-white tracking-widest uppercase mb-10 leading-tight">
               REQUEST INVITATION <span className="text-spectal-mint font-serif italic text-white/95">PASS</span>
             </h2>
-            
+
             {/* Sleek Two-Field Invitation Request Form */}
             <form 
               onSubmit={(e) => e.preventDefault()}
@@ -277,9 +312,32 @@ export default function Home() {
         {/* Section 8: Work Teaser — removed text overlay */}
         <section id="work-teaser" className="w-full min-h-[50vh] pointer-events-none" />
 
-        <RotatingArch />
         <Footer />
       </div>
+
+      {/* Floating Reveal on Hover Image Preview for Project Showcase */}
+      <AnimatePresence>
+        {hoveredProjectImage && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8, rotate: -4 }}
+            animate={{ 
+              opacity: 1, 
+              scale: 1.05, 
+              rotate: 3,
+              x: mousePos.x + 20, 
+              y: mousePos.y - 120 
+            }}
+            exit={{ opacity: 0, scale: 0.8, rotate: -4 }}
+            transition={{ type: "spring", stiffness: 350, damping: 25 }}
+            className="fixed top-0 left-0 pointer-events-none z-[800] w-64 h-40 bg-white/5 border border-white/20 rounded-2xl overflow-hidden shadow-[0_15px_35px_rgba(0,0,0,0.6)] backdrop-blur-sm"
+          >
+            <div 
+              className="w-full h-full bg-cover bg-center"
+              style={{ backgroundImage: `url(${hoveredProjectImage})` }}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </main>
   );
 }

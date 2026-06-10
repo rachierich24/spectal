@@ -8,12 +8,12 @@ import { scrollStore } from "@/lib/scrollStore";
 export default function ConstellationGalaxy() {
   const groupRef = useRef<THREE.Group>(null);
   const starsRef = useRef<THREE.InstancedMesh>(null);
-  
+
   const starCount = 500; // Representing brands/partnerships
-  
+
   // Create randomized positions for the galaxy
   const dummy = useMemo(() => new THREE.Object3D(), []);
-  
+
   const particles = useMemo(() => {
     const temp = [];
     for (let i = 0; i < starCount; i++) {
@@ -21,10 +21,10 @@ export default function ConstellationGalaxy() {
       const angle = Math.random() * Math.PI * 2;
       const radius = 3 + Math.random() * 15;
       const z = (Math.random() - 0.5) * 100; // Deep Z axis
-      
+
       const x = Math.cos(angle) * radius;
       const y = Math.sin(angle) * radius;
-      
+
       temp.push({ x, y, z });
     }
     // Sort by Z so we can apply textures properly if needed later
@@ -49,30 +49,30 @@ export default function ConstellationGalaxy() {
     const scrollProgress = scrollStore.progress;
 
     if (groupRef.current) {
-      const isVisible = scrollProgress > 2.5 && scrollProgress < 5.0;
+      const isVisible = scrollProgress > 4.5 && scrollProgress < 6.5;
       groupRef.current.visible = isVisible;
-      
+
       if (!isVisible) return;
 
-      const targetZ = (scrollProgress - 3.6) * 80; 
+      const targetZ = (scrollProgress - 6.0) * 80;
       groupRef.current.position.z = THREE.MathUtils.lerp(groupRef.current.position.z, targetZ, 0.1);
       groupRef.current.rotation.z += 0.001;
     }
   });
 
   return (
-    <group ref={groupRef} position={[0, 0, -100]}>
+    <group ref={groupRef} position={[0, 0, -150]}>
       {/* 
         In a full production version, this InstancedMesh would use 
         drei's <Instances> component or custom shaders to apply 
         different brand logo textures to each plane.
       */}
       <instancedMesh ref={starsRef} args={[undefined, undefined, starCount]}>
-        <planeGeometry args={[1, 1]} />
-        <meshBasicMaterial 
-          color="#DDECC4" 
-          transparent={true} 
-          opacity={0.8}
+        <planeGeometry args={[0.5, 0.5]} />
+        <meshBasicMaterial
+          color="#DDECC4"
+          transparent={true}
+          opacity={0.15}
           side={THREE.DoubleSide}
           // additive blending for glowing stars
           blending={THREE.AdditiveBlending}

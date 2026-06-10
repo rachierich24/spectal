@@ -80,9 +80,14 @@ const waveFragmentShader = `
   }
 `;
 
+import { useExperience } from "@/lib/experienceStore";
+import EnergyProjects from "./EnergyProjects";
+
 export default function EnergyWaves() {
   const meshRef = useRef<THREE.Mesh>(null);
   const materialRef = useRef<THREE.ShaderMaterial>(null);
+  const { energy } = useExperience();
+  const timeAccumulator = useRef(0);
 
   const uniforms = useMemo(
     () => ({
@@ -93,7 +98,7 @@ export default function EnergyWaves() {
     []
   );
 
-  useFrame((state) => {
+  useFrame((state, delta) => {
     const scrollProgress = scrollStore.progress;
 
     if (meshRef.current) {
@@ -110,25 +115,32 @@ export default function EnergyWaves() {
     }
 
     if (materialRef.current) {
-      materialRef.current.uniforms.uTime.value = state.clock.elapsedTime;
+      // Speed up grid wave animation dynamically when energy is surged (e.g. hovering service list)
+      timeAccumulator.current += delta * (1.0 + energy * 3.5);
+      materialRef.current.uniforms.uTime.value = timeAccumulator.current;
       materialRef.current.uniforms.uPointer.value.lerp(state.pointer, 0.1);
       materialRef.current.uniforms.uScrollProgress.value = scrollProgress;
     }
   });
 
   return (
-    <mesh ref={meshRef}>
-      {/* Optimized segment count from 128 to 64 for performance */}
-      <planeGeometry args={[30, 30, 64, 64]} />
-      <shaderMaterial
-        ref={materialRef}
-        vertexShader={waveVertexShader}
-        fragmentShader={waveFragmentShader}
-        uniforms={uniforms}
-        transparent={true}
-        depthWrite={false}
-        side={THREE.DoubleSide}
-      />
-    </mesh>
+    <group>
+      <mesh ref={meshRef}>
+        {/* Optimized segment count from 128 to 64 for performance */}
+        <planeGeometry args={[30, 30, 64, 64]} />
+        <shaderMaterial
+          ref={materialRef}
+          vertexShader={waveVertexShader}
+          fragmentShader={waveFragmentShader}
+          uniforms={uniforms}
+          transparent={true}
+          depthWrite={false}
+          side={THREE.DoubleSide}
+        />
+      </mesh>
+      
+      {/* Floating project images popping out from the energy wave */}
+      <EnergyProjects />
+    </group>
   );
 }

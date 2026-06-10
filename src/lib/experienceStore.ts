@@ -62,9 +62,6 @@ export function useExperience() {
   const [energy, setEnergy] = useState(() => experienceStore.energy);
 
   useEffect(() => {
-    setState(experienceStore.state);
-    setEnergy(experienceStore.energy);
-    
     const unsub = experienceStore.subscribe(() => {
       setState(experienceStore.state);
       setEnergy(experienceStore.energy);

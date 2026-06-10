@@ -106,7 +106,7 @@ export default function AudioEngine() {
             // Silence section cutoff
             const windowHeight = window.innerHeight;
             const scrollProgress = currentScrollY / windowHeight;
-            if (scrollProgress >= 7.8) { // entering Silence section
+            if (scrollProgress >= 5.8) { // entering Silence section
               gainRef.current.gain.setTargetAtTime(0.0, now, 0.5); // Instant cut to near vacuum
             }
 
