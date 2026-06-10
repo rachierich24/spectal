@@ -51,7 +51,7 @@ export default function CultureEngine() {
       {/* Outer Ring */}
       <mesh ref={ring1Ref}>
         <torusGeometry args={[3, 0.2, 16, 48]} />
-        <meshBasicMaterial color="#DDECC4" wireframe={true} />
+        <meshBasicMaterial color="#C9493D" wireframe={true} />
       </mesh>
       
       {/* Inner Ring */}
@@ -63,7 +63,7 @@ export default function CultureEngine() {
       {/* The Core */}
       <mesh ref={coreRef}>
         <icosahedronGeometry args={[1, 1]} />
-        <meshBasicMaterial color="#DDECC4" wireframe={true} />
+        <meshBasicMaterial color="#0B0B0B" wireframe={true} />
       </mesh>
     </group>
   );

@@ -58,14 +58,14 @@ const waveFragmentShader = `
     // If not visible, discard to save performance
     if (visibility <= 0.01) discard;
 
-    // Base color matches the Red background now
-    vec3 colorBase = vec3(0.788, 0.286, 0.239); 
-    // Highlight is Mint
-    vec3 colorHighlight = vec3(0.866, 0.925, 0.768); 
+    vec3 colorCharcoal = vec3(0.043, 0.043, 0.043);
+    vec3 colorMint = vec3(0.866, 0.925, 0.768);
+    vec3 colorRed = vec3(0.788, 0.286, 0.239);
     
-    // Mix based on displacement (peaks are mint, valleys are red)
-    float mixRatio = smoothstep(0.0, 1.0, vElevation);
-    vec3 color = mix(colorBase, colorHighlight, mixRatio);
+    // Map elevation to color
+    // Low elevation = charcoal, Mid = Mint, High = Red
+    vec3 color = mix(colorCharcoal, colorMint, smoothstep(0.0, 0.5, vElevation));
+    color = mix(color, colorRed, smoothstep(0.5, 2.0, vElevation));
     
     // Wireframe grid lines effect
     // We can simulate wireframe with fract(vUv * gridScale)

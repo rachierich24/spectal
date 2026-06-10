@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #C9493D;
+  --background: #0B0B0B;
   --foreground: #DDECC4;
   --spectal-red: #C9493D;
   --spectal-mint: #DDECC4;
@@ -64,4 +64,12 @@ select option {
 
 .animate-spin-slow {
   animation: spin-slow 20s linear infinite;
+}
+
+/* Sharpness styling for video elements */
+video {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
