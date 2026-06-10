@@ -33,9 +33,9 @@ const waveVertexShader = `
     
     vElevation = currentPos.z;
     
-    // Global scroll visibility logic (Section 3 is roughly scroll 2 to 3)
+    // Global scroll visibility logic (Section 2 is scroll 1 to 2, gap is 2 to 3)
     // We want the grid to fly up from below, be active, then fade/move down
-    float visibility = smoothstep(1.5, 2.0, uScrollProgress) * (1.0 - smoothstep(3.0, 3.5, uScrollProgress));
+    float visibility = smoothstep(0.5, 1.0, uScrollProgress) * (1.0 - smoothstep(2.0, 2.8, uScrollProgress));
     
     // Move the plane up into view based on scroll
     currentPos.y += (1.0 - visibility) * -20.0;
@@ -53,7 +53,7 @@ const waveFragmentShader = `
 
   void main() {
     // Visibility fade
-    float visibility = smoothstep(1.5, 2.0, uScrollProgress) * (1.0 - smoothstep(3.0, 3.5, uScrollProgress));
+    float visibility = smoothstep(0.5, 1.0, uScrollProgress) * (1.0 - smoothstep(2.0, 2.8, uScrollProgress));
     
     // If not visible, discard to save performance
     if (visibility <= 0.01) discard;
@@ -97,7 +97,7 @@ export default function EnergyWaves() {
     const scrollProgress = scrollStore.progress;
 
     if (meshRef.current) {
-      const isVisible = scrollProgress > 1.0 && scrollProgress < 4.0;
+      const isVisible = scrollProgress > 0.5 && scrollProgress < 3.2;
       meshRef.current.visible = isVisible;
       
       if (!isVisible) return;

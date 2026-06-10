@@ -49,12 +49,12 @@ export default function ConstellationGalaxy() {
     const scrollProgress = scrollStore.progress;
 
     if (groupRef.current) {
-      const isVisible = scrollProgress > 2.5 && scrollProgress < 5.5;
+      const isVisible = scrollProgress > 2.5 && scrollProgress < 5.0;
       groupRef.current.visible = isVisible;
       
       if (!isVisible) return;
 
-      const targetZ = (scrollProgress - 4.0) * 80; 
+      const targetZ = (scrollProgress - 3.6) * 80; 
       groupRef.current.position.z = THREE.MathUtils.lerp(groupRef.current.position.z, targetZ, 0.1);
       groupRef.current.rotation.z += 0.001;
     }

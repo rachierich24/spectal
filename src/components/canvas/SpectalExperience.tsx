@@ -1,7 +1,6 @@
 "use client";
 
 import ArrivalStar from "./ArrivalStar";
-import AnticipationParticles from "./AnticipationParticles";
 import EnergyWaves from "./EnergyWaves";
 import ConstellationGalaxy from "./ConstellationGalaxy";
 import LegacyPortals from "./LegacyPortals";
@@ -15,9 +14,6 @@ export default function SpectalExperience() {
       
       {/* Section 1: Arrival Star */}
       <ArrivalStar />
-      
-      {/* Section 2: Anticipation Crowd */}
-      <AnticipationParticles />
       
       {/* Section 3: Energy Waves */}
       <EnergyWaves />

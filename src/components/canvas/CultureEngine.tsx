@@ -17,12 +17,12 @@ export default function CultureEngine() {
     const scrollProgress = scrollStore.progress;
 
     if (engineRef.current) {
-      const isVisible = scrollProgress > 4.5 && scrollProgress < 7.5;
+      const isVisible = scrollProgress > 5.5 && scrollProgress < 8.5;
       engineRef.current.visible = isVisible;
       
       if (!isVisible) return;
       
-      const targetY = (6.0 - scrollProgress) * -20;
+      const targetY = (7.2 - scrollProgress) * -20;
       const clampedY = Math.max(Math.min(targetY, 20), -20);
       engineRef.current.position.y = THREE.MathUtils.lerp(engineRef.current.position.y, clampedY, 0.1);
       engineRef.current.position.z = THREE.MathUtils.lerp(engineRef.current.position.z, -5, 0.05);

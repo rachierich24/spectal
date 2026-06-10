@@ -6,50 +6,60 @@ import { MeshPortalMaterial, Environment, Text } from "@react-three/drei";
 import * as THREE from "three";
 import { scrollStore } from "@/lib/scrollStore";
 
+const TEAM = [
+  {
+    position: [-3, 0, 0] as [number, number, number],
+    rotation: [0, Math.PI / 6, 0] as [number, number, number],
+    title: "RACHIT VIJ",
+    subtitle: "FOUNDER",
+    color: "#C9493D",           // Spectal Red
+    geometry: "torusKnot",
+  },
+  {
+    position: [0, 0, 1] as [number, number, number],
+    rotation: [0, 0, 0] as [number, number, number],
+    title: "SHRIYANSH SHARMA",
+    subtitle: "CO-FOUNDER",
+    color: "#DDECC4",           // Spectal Mint
+    geometry: "octahedron",
+  },
+  {
+    position: [3, 0, 0] as [number, number, number],
+    rotation: [0, -Math.PI / 6, 0] as [number, number, number],
+    title: "ARYAN SETH",
+    subtitle: "CREATIVE DIR.",
+    color: "#1a1a2e",           // Deep indigo
+    geometry: "icosahedron",
+  },
+];
+
 export default function LegacyPortals() {
   const groupRef = useRef<THREE.Group>(null);
-  
-  // Section 5 is active around scrollProgress 4.5 to 5.5
+
   useFrame(() => {
     const scrollProgress = scrollStore.progress;
 
     if (groupRef.current) {
-      const isVisible = scrollProgress > 3.5 && scrollProgress < 6.5;
+      const isVisible = scrollProgress > 4.5 && scrollProgress < 7.0;
       groupRef.current.visible = isVisible;
-      
+
       if (!isVisible) return;
 
-      const targetY = (5.0 - scrollProgress) * 15;
-      groupRef.current.position.y = THREE.MathUtils.lerp(groupRef.current.position.y, targetY, 0.1);
+      const targetY = (5.7 - scrollProgress) * 15;
+      groupRef.current.position.y = THREE.MathUtils.lerp(
+        groupRef.current.position.y,
+        targetY,
+        0.1
+      );
       groupRef.current.position.z = -5;
     }
   });
 
   return (
     <group ref={groupRef}>
-      {/* Portal 1: Art Basel */}
-      <PortalItem 
-        position={[-3, 0, 0]} 
-        rotation={[0, Math.PI / 6, 0]} 
-        title="ART BASEL" 
-        color="#C9493D" 
-      />
-      
-      {/* Portal 2: Tomorrowland */}
-      <PortalItem 
-        position={[0, 0, 1]} 
-        rotation={[0, 0, 0]} 
-        title="TOMORROWLAND" 
-        color="#DDECC4" 
-      />
-      
-      {/* Portal 3: F1 Paddock Club */}
-      <PortalItem 
-        position={[3, 0, 0]} 
-        rotation={[0, -Math.PI / 6, 0]} 
-        title="F1 PADDOCK" 
-        color="#4A90E2" 
-      />
+      {TEAM.map((member) => (
+        <PortalItem key={member.title} {...member} />
+      ))}
     </group>
   );
 }
@@ -58,49 +68,92 @@ interface PortalItemProps {
   position: [number, number, number];
   rotation: [number, number, number];
   title: string;
+  subtitle: string;
   color: string;
+  geometry: string;
 }
 
-function PortalItem({ position, rotation, title, color }: PortalItemProps) {
+function PortalItem({
+  position,
+  rotation,
+  title,
+  subtitle,
+  color,
+  geometry,
+}: PortalItemProps) {
   const portalRef = useRef<any>(null);
   const meshRef = useRef<THREE.Mesh>(null);
   const [hovered, setHover] = useState(false);
 
   useFrame((state, delta) => {
     const scrollProgress = scrollStore.progress;
-    if (scrollProgress < 3.5 || scrollProgress > 6.5) return;
+    if (scrollProgress < 4.5 || scrollProgress > 7.0) return;
 
     if (portalRef.current) {
-      // Animate portal blend when hovered
       const targetBlend = hovered ? 1 : 0;
-      portalRef.current.blend = THREE.MathUtils.lerp(portalRef.current.blend, targetBlend, 0.1);
+      portalRef.current.blend = THREE.MathUtils.lerp(
+        portalRef.current.blend,
+        targetBlend,
+        0.1
+      );
     }
-    
+
     if (meshRef.current) {
       meshRef.current.rotation.x += delta * 0.5;
-      meshRef.current.rotation.y += delta * 0.5;
+      meshRef.current.rotation.y += delta * 0.7;
     }
   });
 
   return (
     <group position={position} rotation={rotation}>
-      <Text fontSize={0.3} position={[0, -2, 0]} anchorY="top">
+      {/* Role title below card */}
+      <Text
+        fontSize={0.22}
+        position={[0, -2.15, 0]}
+        anchorY="top"
+        color="white"
+        font={undefined}
+        letterSpacing={0.12}
+      >
         {title}
       </Text>
-      <mesh 
-        onPointerOver={() => setHover(true)} 
+      <Text
+        fontSize={0.14}
+        position={[0, -2.55, 0]}
+        anchorY="top"
+        color={color === "#DDECC4" ? "#DDECC4" : "#C9493D"}
+        letterSpacing={0.2}
+      >
+        {subtitle}
+      </Text>
+
+      <mesh
+        onPointerOver={() => setHover(true)}
         onPointerOut={() => setHover(false)}
       >
         <planeGeometry args={[2.5, 3.5]} />
         <MeshPortalMaterial ref={portalRef} blend={0} blur={0} resolution={512}>
           <color attach="background" args={[color]} />
           <Environment preset="city" />
-          <ambientLight intensity={0.5} />
-          
-          {/* A floating object representing the project inside the portal */}
+          <ambientLight intensity={0.6} />
+          <pointLight position={[2, 2, 2]} intensity={1.5} />
+
+          {/* Unique 3D shape per person */}
           <mesh ref={meshRef}>
-            <torusKnotGeometry args={[0.5, 0.15, 100, 16]} />
-            <meshStandardMaterial color="white" roughness={0.1} metalness={0.8} />
+            {geometry === "torusKnot" && (
+              <torusKnotGeometry args={[0.5, 0.15, 120, 16]} />
+            )}
+            {geometry === "octahedron" && (
+              <octahedronGeometry args={[0.7, 0]} />
+            )}
+            {geometry === "icosahedron" && (
+              <icosahedronGeometry args={[0.7, 1]} />
+            )}
+            <meshStandardMaterial
+              color="white"
+              roughness={0.05}
+              metalness={0.9}
+            />
           </mesh>
         </MeshPortalMaterial>
       </mesh>

@@ -6,7 +6,7 @@ import { Suspense } from "react";
 
 export default function Scene({ children }: { children: React.ReactNode }) {
   return (
-    <div className="fixed top-0 left-0 w-screen h-screen z-[-1] pointer-events-none blur-[6px]">
+    <div className="fixed top-0 left-0 w-screen h-screen z-[-1] pointer-events-none">
       <Canvas
         camera={{ position: [0, 0, 5], fov: 45 }}
         dpr={[1, 1.5]}
