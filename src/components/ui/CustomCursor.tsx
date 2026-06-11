@@ -83,7 +83,7 @@ export default function CustomCursor() {
     <>
       {/* Outer Glow Ring */}
       <motion.div
-        className="fixed top-0 left-0 w-12 h-12 border border-spectal-mint rounded-full pointer-events-none z-[999] mix-blend-difference flex items-center justify-center will-change-transform"
+        className="hidden lg:flex fixed top-0 left-0 w-12 h-12 border border-spectal-mint rounded-full pointer-events-none z-[999] mix-blend-difference items-center justify-center will-change-transform"
         style={{
           x: ringTranslateX,
           y: ringTranslateY,
@@ -116,7 +116,7 @@ export default function CustomCursor() {
 
       {/* Inner Dot */}
       <motion.div
-        className="fixed top-0 left-0 w-4 h-4 bg-spectal-red rounded-full pointer-events-none z-[1000] mix-blend-difference will-change-transform"
+        className="hidden lg:block fixed top-0 left-0 w-4 h-4 bg-spectal-red rounded-full pointer-events-none z-[1000] mix-blend-difference will-change-transform"
         style={{
           x: dotTranslateX,
           y: dotTranslateY,

@@ -366,7 +366,6 @@ export default function Home() {
                 [ End-to-end solutions for artists, brands &amp; campuses ]
               </p>
             </div>
-
             {/* List Table of Projects */}
             <div className="w-full flex flex-col divide-y divide-white/10 mt-6">
               <div
@@ -376,9 +375,15 @@ export default function Home() {
                 onMouseLeave={() => setHoveredProjectImage(null)}
                 className="py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 group cursor-pointer hover:bg-white/[0.02] px-6 transition-all duration-300 pointer-events-auto"
               >
-                <div className="flex items-center gap-8">
-                  <span className="text-sm font-mono text-spectal-red">01 / SERVICE</span>
-                  <h3 className="text-2xl md:text-4xl font-bold text-white tracking-tight group-hover:text-spectal-red transition-colors duration-300">TALENT MANAGEMENT</h3>
+                <div className="flex flex-col gap-4 w-full md:w-auto">
+                  <div className="flex items-center gap-8">
+                    <span className="text-sm font-mono text-spectal-red">01 / SERVICE</span>
+                    <h3 className="text-2xl md:text-4xl font-bold text-white tracking-tight group-hover:text-spectal-red transition-colors duration-300">TALENT MANAGEMENT</h3>
+                  </div>
+                  {/* Mobile-only inline preview image */}
+                  <div className="w-full aspect-[16/10] rounded-xl overflow-hidden md:hidden border border-white/10 relative">
+                    <img src="/event_spatial.png" alt="Talent Management" className="w-full h-full object-cover" />
+                  </div>
                 </div>
                 <div className="flex flex-col md:items-end gap-2 max-w-lg">
                   <span className="text-sm text-spectal-mint font-light">Full 360° artist representation — live show bookings, brand deals, social media strategy, tour curation, and complete legal &amp; commercial affairs.</span>
@@ -393,9 +398,15 @@ export default function Home() {
                 onMouseLeave={() => setHoveredProjectImage(null)}
                 className="py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 group cursor-pointer hover:bg-white/[0.02] px-6 transition-all duration-300 pointer-events-auto"
               >
-                <div className="flex items-center gap-8">
-                  <span className="text-sm font-mono text-white">02 / SERVICE</span>
-                  <h3 className="text-2xl md:text-4xl font-bold text-white tracking-tight group-hover:text-spectal-mint transition-colors duration-300">EVENT PRODUCTION</h3>
+                <div className="flex flex-col gap-4 w-full md:w-auto">
+                  <div className="flex items-center gap-8">
+                    <span className="text-sm font-mono text-white">02 / SERVICE</span>
+                    <h3 className="text-2xl md:text-4xl font-bold text-white tracking-tight group-hover:text-spectal-mint transition-colors duration-300">EVENT PRODUCTION</h3>
+                  </div>
+                  {/* Mobile-only inline preview image */}
+                  <div className="w-full aspect-[16/10] rounded-xl overflow-hidden md:hidden border border-white/10 relative">
+                    <img src="/event_mainstage.png" alt="Event Production" className="w-full h-full object-cover" />
+                  </div>
                 </div>
                 <div className="flex flex-col md:items-end gap-2 max-w-lg">
                   <span className="text-sm text-spectal-mint font-light">End-to-end production of live concerts and campus festivals. We manage logistics, stage, artist booking, and crowd experience across India.</span>
@@ -410,9 +421,15 @@ export default function Home() {
                 onMouseLeave={() => setHoveredProjectImage(null)}
                 className="py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 group cursor-pointer hover:bg-white/[0.02] px-6 transition-all duration-300 pointer-events-auto"
               >
-                <div className="flex items-center gap-8">
-                  <span className="text-sm font-mono text-spectal-red">03 / SERVICE</span>
-                  <h3 className="text-2xl md:text-4xl font-bold text-white tracking-tight group-hover:text-spectal-red transition-colors duration-300">BRAND ACTIVATION</h3>
+                <div className="flex flex-col gap-4 w-full md:w-auto">
+                  <div className="flex items-center gap-8">
+                    <span className="text-sm font-mono text-spectal-red">03 / SERVICE</span>
+                    <h3 className="text-2xl md:text-4xl font-bold text-white tracking-tight group-hover:text-spectal-red transition-colors duration-300">BRAND ACTIVATION</h3>
+                  </div>
+                  {/* Mobile-only inline preview image */}
+                  <div className="w-full aspect-[16/10] rounded-xl overflow-hidden md:hidden border border-white/10 relative">
+                    <img src="/event_hackathon.png" alt="Brand Activation" className="w-full h-full object-cover" />
+                  </div>
                 </div>
                 <div className="flex flex-col md:items-end gap-2 max-w-lg">
                   <span className="text-sm text-spectal-mint font-light">Unique branded experiences and artist partnerships that connect young brands to engaged audiences. Digital content, social campaigns, and live integrations.</span>
@@ -449,7 +466,7 @@ export default function Home() {
               {/* Image 1: Mainstage (7-col card) */}
               <div
                 data-cursor="VIEW"
-                className="md:col-span-7 group relative overflow-hidden bg-white/5 border border-white/10 rounded-2xl h-[400px] transition-all duration-500 hover:border-spectal-red/40 hover:shadow-[0_0_30px_rgba(201,73,61,0.1)]"
+                className="md:col-span-7 group relative overflow-hidden bg-white/5 border border-white/10 rounded-2xl h-[280px] sm:h-[340px] md:h-[400px] transition-all duration-500 hover:border-spectal-red/40 hover:shadow-[0_0_30px_rgba(201,73,61,0.1)]"
               >
                 <div
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105"
@@ -466,7 +483,7 @@ export default function Home() {
               {/* Image 2: Spatial (5-col card) */}
               <div
                 data-cursor="VIEW"
-                className="md:col-span-5 group relative overflow-hidden bg-white/5 border border-white/10 rounded-2xl h-[400px] transition-all duration-500 hover:border-spectal-mint/40 hover:shadow-[0_0_30px_rgba(221,236,196,0.1)]"
+                className="md:col-span-5 group relative overflow-hidden bg-white/5 border border-white/10 rounded-2xl h-[280px] sm:h-[340px] md:h-[400px] transition-all duration-500 hover:border-spectal-mint/40 hover:shadow-[0_0_30px_rgba(221,236,196,0.1)]"
               >
                 <div
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105"
@@ -483,7 +500,7 @@ export default function Home() {
               {/* Image 3: Hackathon (5-col card) */}
               <div
                 data-cursor="VIEW"
-                className="md:col-span-5 group relative overflow-hidden bg-white/5 border border-white/10 rounded-2xl h-[350px] transition-all duration-500 hover:border-spectal-mint/40 hover:shadow-[0_0_30px_rgba(221,236,196,0.1)]"
+                className="md:col-span-5 group relative overflow-hidden bg-white/5 border border-white/10 rounded-2xl h-[240px] sm:h-[300px] md:h-[350px] transition-all duration-500 hover:border-spectal-mint/40 hover:shadow-[0_0_30px_rgba(221,236,196,0.1)]"
               >
                 <div
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105"
@@ -500,7 +517,7 @@ export default function Home() {
               {/* Image 4: Networking (7-col card) */}
               <div
                 data-cursor="VIEW"
-                className="md:col-span-7 group relative overflow-hidden bg-white/5 border border-white/10 rounded-2xl h-[350px] transition-all duration-500 hover:border-spectal-red/40 hover:shadow-[0_0_30px_rgba(201,73,61,0.1)]"
+                className="md:col-span-7 group relative overflow-hidden bg-white/5 border border-white/10 rounded-2xl h-[240px] sm:h-[300px] md:h-[350px] transition-all duration-500 hover:border-spectal-red/40 hover:shadow-[0_0_30px_rgba(201,73,61,0.1)]"
               >
                 <div
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105"
@@ -517,13 +534,11 @@ export default function Home() {
           </div>
         </section>
 
-
-
         {/* Section 5: Legacy — scroll spacer for WebGL galaxy */}
         <section id="legacy" className="w-full min-h-screen pointer-events-none" />
 
         {/* Section 7: Registration Portal (Silence) */}
-        <section id="silence" className="w-full h-screen flex flex-col items-center justify-center bg-black pointer-events-none relative z-20 py-24">
+        <section id="silence" className="w-full min-h-screen lg:h-screen flex flex-col items-center justify-center bg-black pointer-events-none relative z-20 py-16 lg:py-24">
           <div className="max-w-xl w-full mx-auto px-6 text-center flex flex-col items-center select-none">
             <span className="text-xs font-mono tracking-[0.4em] text-spectal-red mb-6">
               07 // CONTACT
