@@ -55,7 +55,7 @@ export default function ConstellationGalaxy() {
     const scrollProgress = scrollStore.progress;
 
     if (groupRef.current) {
-      const isVisible = scrollProgress > 3.8 && scrollProgress < 8.0;
+      const isVisible = scrollProgress > 3.4 && scrollProgress < 8.0;
       groupRef.current.visible = isVisible;
 
       if (!isVisible) return;
@@ -70,9 +70,9 @@ export default function ConstellationGalaxy() {
 
         // Smoothly fade in/out based on scrollProgress
         let opacity = 0;
-        if (scrollProgress >= 3.8 && scrollProgress < 4.2) {
-          opacity = ((scrollProgress - 3.8) / 0.4) * 0.15; // Fade in from 3.8 to 4.2
-        } else if (scrollProgress >= 4.2 && scrollProgress <= 7.2) {
+        if (scrollProgress >= 3.4 && scrollProgress < 3.8) {
+          opacity = ((scrollProgress - 3.4) / 0.4) * 0.15; // Fade in from 3.4 to 3.8
+        } else if (scrollProgress >= 3.8 && scrollProgress <= 7.2) {
           opacity = 0.15;
         } else if (scrollProgress > 7.2) {
           opacity = Math.max(0, ((8.0 - scrollProgress) / 0.8) * 0.15); // Fade out at the very end
