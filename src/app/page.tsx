@@ -10,6 +10,57 @@ import { useExperience } from "@/lib/experienceStore";
 import RotatingArch from "@/components/ui/RotatingArch";
 import SocialFeed from "@/components/ui/SocialFeed";
 
+const CLIENT_LOGOS = [
+  {
+    name: "Red Bull",
+    svg: (
+      <svg className="h-5 w-auto fill-current" viewBox="0 0 120 24">
+        <text x="0" y="18" className="font-sans font-black tracking-widest text-base">RED BULL</text>
+      </svg>
+    )
+  },
+  {
+    name: "Spotify",
+    svg: (
+      <svg className="h-5 w-auto fill-current" viewBox="0 0 24 24">
+        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.485 17.306c-.215.352-.676.467-1.028.252-2.857-1.748-6.452-2.143-10.686-1.176-.402.093-.805-.162-.897-.564-.093-.402.162-.805.564-.897 4.636-1.06 8.594-.606 11.794 1.352.352.215.467.676.253 1.028v.005zm1.464-3.26c-.27 1.02-.756 1.488-1.57 1.155-3.272-2.012-8.258-2.593-12.132-1.416-.453.137-.923-.12-.1.06-.576.453-.137.923.12 1.06.576.453 4.428-1.34 10.02-1.06 13.8 2.01c.21.34.46.74.8 1.01.34-.1.44-.45.8-.8zm.126-3.414c-4.32-2.565-11.436-2.8-15.534-1.556-.66.2-1.36-.18-1.56-.84-.2-.66.18-1.36.84-1.56 4.716-1.428 12.576-1.14 17.544 1.812.594.354.792 1.12.438 1.716-.354.594-1.12.792-1.716.438z"/>
+      </svg>
+    )
+  },
+  {
+    name: "Budweiser",
+    svg: (
+      <svg className="h-5 w-auto fill-current" viewBox="0 0 120 24">
+        <text x="0" y="18" className="font-sans font-black tracking-widest text-base">BUDWEISER</text>
+      </svg>
+    )
+  },
+  {
+    name: "OnePlus",
+    svg: (
+      <svg className="h-5 w-auto fill-current" viewBox="0 0 120 24">
+        <text x="0" y="18" className="font-sans font-bold tracking-widest text-base">ONEPLUS</text>
+      </svg>
+    )
+  },
+  {
+    name: "Coca-Cola",
+    svg: (
+      <svg className="h-5 w-auto fill-current" viewBox="0 0 120 24">
+        <text x="0" y="18" className="font-serif italic font-black tracking-wider text-base">Coca-Cola</text>
+      </svg>
+    )
+  },
+  {
+    name: "Bacardi",
+    svg: (
+      <svg className="h-5 w-auto fill-current" viewBox="0 0 120 24">
+        <text x="0" y="18" className="font-sans font-black tracking-widest text-base">BACARDI</text>
+      </svg>
+    )
+  }
+];
+
 export default function Home() {
   const [hoveredProjectImage, setHoveredProjectImage] = useState<string | null>(null);
   const { setEnergy } = useExperience();
@@ -26,14 +77,89 @@ export default function Home() {
   const previewTranslateX = useTransform(previewXSpring, (x) => x + 20);
   const previewTranslateY = useTransform(previewYSpring, (y) => y - 120);
 
+  // Mouse position motion values for parallax
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  // Smooth spring setup for high-fidelity interactive feel
+  const springX = useSpring(mouseX, { stiffness: 85, damping: 22 });
+  const springY = useSpring(mouseY, { stiffness: 85, damping: 22 });
+
+  // Parallax offsets
+  const headlineX = useTransform(springX, [-0.5, 0.5], [-12, 12]);
+  const headlineY = useTransform(springY, [-0.5, 0.5], [-12, 12]);
+  const videoX = useTransform(springX, [-0.5, 0.5], [15, -15]);
+  const videoY = useTransform(springY, [-0.5, 0.5], [15, -15]);
+
   const handleMouseMove = (e: React.MouseEvent) => {
+    // Floating project preview follow
     previewX.set(e.clientX);
     previewY.set(e.clientY);
+    
+    // Normalize coordinates around screen center (-0.5 to 0.5)
+    const normX = (e.clientX / window.innerWidth) - 0.5;
+    const normY = (e.clientY / window.innerHeight) - 0.5;
+    
+    mouseX.set(normX);
+    mouseY.set(normY);
+  };
+
+  // Entrance animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      }
+    }
+  };
+
+  const wordVariants = {
+    hidden: { filter: "blur(12px)", y: 30, opacity: 0 },
+    visible: {
+      filter: "blur(0px)",
+      y: 0,
+      opacity: 1,
+      transition: { duration: 1.0, ease: [0.16, 1, 0.3, 1] as const }
+    }
+  };
+
+  const buttonVariants = {
+    hidden: { opacity: 0, scale: 0.92 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 1.0, ease: [0.16, 1, 0.3, 1] as const, delay: 0.8 }
+    }
+  };
+
+  const logosContainerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.08,
+        delayChildren: 1.0,
+      }
+    }
+  };
+
+  const logoItemVariants = {
+    hidden: { opacity: 0, y: 15 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: "easeOut" as const }
+    }
   };
 
   return (
     <main className="relative w-full overflow-hidden" onMouseMove={handleMouseMove}>
       <Preloader />
+      {/* Film Grain Overlay */}
+      <div className="film-grain" />
 
       {/* Global 3D Canvas Background */}
       <Scene>
@@ -43,43 +169,149 @@ export default function Home() {
 
       {/* Foreground HTML overlay for scrolling and text content */}
       <div className="relative w-full z-10 flex flex-col pointer-events-none">
+        
+        {/* Section 1: Arrival Hero Section */}
+        <section id="arrival" className="w-full h-screen flex items-center justify-center pointer-events-none relative overflow-hidden bg-black">
+          
+          {/* Background Video with subtle parallax and zoom */}
+          <motion.div 
+            style={{ x: videoX, y: videoY }}
+            className="absolute inset-0 w-[108%] h-[108%] -left-[4%] -top-[4%] z-0 pointer-events-none opacity-40 select-none overflow-hidden"
+          >
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-cover animate-video-zoom"
+            >
+              <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-glowing-plexus-connections-background-loop-33319-large.mp4" type="video/mp4" />
+              <source src="/loader.mp4" type="video/mp4" />
+            </video>
+          </motion.div>
 
-        {/* Section 1: Arrival (Summit Portal Entry) */}
-        <section id="arrival" className="w-full h-screen flex items-center justify-center pointer-events-none relative">
+          {/* Cinematic Overlay mask */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black z-0 pointer-events-none" />
 
-          {/* MDNT-Inspired Spinning Circular Text Badge */}
-          <div className="absolute right-6 md:right-16 top-24 md:top-32 w-28 h-28 md:w-36 md:h-36 select-none pointer-events-none z-10 animate-spin-slow">
-            <svg viewBox="0 0 100 100" className="w-full h-full text-spectal-mint/20 fill-current">
-              <path id="circlePath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="none" />
-              <text className="font-mono text-[7px] uppercase tracking-[0.17em]">
-                <textPath href="#circlePath">
-                  SPECTAL MANAGEMENT • NEW DELHI • EST. 2015 •
-                </textPath>
-              </text>
-            </svg>
-          </div>
-
-          <div className="max-w-7xl w-full mx-auto px-6 md:px-12 flex flex-col items-start justify-center h-full select-none pt-24 pb-12">
-            <span className="text-xs font-mono tracking-[0.4em] text-spectal-red mb-4 animate-pulse">
-              SPECTAL MANAGEMENT // TALENT &amp; EVENTS AGENCY
-            </span>
-            <h1 className="text-5xl md:text-[5.5rem] lg:text-[7rem] font-bold tracking-tighter mix-blend-difference text-white leading-none">
-              We manage <span className="text-spectal-red">exceptional talent</span> <br />
-              &amp; produce <span className="text-spectal-mint font-serif italic text-white/95">unforgettable events</span>.
-            </h1>
-            <p className="max-w-md text-sm md:text-base font-light tracking-wide text-spectal-mint/70 mt-6 md:mt-8 leading-relaxed">
-              A boutique agency for 360° talent management, live concerts, college festivals, and brand activation across 30+ cities in India.
-            </p>
-            <div className="mt-8 pointer-events-auto">
-              <a
-                href="#silence"
-                data-interactive="true"
-                className="px-8 py-4 bg-spectal-red text-spectal-charcoal text-xs font-mono tracking-widest uppercase hover:bg-white transition-all duration-300 rounded-none shadow-[0_4px_15px_rgba(201,73,61,0.2)] font-bold"
+          {/* Grid Layout Container */}
+          <div className="max-w-7xl w-full mx-auto px-6 md:px-12 flex flex-col lg:flex-row justify-between items-start lg:items-end h-full select-none pt-32 pb-32 relative z-10 gap-8 lg:gap-12">
+            
+            {/* Left Column: Huge bold headline with blur to sharp entry */}
+            <motion.div 
+              style={{ x: headlineX, y: headlineY }}
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+              className="flex flex-col items-start w-full lg:w-[62%] xl:w-[65%] lg:max-w-[760px] pointer-events-auto mt-auto mb-8 lg:mb-0"
+            >
+              <motion.span 
+                variants={wordVariants}
+                className="text-xs font-mono tracking-[0.4em] text-spectal-red mb-6 block uppercase"
               >
-                Book With Us
-              </a>
+                [ SPECTAL MANAGEMENT ]
+              </motion.span>
+              
+              <h1 className="text-4xl sm:text-5xl md:text-[5.5rem] lg:text-[4.8rem] xl:text-[5.8rem] font-black tracking-tighter text-white leading-[0.9] font-inter-tight uppercase">
+                <motion.span variants={wordVariants} className="block">WE MANAGE</motion.span>
+                <motion.span variants={wordVariants} className="block">EXCEPTIONAL TALENT</motion.span>
+                <motion.span variants={wordVariants} className="block">&amp; PRODUCE</motion.span>
+                <motion.span 
+                  variants={wordVariants} 
+                  className="block text-transparent bg-clip-text bg-gradient-to-r from-spectal-red to-spectal-mint drop-shadow-[0_0_25px_rgba(221,236,196,0.25)]"
+                >
+                  UNFORGETTABLE
+                </motion.span>
+                <motion.span 
+                  variants={wordVariants} 
+                  className="block text-transparent bg-clip-text bg-gradient-to-r from-spectal-red to-spectal-mint drop-shadow-[0_0_25px_rgba(221,236,196,0.25)]"
+                >
+                  EVENTS.
+                </motion.span>
+              </h1>
+            </motion.div>
+
+            {/* Right Column: Supporting text & CTAs */}
+            <div className="flex flex-col items-start lg:items-end text-left lg:text-right w-full lg:w-[33%] xl:w-[30%] lg:max-w-[320px] xl:max-w-[380px] pointer-events-auto lg:mt-auto mb-16 lg:mb-0">
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] as const, delay: 0.7 }}
+                className="text-lg text-white/80 font-light leading-relaxed mb-8"
+              >
+                Spectal is a boutique agency curating 360° talent management, live concerts, college festivals, and brand activations across India.
+              </motion.p>
+              
+              {/* Buttons with premium scale & shadow effects */}
+              <motion.div 
+                variants={buttonVariants}
+                initial="hidden"
+                animate="visible"
+                className="flex items-center gap-4 w-full justify-start lg:justify-end"
+              >
+                {/* Primary: Glass button with glow */}
+                <motion.a
+                  href="#contact"
+                  whileHover={{ scale: 1.05, boxShadow: "0 0 25px rgba(221,236,196,0.35)", background: "rgba(255,255,255,0.12)" }}
+                  whileTap={{ scale: 0.98 }}
+                  data-interactive="true"
+                  className="px-6 py-4 bg-white/5 backdrop-blur-md border border-white/10 text-white text-xs font-mono tracking-widest uppercase transition-all duration-300 rounded-full font-bold shadow-lg"
+                >
+                  Book With Us
+                </motion.a>
+                
+                {/* Secondary: Transparent outline button */}
+                <motion.a
+                  href="#showcase"
+                  whileHover={{ scale: 1.05, borderColor: "rgba(255,255,255,0.8)", background: "rgba(255,255,255,0.05)" }}
+                  whileTap={{ scale: 0.98 }}
+                  data-interactive="true"
+                  className="px-6 py-4 border border-white/20 text-white text-xs font-mono tracking-widest uppercase transition-all duration-300 rounded-full font-bold"
+                >
+                  View Services
+                </motion.a>
+              </motion.div>
             </div>
           </div>
+
+          {/* Client Logos Ticker - Staggered fade in */}
+          <motion.div 
+            variants={logosContainerVariants}
+            initial="hidden"
+            animate="visible"
+            className="absolute bottom-6 left-0 w-full z-20 border-t border-white/5 pt-6 overflow-hidden pointer-events-auto"
+          >
+            <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row md:items-center justify-between gap-6">
+              <span className="text-[9px] font-mono tracking-[0.27em] text-white/30 uppercase whitespace-nowrap">
+                TRUSTED BY LEADING BRANDS &amp; PARTNERS
+              </span>
+              
+              {/* Logo horizontal ticker */}
+              <div className="flex-1 overflow-hidden relative w-full select-none">
+                <div className="animate-marquee whitespace-nowrap flex items-center gap-16 md:gap-24">
+                  {CLIENT_LOGOS.map((logo, idx) => (
+                    <motion.div 
+                      key={idx}
+                      variants={logoItemVariants}
+                      whileHover={{ scale: 1.08 }}
+                      className="text-white/40 hover:text-white transition-all duration-300 cursor-pointer flex-shrink-0"
+                    >
+                      {logo.svg}
+                    </motion.div>
+                  ))}
+                  {/* Duplicate logos for seamless infinite scroll */}
+                  {CLIENT_LOGOS.map((logo, idx) => (
+                    <motion.div 
+                      key={`dup-${idx}`}
+                      whileHover={{ scale: 1.08 }}
+                      className="text-white/40 hover:text-white transition-all duration-300 cursor-pointer flex-shrink-0"
+                    >
+                      {logo.svg}
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </section>
 
         {/* MDNT-Inspired Infinite Scrolling Marquee Banner */}
@@ -338,9 +570,6 @@ export default function Home() {
             </p>
           </div>
         </section>
-
-        {/* Section 8: Work Teaser — removed text overlay */}
-        <section id="work-teaser" className="w-full min-h-[50vh] pointer-events-none" />
 
         <SocialFeed />
         <RotatingArch />

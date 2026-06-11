@@ -57,7 +57,7 @@ export default function Footer() {
               { label: "HOME", href: "#arrival" },
               { label: "SERVICES", href: "#showcase" },
               { label: "EVENTS", href: "#impact" },
-              { label: "CONTACT", href: "#silence" },
+              { label: "CONTACT", href: "#silence" as string },
             ].map((link) => (
               <a
                 key={link.label}
