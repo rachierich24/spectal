@@ -6,12 +6,9 @@ import Scene from "@/components/canvas/Scene";
 import SpectalExperience from "@/components/canvas/SpectalExperience";
 import Preloader from "@/components/ui/Preloader";
 import Footer from "@/components/layout/Footer";
-<<<<<<< Updated upstream
 import { useExperience } from "@/lib/experienceStore";
-=======
 import RotatingArch from "@/components/ui/RotatingArch";
 import SocialFeed from "@/components/ui/SocialFeed";
->>>>>>> Stashed changes
 
 export default function Home() {
   const [hoveredProjectImage, setHoveredProjectImage] = useState<string | null>(null);
@@ -317,11 +314,8 @@ export default function Home() {
         {/* Section 8: Work Teaser — removed text overlay */}
         <section id="work-teaser" className="w-full min-h-[50vh] pointer-events-none" />
 
-<<<<<<< Updated upstream
-=======
         <SocialFeed />
         <RotatingArch />
->>>>>>> Stashed changes
         <Footer />
       </div>
 
