@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
 import Scene from "@/components/canvas/Scene";
 import SpectalExperience from "@/components/canvas/SpectalExperience";
 import Preloader from "@/components/ui/Preloader";
@@ -12,17 +12,29 @@ import SocialFeed from "@/components/ui/SocialFeed";
 
 export default function Home() {
   const [hoveredProjectImage, setHoveredProjectImage] = useState<string | null>(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const { setEnergy } = useExperience();
 
+  // Motion values for the floating project preview (avoids re-rendering the entire Home page on mouse move!)
+  const previewX = useMotionValue(0);
+  const previewY = useMotionValue(0);
+
+  // Springs for buttery smooth follow animation
+  const previewXSpring = useSpring(previewX, { damping: 25, stiffness: 250, mass: 0.5 });
+  const previewYSpring = useSpring(previewY, { damping: 25, stiffness: 250, mass: 0.5 });
+
+  // Compute offset translations (preview is 256px wide by 160px tall, offset keeps it offset from cursor)
+  const previewTranslateX = useTransform(previewXSpring, (x) => x + 20);
+  const previewTranslateY = useTransform(previewYSpring, (y) => y - 120);
+
   const handleMouseMove = (e: React.MouseEvent) => {
-    setMousePos({ x: e.clientX, y: e.clientY });
+    previewX.set(e.clientX);
+    previewY.set(e.clientY);
   };
 
   return (
     <main className="relative w-full overflow-hidden" onMouseMove={handleMouseMove}>
       <Preloader />
-      
+
       {/* Global 3D Canvas Background */}
       <Scene>
         <ambientLight intensity={0.5} />
@@ -31,10 +43,10 @@ export default function Home() {
 
       {/* Foreground HTML overlay for scrolling and text content */}
       <div className="relative w-full z-10 flex flex-col pointer-events-none">
-        
+
         {/* Section 1: Arrival (Summit Portal Entry) */}
         <section id="arrival" className="w-full h-screen flex items-center justify-center pointer-events-none relative">
-          
+
           {/* MDNT-Inspired Spinning Circular Text Badge */}
           <div className="absolute right-6 md:right-16 top-24 md:top-32 w-28 h-28 md:w-36 md:h-36 select-none pointer-events-none z-10 animate-spin-slow">
             <svg viewBox="0 0 100 100" className="w-full h-full text-spectal-mint/20 fill-current">
@@ -83,10 +95,13 @@ export default function Home() {
             <span className="w-1.5 h-1.5 rounded-full bg-spectal-red"></span>
             <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">Tour Curation</span>
             <span className="w-1.5 h-1.5 rounded-full bg-spectal-mint"></span>
+<<<<<<< Updated upstream
             <span className="text-xs font-mono tracking-widest text-white uppercase">Music & Comedy</span>
             <span className="w-1.5 h-1.5 rounded-full bg-spectal-red"></span>
             <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">Digital Content</span>
             <span className="w-1.5 h-1.5 rounded-full bg-spectal-mint"></span>
+=======
+>>>>>>> Stashed changes
 
             {/* Duplicated for seamless loop */}
             <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">360° Talent Management</span>
@@ -199,15 +214,15 @@ export default function Home() {
                 [ From college campuses to mainstage arenas ]
               </p>
             </div>
-            
+
             {/* Bento Grid layout */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6 w-full">
               {/* Image 1: Mainstage (7-col card) */}
-              <div 
+              <div
                 data-cursor="VIEW"
                 className="md:col-span-7 group relative overflow-hidden bg-white/5 border border-white/10 rounded-2xl h-[400px] transition-all duration-500 hover:border-spectal-red/40 hover:shadow-[0_0_30px_rgba(201,73,61,0.1)]"
               >
-                <div 
+                <div
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105"
                   style={{ backgroundImage: `url('/event_mainstage.png')` }}
                 />
@@ -218,13 +233,13 @@ export default function Home() {
                   <p className="text-xs text-spectal-mint/70 mt-2 font-light max-w-md">High-energy concert productions featuring India's top independent artists, managed end-to-end by Spectal.</p>
                 </div>
               </div>
-              
+
               {/* Image 2: Spatial (5-col card) */}
-              <div 
+              <div
                 data-cursor="VIEW"
                 className="md:col-span-5 group relative overflow-hidden bg-white/5 border border-white/10 rounded-2xl h-[400px] transition-all duration-500 hover:border-spectal-mint/40 hover:shadow-[0_0_30px_rgba(221,236,196,0.1)]"
               >
-                <div 
+                <div
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105"
                   style={{ backgroundImage: `url('/event_spatial.png')` }}
                 />
@@ -237,11 +252,11 @@ export default function Home() {
               </div>
 
               {/* Image 3: Hackathon (5-col card) */}
-              <div 
+              <div
                 data-cursor="VIEW"
                 className="md:col-span-5 group relative overflow-hidden bg-white/5 border border-white/10 rounded-2xl h-[350px] transition-all duration-500 hover:border-spectal-mint/40 hover:shadow-[0_0_30px_rgba(221,236,196,0.1)]"
               >
-                <div 
+                <div
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105"
                   style={{ backgroundImage: `url('/event_hackathon.png')` }}
                 />
@@ -254,11 +269,11 @@ export default function Home() {
               </div>
 
               {/* Image 4: Networking (7-col card) */}
-              <div 
+              <div
                 data-cursor="VIEW"
                 className="md:col-span-7 group relative overflow-hidden bg-white/5 border border-white/10 rounded-2xl h-[350px] transition-all duration-500 hover:border-spectal-red/40 hover:shadow-[0_0_30px_rgba(201,73,61,0.1)]"
               >
-                <div 
+                <div
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105"
                   style={{ backgroundImage: `url('/event_networking.png')` }}
                 />
@@ -273,6 +288,81 @@ export default function Home() {
           </div>
         </section>
 
+<<<<<<< Updated upstream
+=======
+        {/* Section 4: Project Showcase — Editorial Project Grid */}
+        <section id="showcase" className="w-full min-h-screen py-24 flex items-center justify-center relative z-20 pointer-events-auto border-t border-white/5">
+          <div className="max-w-7xl w-full mx-auto px-6 md:px-12 flex flex-col select-none">
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+              <div className="flex flex-col items-start">
+                <span className="text-xs font-mono tracking-[0.4em] text-spectal-red mb-3">
+                  04 // SHOWCASE
+                </span>
+                <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-white leading-none">
+                  TALENT <span className="text-spectal-mint font-serif italic font-light">ENGINES</span>
+                </h2>
+              </div>
+              <p className="max-w-md text-xs font-mono text-spectal-mint/50 uppercase tracking-widest">
+                [ Custom productions created by student placement talent ]
+              </p>
+            </div>
+
+            {/* List Table of Projects */}
+            <div className="w-full flex flex-col divide-y divide-white/10 mt-6">
+              <div
+                data-interactive="true"
+                data-cursor="EXPLORE"
+                onMouseEnter={() => setHoveredProjectImage("/event_spatial.png")}
+                onMouseLeave={() => setHoveredProjectImage(null)}
+                className="py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 group cursor-pointer hover:bg-white/[0.02] px-6 transition-all duration-300 pointer-events-auto"
+              >
+                <div className="flex items-center gap-8">
+                  <span className="text-sm font-mono text-spectal-red">01 / PROJECT</span>
+                  <h3 className="text-2xl md:text-4xl font-bold text-white tracking-tight group-hover:text-spectal-red transition-colors duration-300">HYPER-TRUSS</h3>
+                </div>
+                <div className="flex flex-col md:items-end gap-2 max-w-lg">
+                  <span className="text-sm text-spectal-mint font-light">Real-time projection mapping mapping visual streams into mechanical truss arrays.</span>
+                  <span className="text-[10px] font-mono text-spectal-mint/40 uppercase tracking-wider">WebGL // WebVR // ThreeJS // Arduino</span>
+                </div>
+              </div>
+
+              <div
+                data-interactive="true"
+                data-cursor="EXPLORE"
+                onMouseEnter={() => setHoveredProjectImage("/event_mainstage.png")}
+                onMouseLeave={() => setHoveredProjectImage(null)}
+                className="py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 group cursor-pointer hover:bg-white/[0.02] px-6 transition-all duration-300 pointer-events-auto"
+              >
+                <div className="flex items-center gap-8">
+                  <span className="text-sm font-mono text-white">02 / PROJECT</span>
+                  <h3 className="text-2xl md:text-4xl font-bold text-white tracking-tight group-hover:text-spectal-mint transition-colors duration-300">WAVE-SYNTH</h3>
+                </div>
+                <div className="flex flex-col md:items-end gap-2 max-w-lg">
+                  <span className="text-sm text-spectal-mint font-light">Custom DSP engine converting spatial crowd density and velocity maps into live ambient soundtrack modulations.</span>
+                  <span className="text-[10px] font-mono text-spectal-mint/40 uppercase tracking-wider">Web Audio API // Computer Vision // Node</span>
+                </div>
+              </div>
+
+              <div
+                data-interactive="true"
+                data-cursor="EXPLORE"
+                onMouseEnter={() => setHoveredProjectImage("/event_hackathon.png")}
+                onMouseLeave={() => setHoveredProjectImage(null)}
+                className="py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 group cursor-pointer hover:bg-white/[0.02] px-6 transition-all duration-300 pointer-events-auto"
+              >
+                <div className="flex items-center gap-8">
+                  <span className="text-sm font-mono text-spectal-red">03 / PROJECT</span>
+                  <h3 className="text-2xl md:text-4xl font-bold text-white tracking-tight group-hover:text-spectal-red transition-colors duration-300">CHROMA-FLUX</h3>
+                </div>
+                <div className="flex flex-col md:items-end gap-2 max-w-lg">
+                  <span className="text-sm text-spectal-mint font-light">An open-source generative particle engine built for live concerts, designed to render 1M+ nodes dynamically at 60FPS.</span>
+                  <span className="text-[10px] font-mono text-spectal-mint/40 uppercase tracking-wider">WebGL Shader // GLSL // Canvas API</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+>>>>>>> Stashed changes
 
         {/* Section 5: Legacy — scroll spacer for WebGL galaxy */}
         <section id="legacy" className="w-full min-h-screen pointer-events-none" />
@@ -287,21 +377,35 @@ export default function Home() {
               BOOK WITH <span className="text-spectal-mint font-serif italic text-white/95">US</span>
             </h2>
 
+<<<<<<< Updated upstream
             {/* Booking / Inquiry Form */}
+=======
+            {/* Sleek Two-Field Invitation Request Form */}
+>>>>>>> Stashed changes
             <form
               onSubmit={(e) => e.preventDefault()}
               className="pointer-events-auto w-full flex flex-col space-y-4 mt-4 text-left"
             >
               <div className="flex flex-col sm:flex-row gap-3">
                 <input
+<<<<<<< Updated upstream
                   type="text"
                   placeholder="Your name"
+=======
+                  type="email"
+                  placeholder="Enter email address"
+>>>>>>> Stashed changes
                   required
                   className="flex-grow bg-white/5 border border-white/10 rounded-lg px-5 py-4 text-sm text-white focus:outline-none focus:border-spectal-mint focus:ring-1 focus:ring-spectal-mint transition-all duration-300"
                 />
                 <input
+<<<<<<< Updated upstream
                   type="email"
                   placeholder="Email address"
+=======
+                  type="text"
+                  placeholder="College / Company"
+>>>>>>> Stashed changes
                   required
                   className="flex-grow bg-white/5 border border-white/10 rounded-lg px-5 py-4 text-sm text-white focus:outline-none focus:border-spectal-mint focus:ring-1 focus:ring-spectal-mint transition-all duration-300"
                 />
@@ -339,18 +443,20 @@ export default function Home() {
         {hoveredProjectImage && (
           <motion.div
             initial={{ opacity: 0, scale: 0.8, rotate: -4 }}
-            animate={{ 
-              opacity: 1, 
-              scale: 1.05, 
+            animate={{
+              opacity: 1,
+              scale: 1.05,
               rotate: 3,
-              x: mousePos.x + 20, 
-              y: mousePos.y - 120 
+            }}
+            style={{
+              x: previewTranslateX,
+              y: previewTranslateY,
             }}
             exit={{ opacity: 0, scale: 0.8, rotate: -4 }}
             transition={{ type: "spring", stiffness: 350, damping: 25 }}
-            className="fixed top-0 left-0 pointer-events-none z-[800] w-64 h-40 bg-white/5 border border-white/20 rounded-2xl overflow-hidden shadow-[0_15px_35px_rgba(0,0,0,0.6)] backdrop-blur-sm"
+            className="fixed top-0 left-0 pointer-events-none z-[800] w-64 h-40 bg-white/5 border border-white/20 rounded-2xl overflow-hidden shadow-[0_15px_35px_rgba(0,0,0,0.6)] backdrop-blur-sm will-change-transform"
           >
-            <div 
+            <div
               className="w-full h-full bg-cover bg-center"
               style={{ backgroundImage: `url(${hoveredProjectImage})` }}
             />

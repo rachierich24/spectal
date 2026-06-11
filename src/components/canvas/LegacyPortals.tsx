@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
-import { MeshPortalMaterial, Environment, Text } from "@react-three/drei";
+import { MeshPortalMaterial, Text } from "@react-three/drei";
 import * as THREE from "three";
 import { scrollStore } from "@/lib/scrollStore";
 
@@ -145,6 +145,7 @@ function PortalItem({
         {subtitle}
       </Text>
 
+<<<<<<< Updated upstream
       {/* Flippable Card Container */}
       <group ref={cardGroupRef}>
         
@@ -168,6 +169,18 @@ function PortalItem({
           <boxGeometry args={[2.5, 3.5, 0.15]} />
           <meshBasicMaterial transparent opacity={0} depthWrite={false} />
         </mesh>
+=======
+      <mesh
+        onPointerOver={() => setHover(true)}
+        onPointerOut={() => setHover(false)}
+      >
+        <planeGeometry args={[2.5, 3.5]} />
+        <MeshPortalMaterial ref={portalRef} blend={0} blur={0} resolution={256}>
+          <color attach="background" args={[color]} />
+          <ambientLight intensity={0.4} />
+          <directionalLight position={[3, 3, 3]} intensity={2.0} />
+          <pointLight position={[-3, -3, 2]} intensity={1.0} />
+>>>>>>> Stashed changes
 
         {/* Front Side: Mesh Portal */}
         <mesh position={[0, 0, 0.01]}>

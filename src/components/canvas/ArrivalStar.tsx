@@ -54,21 +54,19 @@ const particleFragmentShader = `
   varying vec3 vColor;
   
   void main() {
-    // Make particles circular and soft
+    // Make particles circular and soft without using discard
     vec2 cxy = 2.0 * gl_PointCoord - 1.0;
     float r = dot(cxy, cxy);
-    if (r > 1.0) discard;
+    float mask = smoothstep(1.0, 0.8, r);
     
-    float alpha = (1.0 - r) * 0.9;
-    
-    gl_FragColor = vec4(vColor, alpha);
+    gl_FragColor = vec4(vColor, mask * 0.9);
   }
 `;
 
 export default function ArrivalStar() {
   const pointsRef = useRef<THREE.Points>(null);
   const materialRef = useRef<THREE.ShaderMaterial>(null);
-  
+
   const [geometryData, setGeometryData] = useState<{
     positions: Float32Array;
     colors: Float32Array;
@@ -81,32 +79,32 @@ export default function ArrivalStar() {
     const img = new Image();
     // Updated to the user's actual filename
     img.src = '/spectallogo.jpg';
-    
+
     img.onload = () => {
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
       if (!ctx) return;
-      
-      const size = 150; 
+
+      const size = 150;
       canvas.width = size;
       canvas.height = size;
       ctx.drawImage(img, 0, 0, size, size);
-      
+
       const imgData = ctx.getImageData(0, 0, size, size).data;
-      
+
       const positions = [];
       const colors = [];
       const directions = [];
-      
+
       const scale = 0.05;
-      
+
       for (let y = 0; y < size; y++) {
         for (let x = 0; x < size; x++) {
           const i = (y * size + x) * 4;
           const r = imgData[i] / 255;
           const g = imgData[i + 1] / 255;
           const b = imgData[i + 2] / 255;
-          
+
           // The logo is a JPEG with a solid red background.
           // Spectal Red is roughly R: 0.78, G: 0.28, B: 0.23
           // Spectal Mint is roughly R: 0.86, G: 0.92, B: 0.76
@@ -116,10 +114,10 @@ export default function ArrivalStar() {
             const posX = (x - size / 2) * scale;
             const posY = -(y - size / 2) * scale;
             const posZ = (Math.random() - 0.5) * 0.5;
-            
+
             positions.push(posX, posY, posZ);
             colors.push(r, g, b);
-            
+
             const dirX = posX * 2.0 + (Math.random() - 0.5);
             const dirY = posY * 2.0 + (Math.random() - 0.5);
             const dirZ = (Math.random() - 0.5) * 5.0;
@@ -127,7 +125,7 @@ export default function ArrivalStar() {
           }
         }
       }
-      
+
       setGeometryData({
         positions: new Float32Array(positions),
         colors: new Float32Array(colors),
@@ -135,7 +133,7 @@ export default function ArrivalStar() {
         count: positions.length / 3
       });
     };
-    
+
     // Fallback if image fails to load (dev environment without logo.png)
     img.onerror = () => {
       console.warn("logo.png not found in public folder. Please add it!");
@@ -159,14 +157,14 @@ export default function ArrivalStar() {
       materialRef.current.uniforms.uPointer.value.lerp(state.pointer, 0.1);
       materialRef.current.uniforms.uScrollProgress.value = scrollProgress;
     }
-    
+
     if (pointsRef.current) {
       // Visibility culling
       const isVisible = scrollProgress < 1.5;
       pointsRef.current.visible = isVisible;
-      
+
       if (!isVisible) return;
-      
+
       // Slow rotation before explosion
       pointsRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.2;
       pointsRef.current.rotation.x = Math.cos(state.clock.elapsedTime * 0.5) * 0.1;

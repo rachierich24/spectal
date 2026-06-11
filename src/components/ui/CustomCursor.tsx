@@ -1,17 +1,36 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
 
 export default function CustomCursor() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const [cursorText, setCursorText] = useState("");
   const [isClicked, setIsClicked] = useState(false);
 
+  // Motion values for raw mouse coordinates (no React state updates on move!)
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
+
+  // Inertia springs for smooth custom follow-through
+  // Ring: higher damping/mass for organic drag/lag effect
+  const ringX = useSpring(cursorX, { damping: 30, stiffness: 220, mass: 0.65 });
+  const ringY = useSpring(cursorY, { damping: 30, stiffness: 220, mass: 0.65 });
+
+  // Dot: faster tracking with high stiffness and minimal mass
+  const dotX = useSpring(cursorX, { damping: 25, stiffness: 450, mass: 0.2 });
+  const dotY = useSpring(cursorY, { damping: 25, stiffness: 450, mass: 0.2 });
+
+  // Center alignment offsets (Ring is 48px/2 = 24px, Dot is 16px/2 = 8px)
+  const ringTranslateX = useTransform(ringX, (val) => val - 24);
+  const ringTranslateY = useTransform(ringY, (val) => val - 24);
+  const dotTranslateX = useTransform(dotX, (val) => val - 8);
+  const dotTranslateY = useTransform(dotY, (val) => val - 8);
+
   useEffect(() => {
     const updateMousePosition = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
     };
 
     const handleMouseOver = (e: MouseEvent) => {
@@ -58,16 +77,18 @@ export default function CustomCursor() {
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mouseup", handleMouseUp);
     };
-  }, [cursorText]);
+  }, [cursorText, cursorX, cursorY]);
 
   return (
     <>
       {/* Outer Glow Ring */}
       <motion.div
-        className="fixed top-0 left-0 w-12 h-12 border border-spectal-mint rounded-full pointer-events-none z-[999] mix-blend-difference flex items-center justify-center"
+        className="fixed top-0 left-0 w-12 h-12 border border-spectal-mint rounded-full pointer-events-none z-[999] mix-blend-difference flex items-center justify-center will-change-transform"
+        style={{
+          x: ringTranslateX,
+          y: ringTranslateY,
+        }}
         animate={{
-          x: mousePosition.x - 24,
-          y: mousePosition.y - 24,
           scale: isClicked ? 0.75 : cursorText ? 2.0 : isHovering ? 1.5 : 1,
           opacity: isHovering && !cursorText ? 0 : 0.6,
           borderColor: cursorText ? "#C9493D" : "#DDECC4",
@@ -95,10 +116,12 @@ export default function CustomCursor() {
 
       {/* Inner Dot */}
       <motion.div
-        className="fixed top-0 left-0 w-4 h-4 bg-spectal-red rounded-full pointer-events-none z-[1000] mix-blend-difference"
+        className="fixed top-0 left-0 w-4 h-4 bg-spectal-red rounded-full pointer-events-none z-[1000] mix-blend-difference will-change-transform"
+        style={{
+          x: dotTranslateX,
+          y: dotTranslateY,
+        }}
         animate={{
-          x: mousePosition.x - 8,
-          y: mousePosition.y - 8,
           scale: isClicked ? 0.5 : cursorText ? 0 : isHovering ? 2.5 : 1,
         }}
         transition={{

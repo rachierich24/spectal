@@ -54,9 +54,6 @@ const waveFragmentShader = `
     // Visibility fade (Shifted by +1.0)
     float visibility = smoothstep(1.5, 2.0, uScrollProgress) * (1.0 - smoothstep(3.0, 3.8, uScrollProgress));
     
-    // If not visible, discard to save performance
-    if (visibility <= 0.01) discard;
-
     vec3 colorCharcoal = vec3(0.043, 0.043, 0.043);
     vec3 colorMint = vec3(0.866, 0.925, 0.768);
     vec3 colorRed = vec3(0.788, 0.286, 0.239);

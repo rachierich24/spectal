@@ -12,8 +12,13 @@ const NAV_ITEMS = [
 export default function Header() {
   return (
     <header className="fixed top-0 left-0 w-full z-50 pt-6 pointer-events-none">
+<<<<<<< Updated upstream
       <div className="max-w-[1600px] mx-auto px-6 md:px-12 flex justify-between items-center pointer-events-auto relative">
         
+=======
+      <div className="max-w-[1600px] mx-auto px-6 md:px-12 grid grid-cols-3 items-center pointer-events-auto">
+
+>>>>>>> Stashed changes
         {/* Left: Brand Logo */}
         <div className="flex-shrink-0">
           <a
@@ -51,11 +56,11 @@ export default function Header() {
             data-interactive="true"
             className="group px-6 py-3 bg-white text-black text-xs font-mono font-bold tracking-widest uppercase hover:bg-white/90 transition-all duration-300 rounded-full inline-flex items-center shadow-lg whitespace-nowrap"
           >
-            GET IN TOUCH 
+            GET IN TOUCH
             <span className="text-spectal-red group-hover:text-black ml-2 inline-block transition-colors duration-300">●</span>
           </a>
         </div>
-        
+
       </div>
     </header>
   );

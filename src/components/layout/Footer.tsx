@@ -13,16 +13,12 @@ const letterVariants: Variants = {
     opacity: 0,
     scale: 0.8,
     rotate: 6,
-    color: "rgba(221, 236, 196, 0.15)",
-    textShadow: "0px 0px 0px rgba(201, 73, 61, 0)",
   },
   visible: (index: number) => ({
     y: "18%", // Shifts resting state down so bottom 18% of the letters is hidden/clipped below the end
     opacity: 1,
     scale: 1,
     rotate: 0,
-    color: "rgba(201, 73, 61, 1)",
-    textShadow: "0px 0px 30px rgba(201, 73, 61, 0.4)",
     transition: {
       duration: 0.8,
       ease: [0.16, 1, 0.3, 1] as const, // easeOutExpo
@@ -36,7 +32,7 @@ function AnimatedLetter({ char, index }: AnimatedLetterProps) {
     <motion.span
       custom={index}
       variants={letterVariants}
-      className="origin-bottom font-black font-sans select-none pointer-events-none"
+      className="origin-bottom font-black font-sans select-none pointer-events-none text-spectal-red drop-shadow-[0_0_20px_rgba(201,73,61,0.4)] will-change-transform"
       style={{ display: "inline-block" }}
     >
       {char}
@@ -163,8 +159,13 @@ export default function Footer() {
       <motion.div
         initial="hidden"
         whileInView="visible"
+<<<<<<< Updated upstream
         viewport={{ once: false, amount: 0.05 }}
         className="w-full flex flex-col items-center justify-end overflow-hidden select-none relative z-10 pt-4"
+=======
+        viewport={{ once: true, amount: 0.05 }}
+        className="w-full flex flex-col items-center justify-end overflow-hidden select-none relative z-10 pt-8 mt-4"
+>>>>>>> Stashed changes
       >
         
         {/* Animated Summit Star logo symbol sitting above spectal, like Quoti's orange roof mark */}
