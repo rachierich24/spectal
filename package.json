@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "download-logos": "node src/scripts/download_logos.js",
+    "test-md5": "node src/scripts/test_md5.js",
+    "process-logos": "node src/scripts/process_logos.js",
+    "download-mdn-logos": "node src/scripts/download_mdn_logos.js"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",

@@ -8,58 +8,8 @@ import Preloader from "@/components/ui/Preloader";
 import Footer from "@/components/layout/Footer";
 import { useExperience } from "@/lib/experienceStore";
 import RotatingArch from "@/components/ui/RotatingArch";
+import { CLIENT_LOGOS } from "@/components/ui/ClientLogos";
 import SocialFeed from "@/components/ui/SocialFeed";
-
-const CLIENT_LOGOS = [
-  {
-    name: "Red Bull",
-    svg: (
-      <svg className="h-5 w-auto fill-current" viewBox="0 0 120 24">
-        <text x="0" y="18" className="font-sans font-black tracking-widest text-base">RED BULL</text>
-      </svg>
-    )
-  },
-  {
-    name: "Spotify",
-    svg: (
-      <svg className="h-5 w-auto fill-current" viewBox="0 0 24 24">
-        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.485 17.306c-.215.352-.676.467-1.028.252-2.857-1.748-6.452-2.143-10.686-1.176-.402.093-.805-.162-.897-.564-.093-.402.162-.805.564-.897 4.636-1.06 8.594-.606 11.794 1.352.352.215.467.676.253 1.028v.005zm1.464-3.26c-.27 1.02-.756 1.488-1.57 1.155-3.272-2.012-8.258-2.593-12.132-1.416-.453.137-.923-.12-.1.06-.576.453-.137.923.12 1.06.576.453 4.428-1.34 10.02-1.06 13.8 2.01c.21.34.46.74.8 1.01.34-.1.44-.45.8-.8zm.126-3.414c-4.32-2.565-11.436-2.8-15.534-1.556-.66.2-1.36-.18-1.56-.84-.2-.66.18-1.36.84-1.56 4.716-1.428 12.576-1.14 17.544 1.812.594.354.792 1.12.438 1.716-.354.594-1.12.792-1.716.438z" />
-      </svg>
-    )
-  },
-  {
-    name: "Budweiser",
-    svg: (
-      <svg className="h-5 w-auto fill-current" viewBox="0 0 120 24">
-        <text x="0" y="18" className="font-sans font-black tracking-widest text-base">BUDWEISER</text>
-      </svg>
-    )
-  },
-  {
-    name: "OnePlus",
-    svg: (
-      <svg className="h-5 w-auto fill-current" viewBox="0 0 120 24">
-        <text x="0" y="18" className="font-sans font-bold tracking-widest text-base">ONEPLUS</text>
-      </svg>
-    )
-  },
-  {
-    name: "Coca-Cola",
-    svg: (
-      <svg className="h-5 w-auto fill-current" viewBox="0 0 120 24">
-        <text x="0" y="18" className="font-serif italic font-black tracking-wider text-base">Coca-Cola</text>
-      </svg>
-    )
-  },
-  {
-    name: "Bacardi",
-    svg: (
-      <svg className="h-5 w-auto fill-current" viewBox="0 0 120 24">
-        <text x="0" y="18" className="font-sans font-black tracking-widest text-base">BACARDI</text>
-      </svg>
-    )
-  }
-];
 
 export default function Home() {
   const [hoveredProjectImage, setHoveredProjectImage] = useState<string | null>(null);
@@ -293,9 +243,9 @@ export default function Home() {
                       key={idx}
                       variants={logoItemVariants}
                       whileHover={{ scale: 1.08 }}
-                      className="text-white/40 hover:text-white transition-all duration-300 cursor-pointer flex-shrink-0"
+                      className="opacity-40 hover:opacity-100 transition-all duration-300 cursor-pointer flex-shrink-0"
                     >
-                      {logo.svg}
+                      <img src={logo.src} alt={logo.name} className="h-5 md:h-6 w-auto object-contain" />
                     </motion.div>
                   ))}
                   {/* Duplicate logos for seamless infinite scroll */}
@@ -303,9 +253,9 @@ export default function Home() {
                     <motion.div
                       key={`dup-${idx}`}
                       whileHover={{ scale: 1.08 }}
-                      className="text-white/40 hover:text-white transition-all duration-300 cursor-pointer flex-shrink-0"
+                      className="opacity-40 hover:opacity-100 transition-all duration-300 cursor-pointer flex-shrink-0"
                     >
-                      {logo.svg}
+                      <img src={logo.src} alt={logo.name} className="h-5 md:h-6 w-auto object-contain" />
                     </motion.div>
                   ))}
                 </div>
