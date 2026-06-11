@@ -8,11 +8,11 @@ export default function WorkWithUsPage() {
   return (
     <main className="relative w-full min-h-screen bg-[#050505] overflow-hidden text-white">
       <Preloader />
-      
+
       {/* Content */}
       <div className="relative w-full z-10 pt-40 pb-24">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
@@ -30,8 +30,8 @@ export default function WorkWithUsPage() {
             <p className="text-xl text-spectal-mint/80 font-light leading-relaxed mb-8">
               We are always looking for passionate individuals who understand the power of experiential marketing. If you thrive in fast-paced environments and love creating unforgettable moments, you belong here.
             </p>
-            <a 
-              href="/contact" 
+            <a
+              href="/contact"
               className="inline-block px-8 py-4 border border-white/20 text-xs font-mono tracking-widest uppercase hover:bg-white hover:text-black transition-colors duration-300"
             >
               View Open Roles

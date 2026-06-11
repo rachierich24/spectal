@@ -35,11 +35,11 @@ export default function WorkPage() {
   return (
     <main className="relative w-full min-h-screen bg-[#050505] overflow-hidden text-white">
       <Preloader />
-      
+
       {/* Content */}
       <div className="relative w-full z-10 pt-40 pb-24">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
@@ -69,7 +69,7 @@ export default function WorkPage() {
                 <div className={`w-full aspect-[4/3] ${item.color} mb-6 overflow-hidden relative flex items-center justify-center`}>
                   <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors duration-500" />
                   <span className="text-spectal-mint/50 font-mono tracking-widest text-xs uppercase z-10">Image Placeholder</span>
-                  
+
                   {/* Tag */}
                   <div className="absolute top-4 left-4 px-3 py-1.5 bg-black/80 backdrop-blur-md border border-white/10 text-[10px] font-mono tracking-widest uppercase text-white flex items-center gap-2 rounded">
                     <span className="w-1.5 h-1.5 rounded-full bg-spectal-red"></span>

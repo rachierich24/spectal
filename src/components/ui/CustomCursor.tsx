@@ -14,12 +14,12 @@ export default function CustomCursor() {
 
   // Inertia springs for smooth custom follow-through
   // Ring: higher damping/mass for organic drag/lag effect
-  const ringX = useSpring(cursorX, { damping: 30, stiffness: 220, mass: 0.65 });
-  const ringY = useSpring(cursorY, { damping: 30, stiffness: 220, mass: 0.65 });
+  const ringX = useSpring(cursorX, { damping: 36, stiffness: 280, mass: 0.6 });
+  const ringY = useSpring(cursorY, { damping: 36, stiffness: 280, mass: 0.6 });
 
-  // Dot: faster tracking with high stiffness and minimal mass
-  const dotX = useSpring(cursorX, { damping: 25, stiffness: 450, mass: 0.2 });
-  const dotY = useSpring(cursorY, { damping: 25, stiffness: 450, mass: 0.2 });
+  // Dot: faster, instant tracking with high stiffness and minimal mass
+  const dotX = useSpring(cursorX, { damping: 35, stiffness: 600, mass: 0.1 });
+  const dotY = useSpring(cursorY, { damping: 35, stiffness: 600, mass: 0.1 });
 
   // Center alignment offsets (Ring is 48px/2 = 24px, Dot is 16px/2 = 8px)
   const ringTranslateX = useTransform(ringX, (val) => val - 24);

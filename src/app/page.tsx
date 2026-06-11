@@ -23,7 +23,7 @@ const CLIENT_LOGOS = [
     name: "Spotify",
     svg: (
       <svg className="h-5 w-auto fill-current" viewBox="0 0 24 24">
-        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.485 17.306c-.215.352-.676.467-1.028.252-2.857-1.748-6.452-2.143-10.686-1.176-.402.093-.805-.162-.897-.564-.093-.402.162-.805.564-.897 4.636-1.06 8.594-.606 11.794 1.352.352.215.467.676.253 1.028v.005zm1.464-3.26c-.27 1.02-.756 1.488-1.57 1.155-3.272-2.012-8.258-2.593-12.132-1.416-.453.137-.923-.12-.1.06-.576.453-.137.923.12 1.06.576.453 4.428-1.34 10.02-1.06 13.8 2.01c.21.34.46.74.8 1.01.34-.1.44-.45.8-.8zm.126-3.414c-4.32-2.565-11.436-2.8-15.534-1.556-.66.2-1.36-.18-1.56-.84-.2-.66.18-1.36.84-1.56 4.716-1.428 12.576-1.14 17.544 1.812.594.354.792 1.12.438 1.716-.354.594-1.12.792-1.716.438z"/>
+        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.485 17.306c-.215.352-.676.467-1.028.252-2.857-1.748-6.452-2.143-10.686-1.176-.402.093-.805-.162-.897-.564-.093-.402.162-.805.564-.897 4.636-1.06 8.594-.606 11.794 1.352.352.215.467.676.253 1.028v.005zm1.464-3.26c-.27 1.02-.756 1.488-1.57 1.155-3.272-2.012-8.258-2.593-12.132-1.416-.453.137-.923-.12-.1.06-.576.453-.137.923.12 1.06.576.453 4.428-1.34 10.02-1.06 13.8 2.01c.21.34.46.74.8 1.01.34-.1.44-.45.8-.8zm.126-3.414c-4.32-2.565-11.436-2.8-15.534-1.556-.66.2-1.36-.18-1.56-.84-.2-.66.18-1.36.84-1.56 4.716-1.428 12.576-1.14 17.544 1.812.594.354.792 1.12.438 1.716-.354.594-1.12.792-1.716.438z" />
       </svg>
     )
   },
@@ -95,11 +95,11 @@ export default function Home() {
     // Floating project preview follow
     previewX.set(e.clientX);
     previewY.set(e.clientY);
-    
+
     // Normalize coordinates around screen center (-0.5 to 0.5)
     const normX = (e.clientX / window.innerWidth) - 0.5;
     const normY = (e.clientY / window.innerHeight) - 0.5;
-    
+
     mouseX.set(normX);
     mouseY.set(normY);
   };
@@ -117,21 +117,21 @@ export default function Home() {
   };
 
   const wordVariants = {
-    hidden: { filter: "blur(12px)", y: 30, opacity: 0 },
+    hidden: { filter: "blur(12px)", y: 40, opacity: 0 },
     visible: {
       filter: "blur(0px)",
       y: 0,
       opacity: 1,
-      transition: { duration: 1.0, ease: [0.16, 1, 0.3, 1] as const }
+      transition: { duration: 1.2, ease: [0.22, 1, 0.36, 1] as const }
     }
   };
 
   const buttonVariants = {
-    hidden: { opacity: 0, scale: 0.92 },
+    hidden: { opacity: 0, scale: 0.95 },
     visible: {
       opacity: 1,
       scale: 1,
-      transition: { duration: 1.0, ease: [0.16, 1, 0.3, 1] as const, delay: 0.8 }
+      transition: { duration: 1.2, ease: [0.22, 1, 0.36, 1] as const, delay: 0.8 }
     }
   };
 
@@ -147,11 +147,11 @@ export default function Home() {
   };
 
   const logoItemVariants = {
-    hidden: { opacity: 0, y: 15 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: "easeOut" as const }
+      transition: { duration: 1.0, ease: [0.22, 1, 0.36, 1] as const }
     }
   };
 
@@ -169,12 +169,12 @@ export default function Home() {
 
       {/* Foreground HTML overlay for scrolling and text content */}
       <div className="relative w-full z-10 flex flex-col pointer-events-none">
-        
+
         {/* Section 1: Arrival Hero Section */}
         <section id="arrival" className="w-full h-screen flex items-center justify-center pointer-events-none relative overflow-hidden bg-black">
-          
+
           {/* Background Video with subtle parallax and zoom */}
-          <motion.div 
+          <motion.div
             style={{ x: videoX, y: videoY }}
             className="absolute inset-0 w-[108%] h-[108%] -left-[4%] -top-[4%] z-0 pointer-events-none opacity-40 select-none overflow-hidden"
           >
@@ -195,34 +195,34 @@ export default function Home() {
 
           {/* Grid Layout Container */}
           <div className="max-w-7xl w-full mx-auto px-6 md:px-12 flex flex-col lg:flex-row justify-between items-start lg:items-end h-full select-none pt-32 pb-32 relative z-10 gap-8 lg:gap-12">
-            
+
             {/* Left Column: Huge bold headline with blur to sharp entry */}
-            <motion.div 
+            <motion.div
               style={{ x: headlineX, y: headlineY }}
               variants={containerVariants}
               initial="hidden"
               animate="visible"
               className="flex flex-col items-start w-full lg:w-[62%] xl:w-[65%] lg:max-w-[760px] pointer-events-auto mt-auto mb-8 lg:mb-0"
             >
-              <motion.span 
+              <motion.span
                 variants={wordVariants}
-                className="text-xs font-mono tracking-[0.4em] text-spectal-red mb-6 block uppercase"
+                className="text-xs font-mono tracking-[0.4em] text-spectal-red mb-4 block uppercase"
               >
                 [ SPECTAL MANAGEMENT ]
               </motion.span>
-              
-              <h1 className="text-4xl sm:text-5xl md:text-[5.5rem] lg:text-[4.8rem] xl:text-[5.8rem] font-black tracking-tighter text-white leading-[0.9] font-inter-tight uppercase">
+
+              <h1 className="text-3xl sm:text-4xl md:text-[3.2rem] lg:text-[3.8rem] xl:text-[4.2rem] font-medium tracking-normal text-white leading-[1.4] font-boldonse uppercase">
                 <motion.span variants={wordVariants} className="block">WE MANAGE</motion.span>
                 <motion.span variants={wordVariants} className="block">EXCEPTIONAL TALENT</motion.span>
                 <motion.span variants={wordVariants} className="block">&amp; PRODUCE</motion.span>
-                <motion.span 
-                  variants={wordVariants} 
+                <motion.span
+                  variants={wordVariants}
                   className="block text-transparent bg-clip-text bg-gradient-to-r from-spectal-red to-spectal-mint drop-shadow-[0_0_25px_rgba(221,236,196,0.25)]"
                 >
                   UNFORGETTABLE
                 </motion.span>
-                <motion.span 
-                  variants={wordVariants} 
+                <motion.span
+                  variants={wordVariants}
                   className="block text-transparent bg-clip-text bg-gradient-to-r from-spectal-red to-spectal-mint drop-shadow-[0_0_25px_rgba(221,236,196,0.25)]"
                 >
                   EVENTS.
@@ -236,13 +236,13 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] as const, delay: 0.7 }}
-                className="text-lg text-white/80 font-light leading-relaxed mb-8"
+                className="text-sm sm:text-base text-white/70 font-light leading-relaxed mb-6 lg:max-w-[340px]"
               >
                 Spectal is a boutique agency curating 360° talent management, live concerts, college festivals, and brand activations across India.
               </motion.p>
-              
+
               {/* Buttons with premium scale & shadow effects */}
-              <motion.div 
+              <motion.div
                 variants={buttonVariants}
                 initial="hidden"
                 animate="visible"
@@ -254,18 +254,18 @@ export default function Home() {
                   whileHover={{ scale: 1.05, boxShadow: "0 0 25px rgba(221,236,196,0.35)", background: "rgba(255,255,255,0.12)" }}
                   whileTap={{ scale: 0.98 }}
                   data-interactive="true"
-                  className="px-6 py-4 bg-white/5 backdrop-blur-md border border-white/10 text-white text-xs font-mono tracking-widest uppercase transition-all duration-300 rounded-full font-bold shadow-lg"
+                  className="px-6 py-3.5 bg-white/5 backdrop-blur-md border border-white/10 text-white text-xs font-mono tracking-widest uppercase transition-all duration-300 rounded-full font-bold shadow-lg"
                 >
                   Book With Us
                 </motion.a>
-                
+
                 {/* Secondary: Transparent outline button */}
                 <motion.a
                   href="#showcase"
                   whileHover={{ scale: 1.05, borderColor: "rgba(255,255,255,0.8)", background: "rgba(255,255,255,0.05)" }}
                   whileTap={{ scale: 0.98 }}
                   data-interactive="true"
-                  className="px-6 py-4 border border-white/20 text-white text-xs font-mono tracking-widest uppercase transition-all duration-300 rounded-full font-bold"
+                  className="px-6 py-3.5 border border-white/20 text-white text-xs font-mono tracking-widest uppercase transition-all duration-300 rounded-full font-bold"
                 >
                   View Services
                 </motion.a>
@@ -274,7 +274,7 @@ export default function Home() {
           </div>
 
           {/* Client Logos Ticker - Staggered fade in */}
-          <motion.div 
+          <motion.div
             variants={logosContainerVariants}
             initial="hidden"
             animate="visible"
@@ -284,12 +284,12 @@ export default function Home() {
               <span className="text-[9px] font-mono tracking-[0.27em] text-white/30 uppercase whitespace-nowrap">
                 TRUSTED BY LEADING BRANDS &amp; PARTNERS
               </span>
-              
+
               {/* Logo horizontal ticker */}
               <div className="flex-1 overflow-hidden relative w-full select-none">
                 <div className="animate-marquee whitespace-nowrap flex items-center gap-16 md:gap-24">
                   {CLIENT_LOGOS.map((logo, idx) => (
-                    <motion.div 
+                    <motion.div
                       key={idx}
                       variants={logoItemVariants}
                       whileHover={{ scale: 1.08 }}
@@ -300,7 +300,7 @@ export default function Home() {
                   ))}
                   {/* Duplicate logos for seamless infinite scroll */}
                   {CLIENT_LOGOS.map((logo, idx) => (
-                    <motion.div 
+                    <motion.div
                       key={`dup-${idx}`}
                       whileHover={{ scale: 1.08 }}
                       className="text-white/40 hover:text-white transition-all duration-300 cursor-pointer flex-shrink-0"
@@ -358,7 +358,7 @@ export default function Home() {
                 <span className="text-xs font-mono tracking-[0.4em] text-spectal-red mb-3">
                   04 // SERVICES
                 </span>
-                <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-white leading-none">
+                <h2 className="text-xl md:text-[1.8rem] lg:text-[2.2rem] font-boldonse font-medium tracking-tight text-white leading-[1.2] uppercase">
                   WHAT WE <span className="text-spectal-mint font-serif italic font-light">DO</span>
                 </h2>
               </div>
@@ -378,7 +378,7 @@ export default function Home() {
                 <div className="flex flex-col gap-4 w-full md:w-auto">
                   <div className="flex items-center gap-8">
                     <span className="text-sm font-mono text-spectal-red">01 / SERVICE</span>
-                    <h3 className="text-2xl md:text-4xl font-bold text-white tracking-tight group-hover:text-spectal-red transition-colors duration-300">TALENT MANAGEMENT</h3>
+                    <h3 className="text-xl md:text-2xl font-boldonse font-medium text-white tracking-wide group-hover:text-spectal-red transition-colors duration-500">TALENT MANAGEMENT</h3>
                   </div>
                   {/* Mobile-only inline preview image */}
                   <div className="w-full aspect-[16/10] rounded-xl overflow-hidden md:hidden border border-white/10 relative">
@@ -401,7 +401,7 @@ export default function Home() {
                 <div className="flex flex-col gap-4 w-full md:w-auto">
                   <div className="flex items-center gap-8">
                     <span className="text-sm font-mono text-white">02 / SERVICE</span>
-                    <h3 className="text-2xl md:text-4xl font-bold text-white tracking-tight group-hover:text-spectal-mint transition-colors duration-300">EVENT PRODUCTION</h3>
+                    <h3 className="text-xl md:text-2xl font-boldonse font-medium text-white tracking-wide group-hover:text-spectal-mint transition-colors duration-500">EVENT PRODUCTION</h3>
                   </div>
                   {/* Mobile-only inline preview image */}
                   <div className="w-full aspect-[16/10] rounded-xl overflow-hidden md:hidden border border-white/10 relative">
@@ -424,7 +424,7 @@ export default function Home() {
                 <div className="flex flex-col gap-4 w-full md:w-auto">
                   <div className="flex items-center gap-8">
                     <span className="text-sm font-mono text-spectal-red">03 / SERVICE</span>
-                    <h3 className="text-2xl md:text-4xl font-bold text-white tracking-tight group-hover:text-spectal-red transition-colors duration-300">BRAND ACTIVATION</h3>
+                    <h3 className="text-xl md:text-2xl font-boldonse font-medium text-white tracking-wide group-hover:text-spectal-red transition-colors duration-500">BRAND ACTIVATION</h3>
                   </div>
                   {/* Mobile-only inline preview image */}
                   <div className="w-full aspect-[16/10] rounded-xl overflow-hidden md:hidden border border-white/10 relative">
@@ -453,7 +453,7 @@ export default function Home() {
               <span className="text-xs font-mono tracking-[0.4em] text-spectal-red mb-3">
                 03 // OUR EVENTS
               </span>
-              <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-white leading-none">
+              <h2 className="text-xl md:text-[1.8rem] lg:text-[2.2rem] font-boldonse font-medium tracking-tight text-white leading-[1.2] uppercase">
                 EVENTS &amp; <span className="text-spectal-mint font-serif italic font-light">PRODUCTIONS</span>
               </h2>
               <p className="text-xs font-mono text-white/40 mt-4 tracking-wider uppercase">
@@ -475,7 +475,7 @@ export default function Home() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
                 <div className="absolute bottom-6 left-6 right-6">
                   <span className="text-[10px] font-mono tracking-widest text-spectal-red uppercase block mb-1">Live Concert</span>
-                  <h3 className="text-2xl font-bold text-white tracking-tight">Mainstage Live Productions</h3>
+                  <h3 className="text-xl font-boldonse font-medium text-white tracking-wide">Mainstage Live Productions</h3>
                   <p className="text-xs text-spectal-mint/70 mt-2 font-light max-w-md">High-energy concert productions featuring India's top independent artists, managed end-to-end by Spectal.</p>
                 </div>
               </div>
@@ -492,7 +492,7 @@ export default function Home() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
                 <div className="absolute bottom-6 left-6 right-6">
                   <span className="text-[10px] font-mono tracking-widest text-spectal-mint uppercase block mb-1">Campus Festival</span>
-                  <h3 className="text-2xl font-bold text-white tracking-tight">College Campus Festivals</h3>
+                  <h3 className="text-xl font-boldonse font-medium text-white tracking-wide">College Campus Festivals</h3>
                   <p className="text-xs text-spectal-mint/70 mt-2 font-light">End-to-end campus festival management bringing popular artists to college audiences across 30+ cities.</p>
                 </div>
               </div>
@@ -509,7 +509,7 @@ export default function Home() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
                 <div className="absolute bottom-6 left-6 right-6">
                   <span className="text-[10px] font-mono tracking-widest text-spectal-mint uppercase block mb-1">Brand Activation</span>
-                  <h3 className="text-2xl font-bold text-white tracking-tight">Brand &amp; Artist Collabs</h3>
+                  <h3 className="text-xl font-boldonse font-medium text-white tracking-wide">Brand &amp; Artist Collabs</h3>
                   <p className="text-xs text-spectal-mint/70 mt-2 font-light">Custom branded experiences connecting India's young brands with engaged audiences through live event integrations.</p>
                 </div>
               </div>
@@ -526,7 +526,7 @@ export default function Home() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
                 <div className="absolute bottom-6 left-6 right-6">
                   <span className="text-[10px] font-mono tracking-widest text-spectal-red uppercase block mb-1">Networking</span>
-                  <h3 className="text-2xl font-bold text-white tracking-tight">Industry Networking Events</h3>
+                  <h3 className="text-xl font-boldonse font-medium text-white tracking-wide">Industry Networking Events</h3>
                   <p className="text-xs text-spectal-mint/70 mt-2 font-light">VIP mixers and industry forums connecting artists, label heads, brand managers, and event directors.</p>
                 </div>
               </div>
@@ -543,7 +543,7 @@ export default function Home() {
             <span className="text-xs font-mono tracking-[0.4em] text-spectal-red mb-6">
               07 // CONTACT
             </span>
-            <h2 className="text-4xl md:text-6xl font-serif text-white tracking-widest uppercase mb-10 leading-tight">
+            <h2 className="text-xl md:text-[1.8rem] lg:text-[2.2rem] font-serif text-white tracking-widest uppercase mb-12 leading-[1.2]">
               BOOK WITH <span className="text-spectal-mint font-serif italic text-white/95">US</span>
             </h2>
 

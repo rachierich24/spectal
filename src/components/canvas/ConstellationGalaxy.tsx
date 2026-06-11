@@ -17,18 +17,25 @@ export default function ConstellationGalaxy() {
   const particles = useMemo(() => {
     const temp = [];
     for (let i = 0; i < starCount; i++) {
-      // Create a cylinder/tube-like galaxy to fly through
-      const angle = Math.random() * Math.PI * 2;
-      const radius = 3 + Math.random() * 15;
-      const z = (Math.random() - 0.5) * 100; // Deep Z axis
+      // Create a spiral galaxy tunnel to fly through
+      const z = (Math.random() - 0.5) * 120; // Deeper Z axis range
+
+      // Spiral rotation angle depends on Z (creates beautiful twisting nebula arm effect)
+      const angle = (Math.random() * Math.PI * 2) + (z * 0.05);
+
+      // Radial distribution favoring a denser core with some wider outlying arms
+      const radius = 2.0 + Math.pow(Math.random(), 1.5) * 16.0;
 
       const x = Math.cos(angle) * radius;
       const y = Math.sin(angle) * radius;
 
-      temp.push({ x, y, z });
+      // Speed and phase for twinkling animation
+      const speed = 0.5 + Math.random() * 1.5;
+      const phase = Math.random() * Math.PI * 2;
+
+      temp.push({ x, y, z, speed, phase });
     }
-    // Sort by Z so we can apply textures properly if needed later
-    return temp.sort((a, b) => a.z - b.z);
+    return temp;
   }, [starCount]);
 
   // Set initial instance matrices
@@ -36,8 +43,7 @@ export default function ConstellationGalaxy() {
     if (!starsRef.current) return;
     particles.forEach((particle, i) => {
       dummy.position.set(particle.x, particle.y, particle.z);
-      // Give them varying sizes
-      const scale = 0.5 + Math.random() * 1.5;
+      const scale = 0.4 + (i % 5 === 0 ? 0.8 : 0.3);
       dummy.scale.set(scale, scale, scale);
       dummy.updateMatrix();
       starsRef.current!.setMatrixAt(i, dummy.matrix);
@@ -55,8 +61,28 @@ export default function ConstellationGalaxy() {
       if (!isVisible) return;
 
       const targetZ = (scrollProgress - 6.0) * 80;
-      groupRef.current.position.z = THREE.MathUtils.lerp(groupRef.current.position.z, targetZ, 0.1);
-      groupRef.current.rotation.z += 0.001;
+      groupRef.current.position.z = THREE.MathUtils.lerp(groupRef.current.position.z, targetZ, 0.08); // smoother scroll follow
+      groupRef.current.rotation.z += 0.0005; // slower rotation for cinematic space depth
+
+      // Dynamic real-time star scale/twinkle updates
+      if (starsRef.current) {
+        const time = state.clock.getElapsedTime();
+        particles.forEach((particle, i) => {
+          // Unique sine-wave twinkle per star using its phase and speed
+          const twinkle = 0.7 + Math.sin(time * particle.speed + particle.phase) * 0.3;
+
+          dummy.position.set(particle.x, particle.y, particle.z);
+
+          // Apply twinkling to the base scale
+          const baseScale = 0.4 + (i % 5 === 0 ? 0.8 : 0.3);
+          const scale = baseScale * twinkle;
+          dummy.scale.set(scale, scale, scale);
+
+          dummy.updateMatrix();
+          starsRef.current!.setMatrixAt(i, dummy.matrix);
+        });
+        starsRef.current.instanceMatrix.needsUpdate = true;
+      }
     }
   });
 

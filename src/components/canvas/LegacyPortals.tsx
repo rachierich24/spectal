@@ -89,7 +89,7 @@ function PortalItem({
   const portalRef = useRef<any>(null);
   const meshRef = useRef<THREE.Mesh>(null);
   const cardGroupRef = useRef<THREE.Group>(null);
-  
+
   const [hovered, setHover] = useState(false);
   const [flipped, setFlipped] = useState(false);
 
@@ -110,7 +110,7 @@ function PortalItem({
       meshRef.current.rotation.x += delta * 0.5;
       meshRef.current.rotation.y += delta * 0.7;
     }
-    
+
     // Smoothly animate the card flip rotation
     if (cardGroupRef.current) {
       const targetRotationY = flipped ? Math.PI : 0;
@@ -147,9 +147,9 @@ function PortalItem({
 
       {/* Flippable Card Container */}
       <group ref={cardGroupRef}>
-        
+
         {/* Invisible Hitbox for reliable clicking and hovering */}
-        <mesh 
+        <mesh
           position={[0, 0, 0]}
           onClick={(e) => {
             e.stopPropagation();
@@ -197,12 +197,12 @@ function PortalItem({
             </mesh>
           </MeshPortalMaterial>
         </mesh>
-        
+
         {/* Back Side: About Section */}
         <mesh position={[0, 0, -0.01]} rotation={[0, Math.PI, 0]}>
           <planeGeometry args={[2.5, 3.5]} />
           <meshBasicMaterial color="#0A0A0A" />
-          
+
           <Text
             fontSize={0.25}
             position={[0, 1.2, 0]}
@@ -213,7 +213,7 @@ function PortalItem({
           >
             ABOUT
           </Text>
-          
+
           <Text
             fontSize={0.12}
             position={[0, 0.6, 0]}
@@ -226,7 +226,7 @@ function PortalItem({
           >
             {about}
           </Text>
-          
+
           <mesh position={[0, -0.8, 0]}>
             <planeGeometry args={[1.5, 0.02]} />
             <meshBasicMaterial color={color === "#DDECC4" ? "#DDECC4" : "#C9493D"} opacity={0.5} transparent />

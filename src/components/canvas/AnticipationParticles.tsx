@@ -65,25 +65,25 @@ export default function AnticipationParticles() {
 
   // Reduced from 20000 to 5000 for massive performance boost
   const particleCount = 5000;
-  
+
   const [positions, target1, target2] = useMemo(() => {
     const pos = new Float32Array(particleCount * 3);
     const t1 = new Float32Array(particleCount * 3);
     const t2 = new Float32Array(particleCount * 3);
-    
+
     for (let i = 0; i < particleCount; i++) {
       const i3 = i * 3;
-      
+
       // Initial: Random cloud (Anticipation)
       pos[i3] = (Math.random() - 0.5) * 20;
       pos[i3 + 1] = (Math.random() - 0.5) * 20;
       pos[i3 + 2] = (Math.random() - 0.5) * 20 - 10;
-      
+
       // Target 1: A "Stage" / Plane structure
       t1[i3] = (Math.random() - 0.5) * 15;
       t1[i3 + 1] = (Math.random() - 0.5) * 2 - 5; // Flat near bottom
       t1[i3 + 2] = (Math.random() - 0.5) * 15 - 15;
-      
+
       // Target 2: Abstract "Energy Sphere"
       const theta = Math.random() * Math.PI * 2;
       const phi = Math.acos(Math.random() * 2 - 1);
@@ -92,7 +92,7 @@ export default function AnticipationParticles() {
       t2[i3 + 1] = r * Math.sin(phi) * Math.sin(theta);
       t2[i3 + 2] = r * Math.cos(phi) - 10;
     }
-    
+
     return [pos, t1, t2];
   }, []);
 
@@ -111,16 +111,16 @@ export default function AnticipationParticles() {
     if (pointsRef.current) {
       const isVisible = scrollProgress > 0.5 && scrollProgress < 2.5;
       pointsRef.current.visible = isVisible;
-      
+
       if (!isVisible) return; // Skip all processing if invisible
-      
+
       pointsRef.current.rotation.y = scrollProgress * 0.5;
     }
 
     if (materialRef.current) {
       materialRef.current.uniforms.uTime.value = state.clock.elapsedTime;
       materialRef.current.uniforms.uScrollProgress.value = scrollProgress;
-      
+
       // Morph happens between scroll 1 and 2
       let morph = 0;
       if (scrollProgress > 1.0 && scrollProgress <= 2.0) {

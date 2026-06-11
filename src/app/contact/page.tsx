@@ -8,11 +8,11 @@ export default function ContactPage() {
   return (
     <main className="relative w-full min-h-screen bg-[#050505] overflow-hidden text-white">
       <Preloader />
-      
+
       {/* Content */}
       <div className="relative w-full z-10 pt-40 pb-24">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
@@ -36,7 +36,7 @@ export default function ContactPage() {
                 <p>HQ: Nashville, TN</p>
               </div>
             </div>
-            
+
             <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
               <div>
                 <input type="text" placeholder="NAME" className="w-full bg-transparent border-b border-white/20 py-4 text-white placeholder:text-white/40 focus:outline-none focus:border-spectal-red transition-colors" />

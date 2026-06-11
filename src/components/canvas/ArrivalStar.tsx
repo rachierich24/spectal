@@ -36,14 +36,27 @@ const particleVertexShader = `
     pos.x += sin(uTime * 2.0 + originalPosition.y) * uScrollProgress;
     pos.y += cos(uTime * 2.0 + originalPosition.x) * uScrollProgress;
     
+    // Swirling vortex effect around the Z-axis
+    float angle = uScrollProgress * 2.0 + uTime * 0.05;
+    float cosA = cos(angle);
+    float sinA = sin(angle);
+    vec2 rotated = vec2(
+      pos.x * cosA - pos.y * sinA,
+      pos.x * sinA + pos.y * cosA
+    );
+    pos.xy = mix(pos.xy, rotated, uScrollProgress);
+    
     // Fly towards camera
     pos.z += uScrollProgress * 15.0;
     
     vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
     gl_Position = projectionMatrix * mvPosition;
     
+    // Shimmering twinkle factor based on time
+    float twinkle = 0.8 + 0.2 * sin(uTime * 5.0 + originalPosition.x * 100.0);
+    
     // Particles get larger as they fly at you, then shrink
-    gl_PointSize = (4.0 + repulsion * 5.0) * (15.0 / -mvPosition.z);
+    gl_PointSize = (1.5 + repulsion * 2.0) * twinkle * (15.0 / -mvPosition.z);
     
     // Fade out size at extreme explosion
     gl_PointSize *= (1.0 - smoothstep(0.5, 1.0, uScrollProgress));

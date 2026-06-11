@@ -29,7 +29,11 @@ const waveVertexShader = `
     // Add extra noise based on pointer speed (simulated by having it pulse)
     float pulse = sin(uTime * 10.0) * 0.5 + 0.5;
     
-    currentPos.z += wave * 2.0 + (pulse * exp(-dist * 0.5));
+    // Multi-frequency noise ripples for natural flowing ocean waves
+    float ripples = sin(currentPos.x * 0.2 - uTime * 2.0) * cos(currentPos.y * 0.2 + uTime * 1.5) * 0.5;
+    ripples += sin(currentPos.x * 0.4 + uTime * 3.0) * 0.15;
+    
+    currentPos.z += wave * 2.0 + (pulse * exp(-dist * 0.5)) + ripples;
     
     vElevation = currentPos.z;
     
@@ -63,14 +67,17 @@ const waveFragmentShader = `
     vec3 color = mix(colorCharcoal, colorMint, smoothstep(0.0, 0.5, vElevation));
     color = mix(color, colorRed, smoothstep(0.5, 2.0, vElevation));
     
-    // Wireframe grid lines effect
-    // We can simulate wireframe with fract(vUv * gridScale)
-    vec2 grid = fract(vUv * 50.0);
-    float lineThickness = 0.05;
-    float isLine = step(grid.x, lineThickness) + step(grid.y, lineThickness);
+    // Wireframe grid lines effect with anti-aliasing
+    vec2 grid = fract(vUv * 60.0);
+    float lineThickness = 0.04;
+    // Compute smooth grid lines for anti-aliasing
+    vec2 gridSmooth = smoothstep(vec2(lineThickness), vec2(0.0), grid) + 
+                      smoothstep(vec2(1.0 - lineThickness), vec2(1.0), grid);
+    float isLine = max(gridSmooth.x, gridSmooth.y);
     
-    // Base color for lines, transparent for gaps
-    float alpha = clamp(isLine, 0.0, 1.0) * visibility;
+    // Glow effect based on elevation
+    float glow = 0.4 + 0.6 * smoothstep(-0.5, 2.0, vElevation);
+    float alpha = isLine * visibility * glow;
     
     gl_FragColor = vec4(color, alpha);
   }
@@ -100,9 +107,9 @@ export default function EnergyWaves() {
     if (meshRef.current) {
       const isVisible = scrollProgress > 1.5 && scrollProgress < 4.2;
       meshRef.current.visible = isVisible;
-      
+
       if (!isVisible) return;
-      
+
       // Tilt the plane to look like a perspective grid floor
       meshRef.current.rotation.x = -Math.PI / 3;
       // Pan it slowly
@@ -134,7 +141,7 @@ export default function EnergyWaves() {
           side={THREE.DoubleSide}
         />
       </mesh>
-      
+
       {/* Floating project images popping out from the energy wave */}
       <EnergyProjects />
     </group>

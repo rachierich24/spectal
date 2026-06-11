@@ -8,11 +8,11 @@ export default function EventsPage() {
   return (
     <main className="relative w-full min-h-screen bg-[#050505] overflow-hidden text-white">
       <Preloader />
-      
+
       {/* Content */}
       <div className="relative w-full z-10 pt-40 pb-24">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}

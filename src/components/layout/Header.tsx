@@ -39,7 +39,7 @@ export default function Header() {
           </div>
 
           {/* Center: Navigation Pill with exact glassmorphism styles */}
-          <div 
+          <div
             style={{
               backdropFilter: "blur(20px)",
               WebkitBackdropFilter: "blur(20px)",
@@ -68,7 +68,7 @@ export default function Header() {
               data-interactive="true"
               className="hidden sm:inline-flex group px-6 py-3 bg-white text-black text-xs font-mono font-bold tracking-widest uppercase hover:bg-white/90 transition-all duration-300 rounded-full items-center shadow-lg whitespace-nowrap"
             >
-              Get In Touch 
+              Get In Touch
               <span className="group-hover:translate-x-1 ml-2 inline-block transition-transform duration-300">→</span>
             </a>
 
@@ -107,7 +107,7 @@ export default function Header() {
                   key={item.href}
                   href={item.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-3xl font-black font-sans tracking-widest uppercase text-white/70 hover:text-spectal-red hover:scale-105 transition-all duration-300 block"
+                  className="text-2xl font-medium font-boldonse tracking-widest uppercase text-white/70 hover:text-spectal-red hover:scale-105 transition-all duration-300 block"
                 >
                   {item.label}
                 </motion.a>
