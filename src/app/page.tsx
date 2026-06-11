@@ -436,7 +436,7 @@ export default function Home() {
         </section>
 
         {/* Section 2: Energy — Brand Manifesto over WebGL wave */}
-        <section id="energy" className="w-full min-h-[220vh] relative pointer-events-none">
+        <section id="energy" className="w-full min-h-[120vh] relative pointer-events-none">
           {/* Sticky frame — stays pinned while user scrolls through the wave */}
           <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden">
 

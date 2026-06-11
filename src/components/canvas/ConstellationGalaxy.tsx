@@ -55,12 +55,12 @@ export default function ConstellationGalaxy() {
     const scrollProgress = scrollStore.progress;
 
     if (groupRef.current) {
-      const isVisible = scrollProgress > 3.4 && scrollProgress < 8.0;
+      const isVisible = scrollProgress > 3.0 && scrollProgress < 7.0;
       groupRef.current.visible = isVisible;
 
       if (!isVisible) return;
 
-      const targetZ = (scrollProgress - 6.0) * 80;
+      const targetZ = (scrollProgress - 5.0) * 80;
       groupRef.current.position.z = THREE.MathUtils.lerp(groupRef.current.position.z, targetZ, 0.08); // smoother scroll follow
       groupRef.current.rotation.z += 0.0005; // slower rotation for cinematic space depth
 
@@ -70,12 +70,12 @@ export default function ConstellationGalaxy() {
 
         // Smoothly fade in/out based on scrollProgress
         let opacity = 0;
-        if (scrollProgress >= 3.4 && scrollProgress < 3.8) {
-          opacity = ((scrollProgress - 3.4) / 0.4) * 0.15; // Fade in from 3.4 to 3.8
-        } else if (scrollProgress >= 3.8 && scrollProgress <= 7.2) {
+        if (scrollProgress >= 3.0 && scrollProgress < 3.4) {
+          opacity = ((scrollProgress - 3.0) / 0.4) * 0.15; // Fade in from 3.0 to 3.4
+        } else if (scrollProgress >= 3.4 && scrollProgress <= 6.2) {
           opacity = 0.15;
-        } else if (scrollProgress > 7.2) {
-          opacity = Math.max(0, ((8.0 - scrollProgress) / 0.8) * 0.15); // Fade out at the very end
+        } else if (scrollProgress > 6.2) {
+          opacity = Math.max(0, ((7.0 - scrollProgress) / 0.8) * 0.15); // Fade out at the very end
         }
 
         const material = starsRef.current.material as THREE.MeshBasicMaterial;

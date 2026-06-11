@@ -38,7 +38,7 @@ const waveVertexShader = `
     vElevation = currentPos.z;
     
     // Global scroll visibility logic (Shifted by +1.0)
-    float visibility = smoothstep(1.8, 2.2, uScrollProgress) * (1.0 - smoothstep(3.4, 3.8, uScrollProgress));
+    float visibility = smoothstep(1.8, 2.2, uScrollProgress) * (1.0 - smoothstep(3.0, 3.2, uScrollProgress));
     
     // Move the plane up into view based on scroll
     currentPos.y += (1.0 - visibility) * -20.0;
@@ -56,7 +56,7 @@ const waveFragmentShader = `
 
   void main() {
     // Visibility fade (Shifted by +1.0)
-    float visibility = smoothstep(1.8, 2.2, uScrollProgress) * (1.0 - smoothstep(3.4, 3.8, uScrollProgress));
+    float visibility = smoothstep(1.8, 2.2, uScrollProgress) * (1.0 - smoothstep(3.0, 3.2, uScrollProgress));
     
     vec3 colorCharcoal = vec3(0.043, 0.043, 0.043);
     vec3 colorMint = vec3(0.866, 0.925, 0.768);
@@ -104,7 +104,7 @@ export default function EnergyWaves() {
     const scrollProgress = scrollStore.progress;
 
     if (meshRef.current) {
-      const isVisible = scrollProgress > 1.8 && scrollProgress < 3.8;
+      const isVisible = scrollProgress > 1.8 && scrollProgress < 3.2;
       meshRef.current.visible = isVisible;
 
       if (!isVisible) return;

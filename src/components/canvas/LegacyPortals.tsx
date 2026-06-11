@@ -43,12 +43,12 @@ export default function LegacyPortals() {
     const scrollProgress = scrollStore.progress;
 
     if (groupRef.current) {
-      const isVisible = scrollProgress > 5.2 && scrollProgress < 6.7;
+      const isVisible = scrollProgress > 4.2 && scrollProgress < 5.7;
       groupRef.current.visible = isVisible;
 
       if (!isVisible) return;
 
-      const targetY = (5.7 - scrollProgress) * 15;
+      const targetY = (4.7 - scrollProgress) * 15;
       groupRef.current.position.y = THREE.MathUtils.lerp(
         groupRef.current.position.y,
         targetY,
@@ -95,7 +95,7 @@ function PortalItem({
 
   useFrame((state, delta) => {
     const scrollProgress = scrollStore.progress;
-    if (scrollProgress < 5.2 || scrollProgress > 6.7) return;
+    if (scrollProgress < 4.2 || scrollProgress > 5.7) return;
 
     if (portalRef.current) {
       const targetBlend = hovered || flipped ? 1 : 0;
