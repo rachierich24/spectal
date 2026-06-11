@@ -41,22 +41,22 @@ export default function Home() {
               <path id="circlePath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="none" />
               <text className="font-mono text-[7px] uppercase tracking-[0.17em]">
                 <textPath href="#circlePath">
-                  SPECTAL SUMMIT 2026 • CREATIVE CORES •
+                  SPECTAL MANAGEMENT • NEW DELHI • EST. 2015 •
                 </textPath>
               </text>
             </svg>
           </div>
 
-          <div className="max-w-7xl w-full mx-auto px-6 md:px-12 flex flex-col items-start justify-center h-full select-none">
+          <div className="max-w-7xl w-full mx-auto px-6 md:px-12 flex flex-col items-start justify-center h-full select-none pt-24 pb-12">
             <span className="text-xs font-mono tracking-[0.4em] text-spectal-red mb-4 animate-pulse">
-              SPECTAL 2026 // DIGITAL EVENT &amp; TALENT SUMMIT
+              SPECTAL MANAGEMENT // TALENT &amp; EVENTS AGENCY
             </span>
-            <h1 className="text-5xl md:text-[8rem] font-bold tracking-tighter mix-blend-difference text-white leading-none">
-              We connect <span className="text-spectal-red">student talent</span> <br />
-              to <span className="text-spectal-mint font-serif italic text-white/95">staging engines</span>.
+            <h1 className="text-5xl md:text-[5.5rem] lg:text-[7rem] font-bold tracking-tighter mix-blend-difference text-white leading-none">
+              We manage <span className="text-spectal-red">exceptional talent</span> <br />
+              &amp; produce <span className="text-spectal-mint font-serif italic text-white/95">unforgettable events</span>.
             </h1>
-            <p className="max-w-md text-sm md:text-base font-light tracking-wide text-spectal-mint/70 mt-6 leading-relaxed">
-              The ultimate gathering of student creators, digital artists, tech developers, and forward-thinking recruiters.
+            <p className="max-w-md text-sm md:text-base font-light tracking-wide text-spectal-mint/70 mt-6 md:mt-8 leading-relaxed">
+              A boutique agency for 360° talent management, live concerts, college festivals, and brand activation across 30+ cities in India.
             </p>
             <div className="mt-8 pointer-events-auto">
               <a
@@ -64,7 +64,7 @@ export default function Home() {
                 data-interactive="true"
                 className="px-8 py-4 bg-spectal-red text-spectal-charcoal text-xs font-mono tracking-widest uppercase hover:bg-white transition-all duration-300 rounded-none shadow-[0_4px_15px_rgba(201,73,61,0.2)] font-bold"
               >
-                Request Invitation Pass
+                Book With Us
               </a>
             </div>
           </div>
@@ -73,30 +73,111 @@ export default function Home() {
         {/* MDNT-Inspired Infinite Scrolling Marquee Banner */}
         <div className="w-full py-6 bg-black/60 border-y border-white/5 overflow-hidden flex select-none relative z-20">
           <div className="animate-marquee whitespace-nowrap flex items-center gap-8 pr-8">
-            <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">VFX & Generative Shaders</span>
+            <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">360° Talent Management</span>
             <span className="w-1.5 h-1.5 rounded-full bg-spectal-mint"></span>
-            <span className="text-xs font-mono tracking-widest text-white uppercase">AI Hackathons</span>
+            <span className="text-xs font-mono tracking-widest text-white uppercase">College Festivals</span>
             <span className="w-1.5 h-1.5 rounded-full bg-spectal-red"></span>
-            <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">Sound Synthesis</span>
+            <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">Brand Activation</span>
             <span className="w-1.5 h-1.5 rounded-full bg-spectal-mint"></span>
-            <span className="text-xs font-mono tracking-widest text-white uppercase">Direct Placements</span>
+            <span className="text-xs font-mono tracking-widest text-white uppercase">Live Performances</span>
             <span className="w-1.5 h-1.5 rounded-full bg-spectal-red"></span>
-            <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">Technical Stage Production</span>
+            <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">Tour Curation</span>
             <span className="w-1.5 h-1.5 rounded-full bg-spectal-mint"></span>
-            
+            <span className="text-xs font-mono tracking-widest text-white uppercase">Music & Comedy</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-spectal-red"></span>
+            <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">Digital Content</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-spectal-mint"></span>
+
             {/* Duplicated for seamless loop */}
-            <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">VFX & Generative Shaders</span>
+            <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">360° Talent Management</span>
             <span className="w-1.5 h-1.5 rounded-full bg-spectal-mint"></span>
-            <span className="text-xs font-mono tracking-widest text-white uppercase">AI Hackathons</span>
+            <span className="text-xs font-mono tracking-widest text-white uppercase">College Festivals</span>
             <span className="w-1.5 h-1.5 rounded-full bg-spectal-red"></span>
-            <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">Sound Synthesis</span>
+            <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">Brand Activation</span>
             <span className="w-1.5 h-1.5 rounded-full bg-spectal-mint"></span>
-            <span className="text-xs font-mono tracking-widest text-white uppercase">Direct Placements</span>
+            <span className="text-xs font-mono tracking-widest text-white uppercase">Live Performances</span>
             <span className="w-1.5 h-1.5 rounded-full bg-spectal-red"></span>
-            <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">Technical Stage Production</span>
+            <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">Tour Curation</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-spectal-mint"></span>
+            <span className="text-xs font-mono tracking-widest text-white uppercase">Music & Comedy</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-spectal-red"></span>
+            <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">Digital Content</span>
             <span className="w-1.5 h-1.5 rounded-full bg-spectal-mint"></span>
           </div>
         </div>
+
+        {/* Section 4: Project Showcase — Editorial Project Grid */}
+        <section id="showcase" className="w-full min-h-screen py-24 flex items-center justify-center relative z-20 pointer-events-auto border-t border-white/5">
+          <div className="max-w-7xl w-full mx-auto px-6 md:px-12 flex flex-col select-none">
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+              <div className="flex flex-col items-start">
+                <span className="text-xs font-mono tracking-[0.4em] text-spectal-red mb-3">
+                  04 // SERVICES
+                </span>
+                <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-white leading-none">
+                  WHAT WE <span className="text-spectal-mint font-serif italic font-light">DO</span>
+                </h2>
+              </div>
+              <p className="max-w-md text-xs font-mono text-spectal-mint/50 uppercase tracking-widest">
+                [ End-to-end solutions for artists, brands &amp; campuses ]
+              </p>
+            </div>
+
+            {/* List Table of Projects */}
+            <div className="w-full flex flex-col divide-y divide-white/10 mt-6">
+              <div
+                data-interactive="true"
+                data-cursor="EXPLORE"
+                onMouseEnter={() => setHoveredProjectImage("/event_spatial.png")}
+                onMouseLeave={() => setHoveredProjectImage(null)}
+                className="py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 group cursor-pointer hover:bg-white/[0.02] px-6 transition-all duration-300 pointer-events-auto"
+              >
+                <div className="flex items-center gap-8">
+                  <span className="text-sm font-mono text-spectal-red">01 / SERVICE</span>
+                  <h3 className="text-2xl md:text-4xl font-bold text-white tracking-tight group-hover:text-spectal-red transition-colors duration-300">TALENT MANAGEMENT</h3>
+                </div>
+                <div className="flex flex-col md:items-end gap-2 max-w-lg">
+                  <span className="text-sm text-spectal-mint font-light">Full 360° artist representation — live show bookings, brand deals, social media strategy, tour curation, and complete legal &amp; commercial affairs.</span>
+                  <span className="text-[10px] font-mono text-spectal-mint/40 uppercase tracking-wider">50+ Artists // Music // Comedy // Brand Associations</span>
+                </div>
+              </div>
+
+              <div
+                data-interactive="true"
+                data-cursor="EXPLORE"
+                onMouseEnter={() => setHoveredProjectImage("/event_mainstage.png")}
+                onMouseLeave={() => setHoveredProjectImage(null)}
+                className="py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 group cursor-pointer hover:bg-white/[0.02] px-6 transition-all duration-300 pointer-events-auto"
+              >
+                <div className="flex items-center gap-8">
+                  <span className="text-sm font-mono text-white">02 / SERVICE</span>
+                  <h3 className="text-2xl md:text-4xl font-bold text-white tracking-tight group-hover:text-spectal-mint transition-colors duration-300">EVENT PRODUCTION</h3>
+                </div>
+                <div className="flex flex-col md:items-end gap-2 max-w-lg">
+                  <span className="text-sm text-spectal-mint font-light">End-to-end production of live concerts and campus festivals. We manage logistics, stage, artist booking, and crowd experience across India.</span>
+                  <span className="text-[10px] font-mono text-spectal-mint/40 uppercase tracking-wider">200+ Events // 30+ Cities // College Festivals // Concerts</span>
+                </div>
+              </div>
+
+              <div
+                data-interactive="true"
+                data-cursor="EXPLORE"
+                onMouseEnter={() => setHoveredProjectImage("/event_hackathon.png")}
+                onMouseLeave={() => setHoveredProjectImage(null)}
+                className="py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 group cursor-pointer hover:bg-white/[0.02] px-6 transition-all duration-300 pointer-events-auto"
+              >
+                <div className="flex items-center gap-8">
+                  <span className="text-sm font-mono text-spectal-red">03 / SERVICE</span>
+                  <h3 className="text-2xl md:text-4xl font-bold text-white tracking-tight group-hover:text-spectal-red transition-colors duration-300">BRAND ACTIVATION</h3>
+                </div>
+                <div className="flex flex-col md:items-end gap-2 max-w-lg">
+                  <span className="text-sm text-spectal-mint font-light">Unique branded experiences and artist partnerships that connect young brands to engaged audiences. Digital content, social campaigns, and live integrations.</span>
+                  <span className="text-[10px] font-mono text-spectal-mint/40 uppercase tracking-wider">50+ Brand Experiences // Digital Content // Social Strategy</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Section 2: Energy — scroll spacer for WebGL wave */}
         <section id="energy" className="w-full min-h-screen pointer-events-none" />
@@ -109,13 +190,13 @@ export default function Home() {
           <div className="max-w-7xl w-full mx-auto px-6 md:px-12 flex flex-col select-none">
             <div className="flex flex-col items-start mb-16">
               <span className="text-xs font-mono tracking-[0.4em] text-spectal-red mb-3">
-                03 // ARCHIVE GALLERY
+                03 // OUR EVENTS
               </span>
               <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-white leading-none">
-                SUMMIT <span className="text-spectal-mint font-serif italic font-light">MOMENTS</span>
+                EVENTS &amp; <span className="text-spectal-mint font-serif italic font-light">PRODUCTIONS</span>
               </h2>
               <p className="text-xs font-mono text-white/40 mt-4 tracking-wider uppercase">
-                [ Hover grid items to explore spatial scale ]
+                [ From college campuses to mainstage arenas ]
               </p>
             </div>
             
@@ -132,9 +213,9 @@ export default function Home() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
                 <div className="absolute bottom-6 left-6 right-6">
-                  <span className="text-[10px] font-mono tracking-widest text-spectal-red uppercase block mb-1">Live Stage</span>
-                  <h3 className="text-2xl font-bold text-white tracking-tight">Mainstage Audio-Visual Arena</h3>
-                  <p className="text-xs text-spectal-mint/70 mt-2 font-light max-w-md">15,000+ attendees experiencing real-time projection mapping, trussing automation, and spatial audio arrays.</p>
+                  <span className="text-[10px] font-mono tracking-widest text-spectal-red uppercase block mb-1">Live Concert</span>
+                  <h3 className="text-2xl font-bold text-white tracking-tight">Mainstage Live Productions</h3>
+                  <p className="text-xs text-spectal-mint/70 mt-2 font-light max-w-md">High-energy concert productions featuring India's top independent artists, managed end-to-end by Spectal.</p>
                 </div>
               </div>
               
@@ -149,9 +230,9 @@ export default function Home() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
                 <div className="absolute bottom-6 left-6 right-6">
-                  <span className="text-[10px] font-mono tracking-widest text-spectal-mint uppercase block mb-1">Installation</span>
-                  <h3 className="text-2xl font-bold text-white tracking-tight">Spectral Flux Portal</h3>
-                  <p className="text-xs text-spectal-mint/70 mt-2 font-light">Interactive holographic visualization mapping crowd densities into kinetic node simulations.</p>
+                  <span className="text-[10px] font-mono tracking-widest text-spectal-mint uppercase block mb-1">Campus Festival</span>
+                  <h3 className="text-2xl font-bold text-white tracking-tight">College Campus Festivals</h3>
+                  <p className="text-xs text-spectal-mint/70 mt-2 font-light">End-to-end campus festival management bringing popular artists to college audiences across 30+ cities.</p>
                 </div>
               </div>
 
@@ -166,9 +247,9 @@ export default function Home() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
                 <div className="absolute bottom-6 left-6 right-6">
-                  <span className="text-[10px] font-mono tracking-widest text-spectal-mint uppercase block mb-1">Creative Cores</span>
-                  <h3 className="text-2xl font-bold text-white tracking-tight">Talent Co-Creation</h3>
-                  <p className="text-xs text-spectal-mint/70 mt-2 font-light">24-hour creative coding sprint where developers collaborate live with stage production designers.</p>
+                  <span className="text-[10px] font-mono tracking-widest text-spectal-mint uppercase block mb-1">Brand Activation</span>
+                  <h3 className="text-2xl font-bold text-white tracking-tight">Brand &amp; Artist Collabs</h3>
+                  <p className="text-xs text-spectal-mint/70 mt-2 font-light">Custom branded experiences connecting India's young brands with engaged audiences through live event integrations.</p>
                 </div>
               </div>
 
@@ -183,87 +264,15 @@ export default function Home() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
                 <div className="absolute bottom-6 left-6 right-6">
-                  <span className="text-[10px] font-mono tracking-widest text-spectal-red uppercase block mb-1">Forum</span>
-                  <h3 className="text-2xl font-bold text-white tracking-tight">Industry VIP Mixer</h3>
-                  <p className="text-xs text-spectal-mint/70 mt-2 font-light">Direct talent placement networks linking college creators with lead stage design directors.</p>
+                  <span className="text-[10px] font-mono tracking-widest text-spectal-red uppercase block mb-1">Networking</span>
+                  <h3 className="text-2xl font-bold text-white tracking-tight">Industry Networking Events</h3>
+                  <p className="text-xs text-spectal-mint/70 mt-2 font-light">VIP mixers and industry forums connecting artists, label heads, brand managers, and event directors.</p>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Section 4: Project Showcase — Editorial Project Grid */}
-        <section id="showcase" className="w-full min-h-screen py-24 flex items-center justify-center relative z-20 pointer-events-auto border-t border-white/5">
-          <div className="max-w-7xl w-full mx-auto px-6 md:px-12 flex flex-col select-none">
-            <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-              <div className="flex flex-col items-start">
-                <span className="text-xs font-mono tracking-[0.4em] text-spectal-red mb-3">
-                  04 // SHOWCASE
-                </span>
-                <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-white leading-none">
-                  TALENT <span className="text-spectal-mint font-serif italic font-light">ENGINES</span>
-                </h2>
-              </div>
-              <p className="max-w-md text-xs font-mono text-spectal-mint/50 uppercase tracking-widest">
-                [ Custom productions created by student placement talent ]
-              </p>
-            </div>
-
-            {/* List Table of Projects */}
-            <div className="w-full flex flex-col divide-y divide-white/10 mt-6">
-              <div 
-                data-interactive="true"
-                data-cursor="EXPLORE"
-                onMouseEnter={() => setHoveredProjectImage("/event_spatial.png")}
-                onMouseLeave={() => setHoveredProjectImage(null)}
-                className="py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 group cursor-pointer hover:bg-white/[0.02] px-6 transition-all duration-300 pointer-events-auto"
-              >
-                <div className="flex items-center gap-8">
-                  <span className="text-sm font-mono text-spectal-red">01 / PROJECT</span>
-                  <h3 className="text-2xl md:text-4xl font-bold text-white tracking-tight group-hover:text-spectal-red transition-colors duration-300">HYPER-TRUSS</h3>
-                </div>
-                <div className="flex flex-col md:items-end gap-2 max-w-lg">
-                  <span className="text-sm text-spectal-mint font-light">Real-time projection mapping mapping visual streams into mechanical truss arrays.</span>
-                  <span className="text-[10px] font-mono text-spectal-mint/40 uppercase tracking-wider">WebGL // WebVR // ThreeJS // Arduino</span>
-                </div>
-              </div>
-
-              <div 
-                data-interactive="true"
-                data-cursor="EXPLORE"
-                onMouseEnter={() => setHoveredProjectImage("/event_mainstage.png")}
-                onMouseLeave={() => setHoveredProjectImage(null)}
-                className="py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 group cursor-pointer hover:bg-white/[0.02] px-6 transition-all duration-300 pointer-events-auto"
-              >
-                <div className="flex items-center gap-8">
-                  <span className="text-sm font-mono text-white">02 / PROJECT</span>
-                  <h3 className="text-2xl md:text-4xl font-bold text-white tracking-tight group-hover:text-spectal-mint transition-colors duration-300">WAVE-SYNTH</h3>
-                </div>
-                <div className="flex flex-col md:items-end gap-2 max-w-lg">
-                  <span className="text-sm text-spectal-mint font-light">Custom DSP engine converting spatial crowd density and velocity maps into live ambient soundtrack modulations.</span>
-                  <span className="text-[10px] font-mono text-spectal-mint/40 uppercase tracking-wider">Web Audio API // Computer Vision // Node</span>
-                </div>
-              </div>
-
-              <div 
-                data-interactive="true"
-                data-cursor="EXPLORE"
-                onMouseEnter={() => setHoveredProjectImage("/event_hackathon.png")}
-                onMouseLeave={() => setHoveredProjectImage(null)}
-                className="py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 group cursor-pointer hover:bg-white/[0.02] px-6 transition-all duration-300 pointer-events-auto"
-              >
-                <div className="flex items-center gap-8">
-                  <span className="text-sm font-mono text-spectal-red">03 / PROJECT</span>
-                  <h3 className="text-2xl md:text-4xl font-bold text-white tracking-tight group-hover:text-spectal-red transition-colors duration-300">CHROMA-FLUX</h3>
-                </div>
-                <div className="flex flex-col md:items-end gap-2 max-w-lg">
-                  <span className="text-sm text-spectal-mint font-light">An open-source generative particle engine built for live concerts, designed to render 1M+ nodes dynamically at 60FPS.</span>
-                  <span className="text-[10px] font-mono text-spectal-mint/40 uppercase tracking-wider">WebGL Shader // GLSL // Canvas API</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* Section 5: Legacy — scroll spacer for WebGL galaxy */}
         <section id="legacy" className="w-full min-h-screen pointer-events-none" />
@@ -272,41 +281,47 @@ export default function Home() {
         <section id="silence" className="w-full h-screen flex flex-col items-center justify-center bg-black pointer-events-none relative z-20 py-24">
           <div className="max-w-xl w-full mx-auto px-6 text-center flex flex-col items-center select-none">
             <span className="text-xs font-mono tracking-[0.4em] text-spectal-red mb-6">
-              07 // ADMISSION
+              07 // CONTACT
             </span>
             <h2 className="text-4xl md:text-6xl font-serif text-white tracking-widest uppercase mb-10 leading-tight">
-              REQUEST INVITATION <span className="text-spectal-mint font-serif italic text-white/95">PASS</span>
+              BOOK WITH <span className="text-spectal-mint font-serif italic text-white/95">US</span>
             </h2>
 
-            {/* Sleek Two-Field Invitation Request Form */}
-            <form 
+            {/* Booking / Inquiry Form */}
+            <form
               onSubmit={(e) => e.preventDefault()}
               className="pointer-events-auto w-full flex flex-col space-y-4 mt-4 text-left"
             >
               <div className="flex flex-col sm:flex-row gap-3">
-                <input 
-                  type="email" 
-                  placeholder="Enter email address"
+                <input
+                  type="text"
+                  placeholder="Your name"
                   required
                   className="flex-grow bg-white/5 border border-white/10 rounded-lg px-5 py-4 text-sm text-white focus:outline-none focus:border-spectal-mint focus:ring-1 focus:ring-spectal-mint transition-all duration-300"
                 />
-                <input 
-                  type="text" 
-                  placeholder="College / Company"
+                <input
+                  type="email"
+                  placeholder="Email address"
                   required
                   className="flex-grow bg-white/5 border border-white/10 rounded-lg px-5 py-4 text-sm text-white focus:outline-none focus:border-spectal-mint focus:ring-1 focus:ring-spectal-mint transition-all duration-300"
                 />
               </div>
+              <input
+                type="text"
+                placeholder="What are you looking for? (Talent booking, event, brand activation…)"
+                required
+                className="w-full bg-white/5 border border-white/10 rounded-lg px-5 py-4 text-sm text-white focus:outline-none focus:border-spectal-mint focus:ring-1 focus:ring-spectal-mint transition-all duration-300"
+              />
               <button
                 type="submit"
                 data-interactive="true"
                 className="w-full py-4 bg-spectal-red text-spectal-charcoal text-xs font-mono tracking-widest uppercase hover:bg-white hover:shadow-[0_0_20px_rgba(201,73,61,0.3)] transition-all duration-500 rounded-lg font-bold text-center"
               >
-                Submit Request
+                Send Inquiry
               </button>
             </form>
             <p className="text-[10px] font-mono text-spectal-mint/30 mt-6 tracking-wider uppercase">
-              Powered by Unifesta Events framework. Review rounds occur weekly.
+              Or email us directly at bookings@spectalmanagement.com
             </p>
           </div>
         </section>

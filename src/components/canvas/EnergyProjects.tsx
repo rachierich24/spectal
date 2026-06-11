@@ -7,10 +7,10 @@ import * as THREE from "three";
 import { scrollStore } from "@/lib/scrollStore";
 
 const PROJECTS = [
-  { url: "/event_mainstage.png", floatX: -5, floatZ: -10, delay: 0,   galX: -2.3, galY: 1.3, galZ: -4 },
-  { url: "/event_spatial.png",   floatX: 5,  floatZ: -12, delay: 0.2, galX: 2.3,  galY: 1.3, galZ: -4 },
-  { url: "/event_hackathon.png", floatX: -4, floatZ: -16, delay: 0.4, galX: -2.3, galY: -1.3, galZ: -4 },
-  { url: "/event_networking.png", floatX: 4,  floatZ: -20, delay: 0.6, galX: 2.3,  galY: -1.3, galZ: -4 }
+  { url: "/event_mainstage.png", floatX: -5, floatZ: -10, delay: 0 },
+  { url: "/event_spatial.png",   floatX: 5,  floatZ: -12, delay: 0.2 },
+  { url: "/event_hackathon.png", floatX: -4, floatZ: -16, delay: 0.4 },
+  { url: "/event_networking.png", floatX: 4,  floatZ: -20, delay: 0.6 }
 ];
 
 export default function EnergyProjects() {
@@ -28,8 +28,8 @@ export default function EnergyProjects() {
     const scrollProgress = scrollStore.progress;
 
     if (groupRef.current) {
-      // Visible from energy section, through impact, up to showcase
-      const isVisible = scrollProgress > 1.0 && scrollProgress < 4.0;
+      // Visible from energy section, until they fly past camera (Shifted by +1.0)
+      const isVisible = scrollProgress > 2.0 && scrollProgress < 3.5;
       groupRef.current.visible = isVisible;
 
       if (!isVisible) return;
@@ -38,49 +38,41 @@ export default function EnergyProjects() {
         if (!mesh) return;
         const project = PROJECTS[index];
         
-        // 1. POP OUT PHASE (Scroll 1.2 to 2.0)
-        const popProgress = smoothstep(1.2 + project.delay * 0.5, 2.0, scrollProgress);
+        // 1. POP OUT PHASE (Scroll 2.2 to 3.0)
+        const popProgress = smoothstep(2.2 + project.delay * 0.5, 3.0, scrollProgress);
         
-        // 2. FORM GALLERY PHASE (Scroll 2.0 to 2.8) - this is when the Archive Gallery starts
-        const galleryProgress = smoothstep(2.0, 2.8, scrollProgress);
+        // 2. FLY OUT PHASE (Scroll 3.0 to 3.3) - zoom past camera right before Archive Gallery
+        const flyOutProgress = smoothstep(3.0, 3.3, scrollProgress);
 
         // Calculate Floating State
         const floatY = Math.sin(state.clock.elapsedTime * 0.5 + index * 2) * 0.5 + 1.5;
-        const floatRotX = 0;
         const floatRotY = Math.sin(state.clock.elapsedTime * 0.3 + index) * 0.1;
         const floatRotZ = Math.sin(state.clock.elapsedTime * 0.2 + index) * 0.05;
         
-        // Mix positions: Hide(-15) -> Float -> Gallery
-        const startY = -15;
+        // Positions
+        const currentX = project.floatX;
         
-        const currentX = THREE.MathUtils.lerp(
-          project.floatX, 
-          project.galX, 
-          galleryProgress
-        );
-        
-        const currentY = THREE.MathUtils.lerp(
-          THREE.MathUtils.lerp(startY, floatY, popProgress),
-          project.galY,
-          galleryProgress
-        );
+        const currentY = THREE.MathUtils.lerp(-15, floatY, popProgress);
         
         const currentZ = THREE.MathUtils.lerp(
-          project.floatZ + (scrollProgress - 1.5) * 5, // Camera approaches during float
-          project.galZ, 
-          galleryProgress
+          project.floatZ + (scrollProgress - 2.5) * 5, // Camera approaches during float
+          10, // Fly past the camera
+          flyOutProgress
         );
 
         mesh.position.set(currentX, currentY, currentZ);
         
-        // Mix rotations: Float -> Flat (Gallery)
-        mesh.rotation.x = THREE.MathUtils.lerp(floatRotX, 0, galleryProgress);
-        mesh.rotation.y = THREE.MathUtils.lerp(floatRotY, 0, galleryProgress);
-        mesh.rotation.z = THREE.MathUtils.lerp(floatRotZ, 0, galleryProgress);
+        // Rotations
+        mesh.rotation.y = floatRotY;
+        mesh.rotation.z = floatRotZ;
         
         // Scale effect
-        const scale = THREE.MathUtils.lerp(popProgress * 1.5, 1.8, galleryProgress);
+        const scale = popProgress * 1.5;
         mesh.scale.set(scale, scale, scale);
+
+        // Fade out as it flies past
+        const material = mesh.material as THREE.MeshBasicMaterial;
+        material.opacity = 1.0 - flyOutProgress;
       });
     }
   });
@@ -93,7 +85,6 @@ export default function EnergyProjects() {
           ref={(el) => { planesRef.current[index] = el; }}
           position={[0, -15, 0]}
         >
-          {/* 16:9 aspect ratio roughly */}
           <planeGeometry args={[2.4, 1.35]} />
           <meshBasicMaterial 
             map={texture} 

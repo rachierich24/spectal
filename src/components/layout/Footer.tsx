@@ -55,13 +55,13 @@ export default function Footer() {
         {/* Link Grid - Styled like Quoti */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-8 mb-20 text-left font-sans">
           
-          {/* Column 1: Summit Links */}
+          {/* Column 1: Agency Links */}
           <div className="flex flex-col space-y-3">
             {[
-              { label: "SUMMIT", href: "#arrival" },
-              { label: "METRICS", href: "#anticipation" },
-              { label: "TRACKS", href: "#energy" },
-              { label: "SCHEDULE", href: "#culture-engine" },
+              { label: "HOME", href: "#arrival" },
+              { label: "SERVICES", href: "#showcase" },
+              { label: "EVENTS", href: "#impact" },
+              { label: "CONTACT", href: "#silence" },
             ].map((link) => (
               <a
                 key={link.label}
@@ -77,10 +77,9 @@ export default function Footer() {
           {/* Column 2: Social Links */}
           <div className="flex flex-col space-y-3">
             {[
-              { label: "INSTAGRAM", href: "https://instagram.com" },
-              { label: "LINKEDIN", href: "https://linkedin.com" },
-              { label: "DISCORD", href: "https://discord.gg" },
-              { label: "FACEBOOK", href: "https://facebook.com" },
+              { label: "INSTAGRAM", href: "https://www.instagram.com/spectal.management/" },
+              { label: "LINKEDIN", href: "https://in.linkedin.com/company/spectal-talent-management" },
+              { label: "FACEBOOK", href: "https://www.facebook.com/spectalmanagement/" },
             ].map((link) => (
               <a
                 key={link.label}
@@ -100,7 +99,7 @@ export default function Footer() {
             {[
               { label: "TERMS", href: "#" },
               { label: "PRIVACY", href: "#" },
-              { label: "PASS REQUEST", href: "#silence" },
+              { label: "BOOK NOW", href: "#silence" },
             ].map((link) => (
               <a
                 key={link.label}
@@ -119,7 +118,7 @@ export default function Footer() {
               WEBSITE BY ANTIGRAVITY
             </span>
             <span className="font-black tracking-widest text-[13px] uppercase text-spectal-mint/60">
-              ©SPECTAL2026 - ALL RIGHTS RESERVED.
+              ©SPECTAL MANAGEMENT 2026 - ALL RIGHTS RESERVED.
             </span>
           </div>
 
