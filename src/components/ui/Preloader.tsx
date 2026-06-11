@@ -7,10 +7,10 @@ export default function Preloader() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simple fast loader
+    // Elegant, slow-paced loader holding for 2.5 seconds
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 1500);
+    }, 2500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -21,22 +21,33 @@ export default function Preloader() {
           key="preloader"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
-          className="fixed inset-0 z-[999] flex flex-col items-center justify-center bg-[#0B0B0B] pointer-events-none"
+          transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+          className="fixed inset-0 z-[999] flex flex-col items-center justify-center bg-[#050505] pointer-events-none"
         >
-          <div className="flex flex-col items-center gap-4">
-            <span className="text-[10px] font-mono tracking-[0.3em] text-spectal-mint/70 uppercase">
-              Loading
-            </span>
-            <div className="w-32 h-[1px] bg-white/10 overflow-hidden relative">
-              <motion.div 
-                initial={{ x: "-100%" }}
-                animate={{ x: "200%" }}
-                transition={{ repeat: Infinity, duration: 1.2, ease: "linear" }}
-                className="absolute top-0 left-0 w-1/2 h-full bg-spectal-red"
-              />
-            </div>
-          </div>
+          <motion.div 
+            initial={{ opacity: 0, filter: "blur(10px)" }}
+            animate={{ opacity: 1, filter: "blur(0px)" }}
+            transition={{ duration: 1.8, ease: "easeOut" }}
+            className="flex flex-col items-center"
+          >
+            <h1 className="text-2xl md:text-3xl font-light tracking-[0.6em] text-white/90 uppercase ml-[0.6em]">
+              Spectal
+            </h1>
+            <motion.div 
+              initial={{ height: 0 }}
+              animate={{ height: "2rem" }}
+              transition={{ delay: 0.8, duration: 1, ease: "easeInOut" }}
+              className="w-[1px] bg-spectal-red/60 my-6" 
+            />
+            <motion.span 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.2, duration: 1 }}
+              className="text-[9px] font-mono tracking-[0.4em] text-spectal-mint/40 uppercase ml-[0.4em]"
+            >
+              The Next Moment Could Be Yours
+            </motion.span>
+          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>
