@@ -38,7 +38,7 @@ const waveVertexShader = `
     vElevation = currentPos.z;
     
     // Global scroll visibility logic (Shifted by +1.0)
-    float visibility = smoothstep(1.5, 2.0, uScrollProgress) * (1.0 - smoothstep(3.0, 3.8, uScrollProgress));
+    float visibility = smoothstep(0.8, 1.5, uScrollProgress) * (1.0 - smoothstep(4.2, 4.8, uScrollProgress));
     
     // Move the plane up into view based on scroll
     currentPos.y += (1.0 - visibility) * -20.0;
@@ -56,7 +56,7 @@ const waveFragmentShader = `
 
   void main() {
     // Visibility fade (Shifted by +1.0)
-    float visibility = smoothstep(1.5, 2.0, uScrollProgress) * (1.0 - smoothstep(3.0, 3.8, uScrollProgress));
+    float visibility = smoothstep(0.8, 1.5, uScrollProgress) * (1.0 - smoothstep(4.2, 4.8, uScrollProgress));
     
     vec3 colorCharcoal = vec3(0.043, 0.043, 0.043);
     vec3 colorMint = vec3(0.866, 0.925, 0.768);
@@ -84,7 +84,6 @@ const waveFragmentShader = `
 `;
 
 import { useExperience } from "@/lib/experienceStore";
-import EnergyProjects from "./EnergyProjects";
 
 export default function EnergyWaves() {
   const meshRef = useRef<THREE.Mesh>(null);
@@ -105,7 +104,7 @@ export default function EnergyWaves() {
     const scrollProgress = scrollStore.progress;
 
     if (meshRef.current) {
-      const isVisible = scrollProgress > 1.5 && scrollProgress < 4.2;
+      const isVisible = scrollProgress > 0.8 && scrollProgress < 4.8;
       meshRef.current.visible = isVisible;
 
       if (!isVisible) return;
@@ -141,9 +140,6 @@ export default function EnergyWaves() {
           side={THREE.DoubleSide}
         />
       </mesh>
-
-      {/* Floating project images popping out from the energy wave */}
-      <EnergyProjects />
     </group>
   );
 }

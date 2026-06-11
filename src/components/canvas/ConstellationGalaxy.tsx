@@ -55,7 +55,7 @@ export default function ConstellationGalaxy() {
     const scrollProgress = scrollStore.progress;
 
     if (groupRef.current) {
-      const isVisible = scrollProgress > 4.5 && scrollProgress < 6.5;
+      const isVisible = scrollProgress > 3.8 && scrollProgress < 8.0;
       groupRef.current.visible = isVisible;
 
       if (!isVisible) return;
@@ -67,6 +67,21 @@ export default function ConstellationGalaxy() {
       // Dynamic real-time star scale/twinkle updates
       if (starsRef.current) {
         const time = state.clock.getElapsedTime();
+
+        // Smoothly fade in/out based on scrollProgress
+        let opacity = 0;
+        if (scrollProgress >= 3.8 && scrollProgress < 4.4) {
+          opacity = ((scrollProgress - 3.8) / 0.6) * 0.15; // Fade in from 3.8 to 4.4
+        } else if (scrollProgress >= 4.4 && scrollProgress <= 7.2) {
+          opacity = 0.15;
+        } else if (scrollProgress > 7.2) {
+          opacity = Math.max(0, ((8.0 - scrollProgress) / 0.8) * 0.15); // Fade out at the very end
+        }
+
+        const material = starsRef.current.material as THREE.MeshBasicMaterial;
+        if (material) {
+          material.opacity = opacity;
+        }
         particles.forEach((particle, i) => {
           // Unique sine-wave twinkle per star using its phase and speed
           const twinkle = 0.7 + Math.sin(time * particle.speed + particle.phase) * 0.3;

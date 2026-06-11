@@ -1,19 +1,64 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, useInView } from "framer-motion";
 import Scene from "@/components/canvas/Scene";
 import SpectalExperience from "@/components/canvas/SpectalExperience";
 import Preloader from "@/components/ui/Preloader";
 import Footer from "@/components/layout/Footer";
-import { useExperience } from "@/lib/experienceStore";
 import RotatingArch from "@/components/ui/RotatingArch";
 import { CLIENT_LOGOS } from "@/components/ui/ClientLogos";
 import SocialFeed from "@/components/ui/SocialFeed";
 
+const MANIFESTO = ["WE", "DON'T", "JUST", "BOOK", "ARTISTS.", "WE", "BUILD", "CAREERS."];
+
+const STATS = [
+  { target: 200, suffix: "+", label: "Events Produced" },
+  { target: 50, suffix: "+", label: "Artists Managed" },
+  { target: 30, suffix: "+", label: "Cities Covered" },
+  { target: 10, suffix: " YRS", label: "Years of Energy" },
+];
+
+const ARTIST_MARQUEE = [
+  "Ritviz", "Nucleya", "Prateek Kuhad", "When Chai Met Toast", "Seedhe Maut",
+  "Nikhil Dsouza", "Ankur Tewari", "The Local Train", "Taba Chake", "Mihail",
+  "Ritviz", "Nucleya", "Prateek Kuhad", "When Chai Met Toast", "Seedhe Maut",
+  "Nikhil Dsouza", "Ankur Tewari", "The Local Train", "Taba Chake", "Mihail",
+];
+
+function CountUp({ target, suffix, label }: { target: number; suffix: string; label: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-10%" });
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) return;
+    let raf: number;
+    const start = performance.now();
+    const duration = 1800;
+    const step = (now: number) => {
+      const t = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 3);
+      setCount(Math.floor(eased * target));
+      if (t < 1) raf = requestAnimationFrame(step);
+      else setCount(target);
+    };
+    raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
+  }, [isInView, target]);
+
+  return (
+    <div ref={ref} className="flex flex-col items-center gap-3">
+      <span className="text-5xl md:text-7xl font-black tabular-nums text-spectal-mint drop-shadow-[0_0_20px_rgba(221,236,196,0.3)]">
+        {count}{suffix}
+      </span>
+      <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-white/40">{label}</span>
+    </div>
+  );
+}
+
 export default function Home() {
   const [hoveredProjectImage, setHoveredProjectImage] = useState<string | null>(null);
-  const { setEnergy } = useExperience();
 
   // Motion values for the floating project preview (avoids re-rendering the entire Home page on mouse move!)
   const previewX = useMotionValue(0);
@@ -390,11 +435,64 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Section 2: Energy — scroll spacer for WebGL wave */}
-        <section id="energy" className="w-full min-h-screen pointer-events-none" />
+        {/* Section 2: Energy — Brand Manifesto over WebGL wave */}
+        <section id="energy" className="w-full min-h-[220vh] relative pointer-events-none">
+          {/* Sticky frame — stays pinned while user scrolls through the wave */}
+          <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden">
 
-        {/* Transition Gap between Energy and Impact */}
-        <div className="w-full h-screen pointer-events-none" />
+            {/* Label */}
+            <motion.span
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              className="text-[10px] font-mono tracking-[0.45em] text-spectal-red/70 uppercase mb-10 select-none"
+            >
+              // OUR BELIEF
+            </motion.span>
+
+            {/* Word-by-word manifesto */}
+            <h2 className="max-w-4xl mx-auto px-6 text-center text-[7vw] md:text-[5.5vw] lg:text-[4.8vw] font-black uppercase leading-[1.1] tracking-tighter select-none">
+              {MANIFESTO.map((word, i) => (
+                <motion.span
+                  key={i}
+                  initial={{ opacity: 0, y: 32, filter: "blur(10px)" }}
+                  whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  viewport={{ once: true, margin: "-8%" }}
+                  transition={{ duration: 0.65, delay: i * 0.09, ease: [0.22, 1, 0.36, 1] }}
+                  className={`inline-block mr-[0.28em] ${i >= 6 ? "text-spectal-mint drop-shadow-[0_0_30px_rgba(221,236,196,0.3)]" : "text-white"}`}
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </h2>
+
+            {/* Stat counters */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-5%" }}
+              transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-16 mt-16 md:mt-20 border-t border-white/10 pt-10 pointer-events-auto"
+            >
+              {STATS.map((s) => (
+                <CountUp key={s.label} target={s.target} suffix={s.suffix} label={s.label} />
+              ))}
+            </motion.div>
+
+            {/* Artist name marquee */}
+            <div className="absolute bottom-0 left-0 right-0 py-3 bg-spectal-mint/5 border-t border-spectal-mint/10 overflow-hidden flex select-none">
+              <div className="animate-marquee whitespace-nowrap flex items-center gap-8 pr-8">
+                {ARTIST_MARQUEE.map((name, i) => (
+                  <span key={i} className="text-[11px] font-mono uppercase tracking-[0.3em] text-spectal-mint/70">
+                    {name} {i < ARTIST_MARQUEE.length - 1 && <span className="mx-3 text-white/20">◆</span>}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+          </div>
+        </section>
 
         {/* Section 3: Impact — Interactive Event Gallery */}
         <section id="impact" className="w-full min-h-screen py-24 flex items-center justify-center relative z-20 pointer-events-auto">
