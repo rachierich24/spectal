@@ -49,11 +49,11 @@ export default function Footer() {
 
   return (
     <footer
-      className="w-full bg-[#050505] text-spectal-mint pt-24 pb-0 border-t border-white/5 relative z-20 pointer-events-auto overflow-hidden flex flex-col justify-between"
+      className="w-full bg-[#050505] text-spectal-mint pt-12 pb-0 border-t border-white/5 relative z-20 pointer-events-auto overflow-hidden flex flex-col justify-between"
     >
       <div className="max-w-7xl w-full mx-auto px-6 md:px-12">
         {/* Link Grid - Styled like Quoti */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-8 mb-20 text-left font-sans">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-8 mb-12 text-left font-sans">
           
           {/* Column 1: Agency Links */}
           <div className="flex flex-col space-y-3">
@@ -125,7 +125,7 @@ export default function Footer() {
         </div>
 
         {/* Store Badges sitting on the left above the Logo, like in Quoti */}
-        <div className="flex items-center gap-4 mb-8 z-10">
+        <div className="flex items-center gap-4 mb-4 z-10">
           {/* Apple App Store */}
           <a
             href="#"
@@ -164,7 +164,7 @@ export default function Footer() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: false, amount: 0.05 }}
-        className="w-full flex flex-col items-center justify-end overflow-hidden select-none relative z-10 pt-8 mt-4"
+        className="w-full flex flex-col items-center justify-end overflow-hidden select-none relative z-10 pt-4"
       >
         
         {/* Animated Summit Star logo symbol sitting above spectal, like Quoti's orange roof mark */}
@@ -188,9 +188,9 @@ export default function Footer() {
               }
             }
           }}
-          className="mb-6 flex justify-center text-spectal-red drop-shadow-[0_0_15px_rgba(201,73,61,0.3)]"
+          className="mb-2 flex justify-center text-spectal-red drop-shadow-[0_0_15px_rgba(201,73,61,0.3)]"
         >
-          <svg width="100" height="50" viewBox="0 0 100 50" fill="none" className="w-20 md:w-28 h-auto">
+          <svg width="100" height="50" viewBox="0 0 100 50" fill="none" className="w-16 md:w-20 h-auto">
             {/* Geometric Summit star / double chevron */}
             <path d="M50 5 L85 35 L72 35 L50 16 L28 35 L15 35 Z" fill="#C9493D" />
             <path d="M50 20 L68 35 L59 35 L50 27 L41 35 L32 35 Z" fill="#DDECC4" />
