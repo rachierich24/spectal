@@ -50,7 +50,7 @@ export default function Footer() {
       <div className="max-w-7xl w-full mx-auto px-6 md:px-12">
         {/* Link Grid - Styled like Quoti */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-8 mb-12 text-left font-sans">
-          
+
           {/* Column 1: Agency Links */}
           <div className="flex flex-col space-y-3">
             {[
@@ -110,9 +110,6 @@ export default function Footer() {
 
           {/* Column 4: Credits & Copyright (Right side) */}
           <div className="flex flex-col space-y-3 md:items-end text-left md:text-right">
-            <span className="font-black tracking-widest text-[13px] uppercase text-spectal-mint">
-              WEBSITE BY ANTIGRAVITY
-            </span>
             <span className="font-black tracking-widest text-[13px] uppercase text-spectal-mint/60">
               ©SPECTAL MANAGEMENT 2026 - ALL RIGHTS RESERVED.
             </span>
@@ -159,15 +156,10 @@ export default function Footer() {
       <motion.div
         initial="hidden"
         whileInView="visible"
-<<<<<<< Updated upstream
-        viewport={{ once: false, amount: 0.05 }}
-        className="w-full flex flex-col items-center justify-end overflow-hidden select-none relative z-10 pt-4"
-=======
         viewport={{ once: true, amount: 0.05 }}
         className="w-full flex flex-col items-center justify-end overflow-hidden select-none relative z-10 pt-8 mt-4"
->>>>>>> Stashed changes
       >
-        
+
         {/* Animated Summit Star logo symbol sitting above spectal, like Quoti's orange roof mark */}
         <motion.div
           variants={{

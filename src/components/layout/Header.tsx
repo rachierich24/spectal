@@ -12,13 +12,7 @@ const NAV_ITEMS = [
 export default function Header() {
   return (
     <header className="fixed top-0 left-0 w-full z-50 pt-6 pointer-events-none">
-<<<<<<< Updated upstream
       <div className="max-w-[1600px] mx-auto px-6 md:px-12 flex justify-between items-center pointer-events-auto relative">
-        
-=======
-      <div className="max-w-[1600px] mx-auto px-6 md:px-12 grid grid-cols-3 items-center pointer-events-auto">
-
->>>>>>> Stashed changes
         {/* Left: Brand Logo */}
         <div className="flex-shrink-0">
           <a

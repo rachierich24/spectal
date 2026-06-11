@@ -95,13 +95,10 @@ export default function Home() {
             <span className="w-1.5 h-1.5 rounded-full bg-spectal-red"></span>
             <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">Tour Curation</span>
             <span className="w-1.5 h-1.5 rounded-full bg-spectal-mint"></span>
-<<<<<<< Updated upstream
             <span className="text-xs font-mono tracking-widest text-white uppercase">Music & Comedy</span>
             <span className="w-1.5 h-1.5 rounded-full bg-spectal-red"></span>
             <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">Digital Content</span>
             <span className="w-1.5 h-1.5 rounded-full bg-spectal-mint"></span>
-=======
->>>>>>> Stashed changes
 
             {/* Duplicated for seamless loop */}
             <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">360° Talent Management</span>
@@ -288,81 +285,7 @@ export default function Home() {
           </div>
         </section>
 
-<<<<<<< Updated upstream
-=======
-        {/* Section 4: Project Showcase — Editorial Project Grid */}
-        <section id="showcase" className="w-full min-h-screen py-24 flex items-center justify-center relative z-20 pointer-events-auto border-t border-white/5">
-          <div className="max-w-7xl w-full mx-auto px-6 md:px-12 flex flex-col select-none">
-            <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-              <div className="flex flex-col items-start">
-                <span className="text-xs font-mono tracking-[0.4em] text-spectal-red mb-3">
-                  04 // SHOWCASE
-                </span>
-                <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-white leading-none">
-                  TALENT <span className="text-spectal-mint font-serif italic font-light">ENGINES</span>
-                </h2>
-              </div>
-              <p className="max-w-md text-xs font-mono text-spectal-mint/50 uppercase tracking-widest">
-                [ Custom productions created by student placement talent ]
-              </p>
-            </div>
 
-            {/* List Table of Projects */}
-            <div className="w-full flex flex-col divide-y divide-white/10 mt-6">
-              <div
-                data-interactive="true"
-                data-cursor="EXPLORE"
-                onMouseEnter={() => setHoveredProjectImage("/event_spatial.png")}
-                onMouseLeave={() => setHoveredProjectImage(null)}
-                className="py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 group cursor-pointer hover:bg-white/[0.02] px-6 transition-all duration-300 pointer-events-auto"
-              >
-                <div className="flex items-center gap-8">
-                  <span className="text-sm font-mono text-spectal-red">01 / PROJECT</span>
-                  <h3 className="text-2xl md:text-4xl font-bold text-white tracking-tight group-hover:text-spectal-red transition-colors duration-300">HYPER-TRUSS</h3>
-                </div>
-                <div className="flex flex-col md:items-end gap-2 max-w-lg">
-                  <span className="text-sm text-spectal-mint font-light">Real-time projection mapping mapping visual streams into mechanical truss arrays.</span>
-                  <span className="text-[10px] font-mono text-spectal-mint/40 uppercase tracking-wider">WebGL // WebVR // ThreeJS // Arduino</span>
-                </div>
-              </div>
-
-              <div
-                data-interactive="true"
-                data-cursor="EXPLORE"
-                onMouseEnter={() => setHoveredProjectImage("/event_mainstage.png")}
-                onMouseLeave={() => setHoveredProjectImage(null)}
-                className="py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 group cursor-pointer hover:bg-white/[0.02] px-6 transition-all duration-300 pointer-events-auto"
-              >
-                <div className="flex items-center gap-8">
-                  <span className="text-sm font-mono text-white">02 / PROJECT</span>
-                  <h3 className="text-2xl md:text-4xl font-bold text-white tracking-tight group-hover:text-spectal-mint transition-colors duration-300">WAVE-SYNTH</h3>
-                </div>
-                <div className="flex flex-col md:items-end gap-2 max-w-lg">
-                  <span className="text-sm text-spectal-mint font-light">Custom DSP engine converting spatial crowd density and velocity maps into live ambient soundtrack modulations.</span>
-                  <span className="text-[10px] font-mono text-spectal-mint/40 uppercase tracking-wider">Web Audio API // Computer Vision // Node</span>
-                </div>
-              </div>
-
-              <div
-                data-interactive="true"
-                data-cursor="EXPLORE"
-                onMouseEnter={() => setHoveredProjectImage("/event_hackathon.png")}
-                onMouseLeave={() => setHoveredProjectImage(null)}
-                className="py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 group cursor-pointer hover:bg-white/[0.02] px-6 transition-all duration-300 pointer-events-auto"
-              >
-                <div className="flex items-center gap-8">
-                  <span className="text-sm font-mono text-spectal-red">03 / PROJECT</span>
-                  <h3 className="text-2xl md:text-4xl font-bold text-white tracking-tight group-hover:text-spectal-red transition-colors duration-300">CHROMA-FLUX</h3>
-                </div>
-                <div className="flex flex-col md:items-end gap-2 max-w-lg">
-                  <span className="text-sm text-spectal-mint font-light">An open-source generative particle engine built for live concerts, designed to render 1M+ nodes dynamically at 60FPS.</span>
-                  <span className="text-[10px] font-mono text-spectal-mint/40 uppercase tracking-wider">WebGL Shader // GLSL // Canvas API</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
->>>>>>> Stashed changes
 
         {/* Section 5: Legacy — scroll spacer for WebGL galaxy */}
         <section id="legacy" className="w-full min-h-screen pointer-events-none" />
@@ -377,35 +300,21 @@ export default function Home() {
               BOOK WITH <span className="text-spectal-mint font-serif italic text-white/95">US</span>
             </h2>
 
-<<<<<<< Updated upstream
             {/* Booking / Inquiry Form */}
-=======
-            {/* Sleek Two-Field Invitation Request Form */}
->>>>>>> Stashed changes
             <form
               onSubmit={(e) => e.preventDefault()}
               className="pointer-events-auto w-full flex flex-col space-y-4 mt-4 text-left"
             >
               <div className="flex flex-col sm:flex-row gap-3">
                 <input
-<<<<<<< Updated upstream
                   type="text"
                   placeholder="Your name"
-=======
-                  type="email"
-                  placeholder="Enter email address"
->>>>>>> Stashed changes
                   required
                   className="flex-grow bg-white/5 border border-white/10 rounded-lg px-5 py-4 text-sm text-white focus:outline-none focus:border-spectal-mint focus:ring-1 focus:ring-spectal-mint transition-all duration-300"
                 />
                 <input
-<<<<<<< Updated upstream
                   type="email"
                   placeholder="Email address"
-=======
-                  type="text"
-                  placeholder="College / Company"
->>>>>>> Stashed changes
                   required
                   className="flex-grow bg-white/5 border border-white/10 rounded-lg px-5 py-4 text-sm text-white focus:outline-none focus:border-spectal-mint focus:ring-1 focus:ring-spectal-mint transition-all duration-300"
                 />
