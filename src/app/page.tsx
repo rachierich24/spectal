@@ -306,6 +306,27 @@ export default function Home() {
                   <span className="text-[10px] font-mono text-spectal-mint/40 uppercase tracking-wider">350+ Campus Festivals // 2,000+ Campus Shows</span>
                 </div>
               </div>
+
+              <div
+                data-interactive="true"
+                data-cursor="EXPLORE"
+                className="py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 group cursor-pointer hover:bg-white/[0.02] px-6 transition-all duration-300 pointer-events-auto"
+              >
+                <div className="flex flex-col gap-4 w-full md:w-auto">
+                  <div className="flex items-center gap-8">
+                    <span className="text-sm font-mono text-spectal-red">03 / EVENTS</span>
+                    <h3 className="text-xl md:text-2xl font-boldonse font-medium text-white tracking-wide group-hover:text-spectal-red transition-colors duration-500">LANDMARK EVENTS</h3>
+                  </div>
+                  {/* Mobile-only inline preview image */}
+                  <div className="w-full aspect-[16/10] rounded-xl overflow-hidden md:hidden border border-white/10 relative">
+                    <img src="/event_mainstage.png" alt="Landmark Events" className="w-full h-full object-cover" />
+                  </div>
+                </div>
+                <div className="flex flex-col md:items-end gap-2 max-w-lg">
+                  <span className="text-sm text-spectal-mint font-light">End-to-end live event creation across programming, production, partnerships, audience experience, and on-ground execution.</span>
+                  <span className="text-[10px] font-mono text-spectal-mint/40 uppercase tracking-wider">End-to-end Event Creation // Audience Experience</span>
+                </div>
+              </div>
             </div>
           </div>
         </section>
