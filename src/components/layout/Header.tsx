@@ -39,7 +39,7 @@ export default function Header() {
           <Link
             href="/"
             data-interactive="true"
-            className="group flex items-center gap-3 transition-all duration-300 ease-out inline-block"
+            className="group inline-flex flex-row items-center gap-3 transition-all duration-300 ease-out"
           >
             <img 
               src="/spectallogo.jpg" 
