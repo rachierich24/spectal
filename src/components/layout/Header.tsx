@@ -41,12 +41,11 @@ export default function Header() {
             data-interactive="true"
             className="group text-3xl md:text-4xl font-bold tracking-[0.2em] leading-none transition-all duration-300 ease-out inline-block"
           >
-            <span className="inline-block text-spectal-red group-hover:-translate-y-0.5 transition-transform duration-300">
-              SPEC
-            </span>
-            <span className="inline-block text-spectal-mint group-hover:translate-y-0.5 transition-transform duration-300">
-              TAL
-            </span>
+            <img 
+              src="/spectallogo.jpg" 
+              alt="Spectal" 
+              className="h-10 md:h-12 w-auto object-contain rounded-md group-hover:scale-105 transition-transform duration-300"
+            />
           </Link>
         </div>
 
