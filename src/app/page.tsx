@@ -268,9 +268,6 @@ export default function Home() {
           <div className="max-w-7xl w-full mx-auto px-6 md:px-12 flex flex-col select-none">
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
               <div className="flex flex-col items-start">
-                <span className="text-xs font-mono tracking-[0.4em] text-spectal-red mb-3">
-                  01 // WHAT WE CREATE
-                </span>
                 <h2 className="text-xl md:text-[1.8rem] lg:text-[2.2rem] font-boldonse font-medium tracking-tight text-white leading-[1.2] uppercase">
                   WHAT WE <span className="text-spectal-mint font-serif italic font-light">CREATE</span>
                 </h2>
@@ -290,7 +287,6 @@ export default function Home() {
               >
                 <div className="flex flex-col gap-4 w-full md:w-auto">
                   <div className="flex items-center gap-8">
-                    <span className="text-sm font-mono text-spectal-red">01 / BRAND</span>
                     <h3 className="text-xl md:text-2xl font-boldonse font-medium text-white tracking-wide group-hover:text-spectal-red transition-colors duration-500">BRAND SOLUTIONS</h3>
                   </div>
                   {/* Mobile-only inline preview image */}
@@ -300,7 +296,7 @@ export default function Home() {
                 </div>
                 <div className="flex flex-col md:items-end gap-2 max-w-lg">
                   <span className="text-sm text-spectal-mint font-light">Campaigns, properties, and cultural interventions built around business objectives.</span>
-                  <span className="text-[10px] font-mono text-spectal-mint/40 uppercase tracking-wider">250+ Brand Experiences // Campaigns // Properties</span>
+                  <span className="text-[10px] font-mono text-spectal-mint/40 uppercase tracking-wider">250+ Brand Experiences &bull; Campaigns &bull; Properties</span>
                 </div>
               </div>
 
@@ -315,7 +311,6 @@ export default function Home() {
               >
                 <div className="flex flex-col gap-4 w-full md:w-auto">
                   <div className="flex items-center gap-8">
-                    <span className="text-sm font-mono text-spectal-red">02 / CAMPUS</span>
                     <h3 className="text-xl md:text-2xl font-boldonse font-medium text-white tracking-wide group-hover:text-spectal-red transition-colors duration-500">CAMPUS EXPERIENCES</h3>
                   </div>
                   {/* Mobile-only inline preview image */}
@@ -325,7 +320,7 @@ export default function Home() {
                 </div>
                 <div className="flex flex-col md:items-end gap-2 max-w-lg">
                   <span className="text-sm text-spectal-mint font-light">College festivals, freshers&apos; seasons, student communities, and campus-led properties shaped with institutions across India.</span>
-                  <span className="text-[10px] font-mono text-spectal-mint/40 uppercase tracking-wider">350+ Campus Festivals // 2,000+ Campus Shows</span>
+                  <span className="text-[10px] font-mono text-spectal-mint/40 uppercase tracking-wider">350+ Campus Festivals &bull; 2,000+ Campus Shows</span>
                 </div>
               </div>
             </div>
@@ -338,17 +333,6 @@ export default function Home() {
         {/* Section 3: Brand Belief & Statistics */}
         <section id="stats" className="w-full py-16 md:py-24 flex flex-col items-center justify-center relative bg-black border-t border-white/5 z-20 pointer-events-auto">
           <div className="max-w-7xl w-full mx-auto px-6 md:px-12 flex flex-col items-center">
-
-            {/* Label */}
-            <motion.span
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              className="text-[10px] font-mono tracking-[0.45em] text-spectal-red/70 uppercase mb-8 select-none"
-            >
-              03 // WHO WE ARE
-            </motion.span>
 
             {/* Word-by-word manifesto */}
             <h2 className="max-w-5xl mx-auto px-4 md:px-6 text-center text-[2.2rem] md:text-5xl lg:text-7xl font-black uppercase leading-[1.1] md:leading-[1.2] tracking-tighter select-none mb-16">
@@ -387,9 +371,6 @@ export default function Home() {
         {/* Section 5: Registration & Contact Portal */}
         <section id="silence" className="w-full flex flex-col items-center justify-center bg-black pointer-events-auto relative z-20 py-16 md:py-24 border-t border-white/5">
           <div className="max-w-xl w-full mx-auto px-6 text-center flex flex-col items-center select-none">
-            <span className="text-xs font-mono tracking-[0.4em] text-spectal-red mb-6">
-              05 // GET IN TOUCH
-            </span>
             <h2 className="text-xl md:text-[1.8rem] lg:text-[2.2rem] font-serif text-white tracking-widest uppercase mb-12 leading-[1.2]">
               WORK WITH US, BUILD WITH US, PARTNER WITH US,{" "}
               <span className="text-spectal-mint font-serif italic text-white/95">BUT FIRST&hellip;</span>

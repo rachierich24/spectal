@@ -418,13 +418,6 @@ export default function AboutSection() {
               <StickerBurstShards />
               <div className="flex items-center gap-2.5 sm:gap-3 flex-wrap">
                 <span className="w-2 h-2 rounded-full bg-[#DE382B] animate-pulse" />
-                <motion.span
-                  style={{ color: metaTextColor }}
-                  className="text-[10px] sm:text-[11px] font-mono tracking-[0.3em] uppercase font-bold"
-                >
-                  [ 02 // CULTURAL MANIFESTO ]
-                </motion.span>
-                <span className="text-black/30 hidden sm:inline">•</span>
                 <motion.p
                   style={{ color: metaTextColor }}
                   className="text-xl sm:text-2xl md:text-3xl font-instrument italic font-normal tracking-tight"
@@ -471,15 +464,8 @@ export default function AboutSection() {
             PHASE 2: THE CULTURAL IMPACT (IN CULTURE — NOT JUST SHOW UP!)
            ========================================================================= */}
         <div className="flex flex-col pt-8 sm:pt-12 border-t border-white/20">
-          
-          {/* Sub-label index */}
-          <div className="flex items-center gap-3 mb-3 sm:mb-5">
-            <span className="text-[10px] font-mono tracking-[0.35em] text-white/70 uppercase">
-              INDEX 02 // ACTIVATION
-            </span>
-          </div>
 
-          {/* Headline Line 1: IN CULTURE — */}
+            {/* Headline Line 1: IN CULTURE — */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

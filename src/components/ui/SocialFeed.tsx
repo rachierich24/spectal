@@ -317,9 +317,6 @@ export default function SocialFeed() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="max-w-3xl"
           >
-            <span className="text-xs font-mono tracking-[0.4em] text-spectal-red mb-4 uppercase block">
-              04 // REELS &amp; LIVE SHOWREELS
-            </span>
             <h2 className="text-4xl md:text-6xl font-boldonse font-medium tracking-tight leading-[1.1] md:leading-[1.15] text-white uppercase">
               ENTER THE WORLD WE <br className="hidden md:block" />
               <span className="text-spectal-mint font-serif italic font-light">CREATE</span> AFTER DARK

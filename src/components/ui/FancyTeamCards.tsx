@@ -54,9 +54,6 @@ export default function FancyTeamCards() {
         {/* Editorial Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-6 border-b border-white/10 pb-8">
           <div className="flex flex-col items-start">
-            <span className="text-xs font-mono tracking-[0.4em] text-spectal-red mb-3 uppercase">
-              03 // LEADERSHIP
-            </span>
             <h2 className="text-3xl md:text-5xl font-light tracking-tight text-white uppercase font-boldonse">
               The People Behind <span className="font-serif italic text-spectal-mint">Spectal</span>
             </h2>

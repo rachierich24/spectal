@@ -210,9 +210,6 @@ export default function BrandsPage() {
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end mb-20">
             <div className="lg:col-span-8">
-              <span className="text-xs font-mono tracking-[0.4em] text-spectal-red mb-3 block">
-                OUR METHOD //
-              </span>
               <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-tight font-sans">
                 An idea is only as good as it is <span className="text-spectal-red font-serif italic text-black/90">feasible</span>.
               </h2>
@@ -227,7 +224,6 @@ export default function BrandsPage() {
           {/* Approach Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
             <div className="p-8 border border-black/10 hover:border-black/35 rounded-sm transition-all duration-300">
-              <span className="text-xs font-mono text-spectal-red block mb-6">01 // FEASIBILITY</span>
               <h3 className="text-lg font-bold uppercase tracking-tight mb-4">Strategic Feasibility</h3>
               <p className="text-xs md:text-sm text-black/60 leading-relaxed font-sans">
                 Big activation ideas grounded in real-world budgets, local site timelines, and municipal logistics — ensuring long-term impact rather than short-term hype.
@@ -235,7 +231,6 @@ export default function BrandsPage() {
             </div>
 
             <div className="p-8 border border-black/10 hover:border-black/35 rounded-sm transition-all duration-300">
-              <span className="text-xs font-mono text-spectal-red block mb-6">02 // OPERATIONS</span>
               <h3 className="text-lg font-bold uppercase tracking-tight mb-4">Operational Expertise</h3>
               <p className="text-xs md:text-sm text-black/60 leading-relaxed font-sans">
                 An internal event operations and site production team built to coordinate logistics, vendor rigs, and permit layouts seamlessly under tight windows.
@@ -243,7 +238,6 @@ export default function BrandsPage() {
             </div>
 
             <div className="p-8 border border-black/10 hover:border-black/35 rounded-sm transition-all duration-300">
-              <span className="text-xs font-mono text-spectal-red block mb-6">03 // TIMELINES</span>
               <h3 className="text-lg font-bold uppercase tracking-tight mb-4">Disciplined Execution</h3>
               <p className="text-xs md:text-sm text-black/60 leading-relaxed font-sans">
                 Clear milestones and progress checklines that keep timelines, budgets, and brand guidelines aligned — ensuring every experiential activation delivers.
@@ -269,9 +263,6 @@ export default function BrandsPage() {
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           
           <div className="text-center max-w-3xl mx-auto mb-20">
-            <span className="text-xs font-mono tracking-[0.4em] text-spectal-red mb-3 block">
-              CAPABILITIES //
-            </span>
             <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-tight font-sans">
               Here is some of <span className="text-spectal-mint font-serif italic text-white/95">what we do</span>
             </h2>
@@ -334,9 +325,6 @@ export default function BrandsPage() {
           
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-20">
             <div>
-              <span className="text-xs font-mono tracking-[0.4em] text-spectal-red mb-3 block">
-                SUCCESS STORIES //
-              </span>
               <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-tight font-sans">
                 Selected <span className="text-spectal-mint font-serif italic text-white/95">Brand Work</span>
               </h2>
@@ -388,9 +376,6 @@ export default function BrandsPage() {
             
             {/* Story copy */}
             <div className="lg:col-span-7">
-              <span className="text-xs font-mono tracking-[0.4em] text-spectal-red mb-3 block">
-                OUR MISSION //
-              </span>
               <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter leading-tight mb-8 font-sans">
                 Built on <span className="text-spectal-red font-serif italic text-black/90">getting things done</span>.
               </h2>
