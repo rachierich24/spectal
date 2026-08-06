@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
 import { FaInstagram, FaHeart, FaComment, FaExternalLinkAlt, FaMusic, FaPlay } from "react-icons/fa";
 
 interface ReelItem {
@@ -104,7 +104,8 @@ function ReelCard({ reel, index, activeHover, setActiveHover }: {
       rel="noopener noreferrer"
       onMouseEnter={() => setActiveHover(hoverId)}
       onMouseLeave={() => setActiveHover(null)}
-      className="flex-shrink-0 w-[280px] md:w-[320px] lg:w-[340px] group relative flex flex-col justify-between bg-zinc-950 border border-white/10 rounded-2xl overflow-hidden cursor-pointer hover:border-spectal-red/50 transition-all duration-500 shadow-2xl"
+      // cursor-none is important here so the default pointer doesn't show over our custom DRAG cursor
+      className="flex-shrink-0 w-[280px] md:w-[320px] lg:w-[340px] group relative flex flex-col justify-between bg-zinc-950 border border-white/10 rounded-2xl overflow-hidden hover:border-spectal-red/50 transition-all duration-500 shadow-2xl cursor-none"
     >
       {/* Reel Header (Location & Reel Tag) */}
       <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 text-[10px] font-mono tracking-widest uppercase text-white/60 bg-black/60 z-20">
@@ -159,7 +160,8 @@ function ReelCard({ reel, index, activeHover, setActiveHover }: {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 15 }}
               transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute inset-0 bg-black/88 backdrop-blur-md p-5 flex flex-col justify-between z-30"
+              // Keep pointer-events-none so the custom cursor tracks seamlessly without glitching on nested hovers
+              className="absolute inset-0 bg-black/88 backdrop-blur-md p-5 flex flex-col justify-between z-30 pointer-events-none"
             >
               {/* Overlay Header: Instagram User Pill */}
               <div className="flex items-center justify-between border-b border-white/10 pb-3">
@@ -192,8 +194,8 @@ function ReelCard({ reel, index, activeHover, setActiveHover }: {
                     <FaComment className="text-xs" /> {reel.comments}
                   </span>
                 </div>
-                <span className="text-[9px] uppercase tracking-widest text-spectal-mint font-bold group-hover:underline">
-                  WATCH REEL ON INSTAGRAM ↗
+                <span className="text-[9px] uppercase tracking-widest text-spectal-mint font-bold">
+                  WATCH REEL ↗
                 </span>
               </div>
             </motion.div>
@@ -206,6 +208,23 @@ function ReelCard({ reel, index, activeHover, setActiveHover }: {
 
 export default function SocialFeed() {
   const [activeHover, setActiveHover] = useState<string | null>(null);
+  const [isHoveringMarquee, setIsHoveringMarquee] = useState(false);
+
+  // Framer Motion Custom Cursor Setup
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
+  const springConfig = { damping: 25, stiffness: 250, mass: 0.5 };
+  const cursorXSpring = useSpring(cursorX, springConfig);
+  const cursorYSpring = useSpring(cursorY, springConfig);
+
+  useEffect(() => {
+    const moveCursor = (e: MouseEvent) => {
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
+    };
+    window.addEventListener("mousemove", moveCursor);
+    return () => window.removeEventListener("mousemove", moveCursor);
+  }, [cursorX, cursorY]);
 
   // Triplicated array for seamless infinite marquee loop with 4 items
   const marqueeReels = [...INSTAGRAM_REELS, ...INSTAGRAM_REELS, ...INSTAGRAM_REELS];
@@ -213,6 +232,22 @@ export default function SocialFeed() {
   return (
     <section className="w-full bg-black text-white py-24 md:py-32 border-t border-white/10 relative z-20 pointer-events-auto overflow-hidden">
       
+      {/* Custom DRAG Cursor */}
+      <motion.div
+        className="fixed top-0 left-0 w-24 h-24 bg-white rounded-full flex items-center justify-center pointer-events-none z-[9999] shadow-2xl mix-blend-normal"
+        style={{
+          x: cursorXSpring,
+          y: cursorYSpring,
+          translateX: "-50%",
+          translateY: "-50%",
+          scale: isHoveringMarquee ? 1 : 0,
+          opacity: isHoveringMarquee ? 1 : 0,
+        }}
+        transition={{ scale: { duration: 0.2 }, opacity: { duration: 0.2 } }}
+      >
+        <span className="text-black text-xs font-bold tracking-[0.2em] font-sans">DRAG</span>
+      </motion.div>
+
       {/* Ambient Red & Mint Lighting */}
       <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-spectal-red/5 rounded-full blur-[160px] pointer-events-none z-0" />
 
@@ -251,7 +286,11 @@ export default function SocialFeed() {
       </div>
 
       {/* Infinite Marquee Container of Playable Video Reels */}
-      <div className="w-full overflow-hidden relative select-none">
+      <div 
+        className="w-full overflow-hidden relative select-none cursor-none"
+        onMouseEnter={() => setIsHoveringMarquee(true)}
+        onMouseLeave={() => setIsHoveringMarquee(false)}
+      >
         
         {/* Left & Right Vignette Fades */}
         <div className="absolute top-0 bottom-0 left-0 w-24 bg-gradient-to-r from-black to-transparent z-30 pointer-events-none" />
