@@ -378,10 +378,13 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Section: Leadership & Team (Fancy 3D Interactive Cards) */}
+        {/* Section: Leadership & Team */}
         <FancyTeamCards />
 
-        {/* Section 4: Registration Portal (Silence) */}
+        {/* Instagram Hover Cards */}
+        <SocialFeed />
+
+        {/* Section 4: Registration & Contact Portal */}
         <section id="silence" className="w-full flex flex-col items-center justify-center bg-black pointer-events-auto relative z-20 py-16 md:py-24 border-t border-white/5">
           <div className="max-w-xl w-full mx-auto px-6 text-center flex flex-col items-center select-none">
             <span className="text-xs font-mono tracking-[0.4em] text-spectal-red mb-6">
@@ -430,7 +433,6 @@ export default function Home() {
           </div>
         </section>
 
-        <SocialFeed />
         <RotatingArch />
         <Footer />
       </div>
