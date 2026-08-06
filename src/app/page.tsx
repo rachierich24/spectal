@@ -9,6 +9,7 @@ import Footer from "@/components/layout/Footer";
 import RotatingArch from "@/components/ui/RotatingArch";
 import { CLIENT_LOGOS } from "@/components/ui/ClientLogos";
 import SocialFeed from "@/components/ui/SocialFeed";
+import FancyTeamCards from "@/components/ui/FancyTeamCards";
 
 const MANIFESTO = ["WE", "DON'T", "JUST", "BOOK", "ARTISTS.", "WE", "BUILD", "CAREERS."];
 
@@ -262,8 +263,8 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Section 4: Project Showcase — Editorial Project Grid */}
-        <section id="showcase" className="w-full min-h-screen py-24 flex items-center justify-center relative z-20 pointer-events-auto border-t border-white/5">
+        {/* Section 2: Services / What We Do */}
+        <section id="showcase" className="w-full py-16 md:py-24 flex items-center justify-center relative z-20 pointer-events-auto border-t border-white/5 bg-black">
           <div className="max-w-7xl w-full mx-auto px-6 md:px-12 flex flex-col select-none">
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
               <div className="flex flex-col items-start">
@@ -303,28 +304,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div
-                data-interactive="true"
-                data-cursor="EXPLORE"
-                onMouseEnter={() => setHoveredProjectImage("/event_mainstage.png")}
-                onMouseLeave={() => setHoveredProjectImage(null)}
-                className="py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 group cursor-pointer hover:bg-white/[0.02] px-6 transition-all duration-300 pointer-events-auto"
-              >
-                <div className="flex flex-col gap-4 w-full md:w-auto">
-                  <div className="flex items-center gap-8">
-                    <span className="text-sm font-mono text-white">02 / SERVICE</span>
-                    <h3 className="text-xl md:text-2xl font-boldonse font-medium text-white tracking-wide group-hover:text-spectal-mint transition-colors duration-500">EVENT PRODUCTION</h3>
-                  </div>
-                  {/* Mobile-only inline preview image */}
-                  <div className="w-full aspect-[16/10] rounded-xl overflow-hidden md:hidden border border-white/10 relative">
-                    <img src="/event_mainstage.png" alt="Event Production" className="w-full h-full object-cover" />
-                  </div>
-                </div>
-                <div className="flex flex-col md:items-end gap-2 max-w-lg">
-                  <span className="text-sm text-spectal-mint font-light">End-to-end production of live concerts and campus festivals. We manage logistics, stage, artist booking, and crowd experience across India.</span>
-                  <span className="text-[10px] font-mono text-spectal-mint/40 uppercase tracking-wider">200+ Events // 30+ Cities // College Festivals // Concerts</span>
-                </div>
-              </div>
+
 
               <div
                 data-interactive="true"
@@ -352,10 +332,9 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Section 2: Energy — Brand Manifesto over WebGL wave */}
-        <section id="energy" className="w-full min-h-[120vh] relative pointer-events-none">
-          {/* Sticky frame — stays pinned while user scrolls through the wave */}
-          <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden">
+        {/* Section 3: Brand Manifesto & Statistics */}
+        <section id="stats" className="w-full py-16 md:py-24 flex flex-col items-center justify-center relative bg-black border-t border-white/5 z-20 pointer-events-auto">
+          <div className="max-w-7xl w-full mx-auto px-6 md:px-12 flex flex-col items-center">
 
             {/* Label */}
             <motion.span
@@ -363,20 +342,20 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              className="text-[10px] font-mono tracking-[0.45em] text-spectal-red/70 uppercase mb-10 select-none"
+              className="text-[10px] font-mono tracking-[0.45em] text-spectal-red/70 uppercase mb-8 select-none"
             >
               // OUR BELIEF
             </motion.span>
 
             {/* Word-by-word manifesto */}
-            <h2 className="max-w-4xl mx-auto px-6 text-center text-[7vw] md:text-[5.5vw] lg:text-[4.8vw] font-black uppercase leading-[1.1] tracking-tighter select-none">
+            <h2 className="max-w-4xl mx-auto px-6 text-center text-3xl md:text-5xl font-black uppercase leading-[1.2] tracking-tighter select-none mb-16">
               {MANIFESTO.map((word, i) => (
                 <motion.span
                   key={i}
-                  initial={{ opacity: 0, y: 32, filter: "blur(10px)" }}
+                  initial={{ opacity: 0, y: 24, filter: "blur(8px)" }}
                   whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                   viewport={{ once: true, margin: "-8%" }}
-                  transition={{ duration: 0.65, delay: i * 0.09, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 0.65, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
                   className={`inline-block mr-[0.28em] ${i >= 6 ? "text-spectal-mint drop-shadow-[0_0_30px_rgba(221,236,196,0.3)]" : "text-white"}`}
                 >
                   {word}
@@ -389,121 +368,21 @@ export default function Home() {
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-5%" }}
-              transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-16 mt-16 md:mt-20 border-t border-white/10 pt-10 pointer-events-auto"
+              transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-16 w-full border-t border-white/10 pt-12 pointer-events-auto"
             >
               {STATS.map((s) => (
                 <CountUp key={s.label} target={s.target} suffix={s.suffix} label={s.label} />
               ))}
             </motion.div>
-
-            {/* Artist name marquee */}
-            <div className="absolute bottom-0 left-0 right-0 py-3 bg-spectal-mint/5 border-t border-spectal-mint/10 overflow-hidden flex select-none">
-              <div className="animate-marquee whitespace-nowrap flex items-center gap-8 pr-8">
-                {ARTIST_MARQUEE.map((name, i) => (
-                  <span key={i} className="text-[11px] font-mono uppercase tracking-[0.3em] text-spectal-mint/70">
-                    {name} {i < ARTIST_MARQUEE.length - 1 && <span className="mx-3 text-white/20">◆</span>}
-                  </span>
-                ))}
-              </div>
-            </div>
-
           </div>
         </section>
 
-        {/* Section 3: Impact — Interactive Event Gallery */}
-        <section id="impact" className="w-full min-h-screen py-24 flex items-center justify-center relative z-20 pointer-events-auto">
-          <div className="max-w-7xl w-full mx-auto px-6 md:px-12 flex flex-col select-none">
-            <div className="flex flex-col items-start mb-16">
-              <span className="text-xs font-mono tracking-[0.4em] text-spectal-red mb-3">
-                03 // OUR EVENTS
-              </span>
-              <h2 className="text-xl md:text-[1.8rem] lg:text-[2.2rem] font-boldonse font-medium tracking-tight text-white leading-[1.2] uppercase">
-                EVENTS &amp; <span className="text-spectal-mint font-serif italic font-light">PRODUCTIONS</span>
-              </h2>
-              <p className="text-xs font-mono text-white/40 mt-4 tracking-wider uppercase">
-                [ From college campuses to mainstage arenas ]
-              </p>
-            </div>
+        {/* Section: Leadership & Team (Fancy 3D Interactive Cards) */}
+        <FancyTeamCards />
 
-            {/* Bento Grid layout */}
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 w-full">
-              {/* Image 1: Mainstage (7-col card) */}
-              <div
-                data-cursor="VIEW"
-                className="md:col-span-7 group relative overflow-hidden bg-white/5 border border-white/10 rounded-2xl h-[280px] sm:h-[340px] md:h-[400px] transition-all duration-500 hover:border-spectal-red/40 hover:shadow-[0_0_30px_rgba(201,73,61,0.1)]"
-              >
-                <div
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105"
-                  style={{ backgroundImage: `url('/event_mainstage.png')` }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-                <div className="absolute bottom-6 left-6 right-6">
-                  <span className="text-[10px] font-mono tracking-widest text-spectal-red uppercase block mb-1">Live Concert</span>
-                  <h3 className="text-xl font-boldonse font-medium text-white tracking-wide">Mainstage Live Productions</h3>
-                  <p className="text-xs text-spectal-mint/70 mt-2 font-light max-w-md">High-energy concert productions featuring India's top independent artists, managed end-to-end by Spectal.</p>
-                </div>
-              </div>
-
-              {/* Image 2: Spatial (5-col card) */}
-              <div
-                data-cursor="VIEW"
-                className="md:col-span-5 group relative overflow-hidden bg-white/5 border border-white/10 rounded-2xl h-[280px] sm:h-[340px] md:h-[400px] transition-all duration-500 hover:border-spectal-mint/40 hover:shadow-[0_0_30px_rgba(221,236,196,0.1)]"
-              >
-                <div
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105"
-                  style={{ backgroundImage: `url('/event_spatial.png')` }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-                <div className="absolute bottom-6 left-6 right-6">
-                  <span className="text-[10px] font-mono tracking-widest text-spectal-mint uppercase block mb-1">Campus Festival</span>
-                  <h3 className="text-xl font-boldonse font-medium text-white tracking-wide">College Campus Festivals</h3>
-                  <p className="text-xs text-spectal-mint/70 mt-2 font-light">End-to-end campus festival management bringing popular artists to college audiences across 30+ cities.</p>
-                </div>
-              </div>
-
-              {/* Image 3: Hackathon (5-col card) */}
-              <div
-                data-cursor="VIEW"
-                className="md:col-span-5 group relative overflow-hidden bg-white/5 border border-white/10 rounded-2xl h-[240px] sm:h-[300px] md:h-[350px] transition-all duration-500 hover:border-spectal-mint/40 hover:shadow-[0_0_30px_rgba(221,236,196,0.1)]"
-              >
-                <div
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105"
-                  style={{ backgroundImage: `url('/event_hackathon.png')` }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-                <div className="absolute bottom-6 left-6 right-6">
-                  <span className="text-[10px] font-mono tracking-widest text-spectal-mint uppercase block mb-1">Brand Activation</span>
-                  <h3 className="text-xl font-boldonse font-medium text-white tracking-wide">Brand &amp; Artist Collabs</h3>
-                  <p className="text-xs text-spectal-mint/70 mt-2 font-light">Custom branded experiences connecting India's young brands with engaged audiences through live event integrations.</p>
-                </div>
-              </div>
-
-              {/* Image 4: Networking (7-col card) */}
-              <div
-                data-cursor="VIEW"
-                className="md:col-span-7 group relative overflow-hidden bg-white/5 border border-white/10 rounded-2xl h-[240px] sm:h-[300px] md:h-[350px] transition-all duration-500 hover:border-spectal-red/40 hover:shadow-[0_0_30px_rgba(201,73,61,0.1)]"
-              >
-                <div
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105"
-                  style={{ backgroundImage: `url('/event_networking.png')` }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-                <div className="absolute bottom-6 left-6 right-6">
-                  <span className="text-[10px] font-mono tracking-widest text-spectal-red uppercase block mb-1">Networking</span>
-                  <h3 className="text-xl font-boldonse font-medium text-white tracking-wide">Industry Networking Events</h3>
-                  <p className="text-xs text-spectal-mint/70 mt-2 font-light">VIP mixers and industry forums connecting artists, label heads, brand managers, and event directors.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Section 5: Legacy — scroll spacer for WebGL galaxy */}
-        <section id="legacy" className="w-full min-h-screen pointer-events-none" />
-
-        {/* Section 7: Registration Portal (Silence) */}
-        <section id="silence" className="w-full min-h-screen lg:h-screen flex flex-col items-center justify-center bg-black pointer-events-none relative z-20 py-16 lg:py-24">
+        {/* Section 4: Registration Portal (Silence) */}
+        <section id="silence" className="w-full flex flex-col items-center justify-center bg-black pointer-events-auto relative z-20 py-16 md:py-24 border-t border-white/5">
           <div className="max-w-xl w-full mx-auto px-6 text-center flex flex-col items-center select-none">
             <span className="text-xs font-mono tracking-[0.4em] text-spectal-red mb-6">
               07 // CONTACT

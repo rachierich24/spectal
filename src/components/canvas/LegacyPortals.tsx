@@ -8,8 +8,8 @@ import { scrollStore } from "@/lib/scrollStore";
 
 const TEAM = [
   {
-    position: [-3, 0, 0] as [number, number, number],
-    rotation: [0, Math.PI / 6, 0] as [number, number, number],
+    position: [-3.2, 0, 0] as [number, number, number],
+    rotation: [0, 0, 0] as [number, number, number],
     title: "HIMANSHU CHOWDHRY",
     subtitle: "FOUNDER",
     color: "#C9493D",           // Spectal Red
@@ -17,7 +17,7 @@ const TEAM = [
     about: "Founder of Spectal Management. Built India's leading boutique talent & event agency from New Delhi, working with 50+ artists across music and comedy.",
   },
   {
-    position: [0, 0, 1] as [number, number, number],
+    position: [0, 0, 0] as [number, number, number],
     rotation: [0, 0, 0] as [number, number, number],
     title: "SOURAV YADAV",
     subtitle: "LIVE EVENTS LEAD",
@@ -26,8 +26,8 @@ const TEAM = [
     about: "Heads live event operations at Spectal. Manages end-to-end concert and campus festival production across 30+ cities.",
   },
   {
-    position: [3, 0, 0] as [number, number, number],
-    rotation: [0, -Math.PI / 6, 0] as [number, number, number],
+    position: [3.2, 0, 0] as [number, number, number],
+    rotation: [0, 0, 0] as [number, number, number],
     title: "SPECTAL TEAM",
     subtitle: "CREATIVE & OPS",
     color: "#1a1a2e",           // Deep indigo
@@ -43,12 +43,12 @@ export default function LegacyPortals() {
     const scrollProgress = scrollStore.progress;
 
     if (groupRef.current) {
-      const isVisible = scrollProgress > 4.2 && scrollProgress < 5.7;
+      const isVisible = scrollProgress > 0.5 && scrollProgress < 4.0;
       groupRef.current.visible = isVisible;
 
       if (!isVisible) return;
 
-      const targetY = (4.7 - scrollProgress) * 15;
+      const targetY = (2.2 - scrollProgress) * 10;
       groupRef.current.position.y = THREE.MathUtils.lerp(
         groupRef.current.position.y,
         targetY,
