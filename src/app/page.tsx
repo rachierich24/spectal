@@ -166,107 +166,24 @@ export default function Home() {
       <div className="relative w-full z-10 flex flex-col pointer-events-none">
 
         {/* Section 1: Arrival Hero Section */}
-        <section id="arrival" className="w-full h-screen flex items-center justify-center pointer-events-none relative overflow-hidden bg-black">
+        <section id="arrival" className="w-full h-screen flex items-center justify-center relative overflow-hidden bg-black mt-20 md:mt-24">
 
-          {/* Background Video with subtle parallax and zoom */}
-          <motion.div
-            style={{ x: videoX, y: videoY }}
-            className="absolute inset-0 w-[108%] h-[108%] -left-[4%] -top-[4%] z-0 pointer-events-none opacity-40 select-none overflow-hidden"
-          >
+          {/* Background Video */}
+          <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
             <video
               autoPlay
               loop
               muted
               playsInline
-              className="w-full h-full object-cover animate-video-zoom"
+              className="w-full h-full object-cover"
             >
-              <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-glowing-plexus-connections-background-loop-33319-large.mp4" type="video/mp4" />
-              <source src="/loader.mp4" type="video/mp4" />
+              <source src="/horizontalformat.mp4" media="(min-width: 768px)" type="video/mp4" />
+              <source src="/verticalformat.mp4" media="(max-width: 767px)" type="video/mp4" />
             </video>
-          </motion.div>
-
-          {/* Cinematic Overlay mask */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black z-0 pointer-events-none" />
-
-          {/* Grid Layout Container */}
-          <div className="max-w-7xl w-full mx-auto px-6 md:px-12 flex flex-col lg:flex-row justify-between items-start lg:items-end h-full select-none pt-32 pb-32 relative z-10 gap-8 lg:gap-12">
-
-            {/* Left Column: Huge bold headline with blur to sharp entry */}
-            <motion.div
-              style={{ x: headlineX, y: headlineY }}
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-              className="flex flex-col items-start w-full lg:w-[62%] xl:w-[65%] lg:max-w-[760px] pointer-events-auto mt-auto mb-8 lg:mb-0"
-            >
-              <motion.span
-                variants={wordVariants}
-                className="text-xs font-mono tracking-[0.4em] text-spectal-red mb-4 block uppercase"
-              >
-                [ SPECTAL MANAGEMENT ]
-              </motion.span>
-
-              <h1 className="text-3xl sm:text-4xl md:text-[3.2rem] lg:text-[3.8rem] xl:text-[4.2rem] font-medium tracking-normal text-white leading-[1.4] font-boldonse uppercase">
-                <motion.span variants={wordVariants} className="block">WE MANAGE</motion.span>
-                <motion.span variants={wordVariants} className="block">EXCEPTIONAL TALENT</motion.span>
-                <motion.span variants={wordVariants} className="block">&amp; PRODUCE</motion.span>
-                <motion.span
-                  variants={wordVariants}
-                  className="block text-transparent bg-clip-text bg-gradient-to-r from-spectal-red to-spectal-mint drop-shadow-[0_0_25px_rgba(221,236,196,0.25)]"
-                >
-                  UNFORGETTABLE
-                </motion.span>
-                <motion.span
-                  variants={wordVariants}
-                  className="block text-transparent bg-clip-text bg-gradient-to-r from-spectal-red to-spectal-mint drop-shadow-[0_0_25px_rgba(221,236,196,0.25)]"
-                >
-                  EVENTS.
-                </motion.span>
-              </h1>
-            </motion.div>
-
-            {/* Right Column: Supporting text & CTAs */}
-            <div className="flex flex-col items-start lg:items-end text-left lg:text-right w-full lg:w-[33%] xl:w-[30%] lg:max-w-[320px] xl:max-w-[380px] pointer-events-auto lg:mt-auto mb-16 lg:mb-0">
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] as const, delay: 0.7 }}
-                className="text-sm sm:text-base text-white/70 font-light leading-relaxed mb-6 lg:max-w-[340px]"
-              >
-                Spectal is a boutique agency curating 360° talent management, live concerts, college festivals, and brand activations across India.
-              </motion.p>
-
-              {/* Buttons with premium scale & shadow effects */}
-              <motion.div
-                variants={buttonVariants}
-                initial="hidden"
-                animate="visible"
-                className="flex items-center gap-4 w-full justify-start lg:justify-end"
-              >
-                {/* Primary: Glass button with glow */}
-                <motion.a
-                  href="#contact"
-                  whileHover={{ scale: 1.05, boxShadow: "0 0 25px rgba(221,236,196,0.35)", background: "rgba(255,255,255,0.12)" }}
-                  whileTap={{ scale: 0.98 }}
-                  data-interactive="true"
-                  className="px-6 py-3.5 bg-white/5 backdrop-blur-md border border-white/10 text-white text-xs font-mono tracking-widest uppercase transition-all duration-300 rounded-full font-bold shadow-lg"
-                >
-                  Book With Us
-                </motion.a>
-
-                {/* Secondary: Transparent outline button */}
-                <motion.a
-                  href="#showcase"
-                  whileHover={{ scale: 1.05, borderColor: "rgba(255,255,255,0.8)", background: "rgba(255,255,255,0.05)" }}
-                  whileTap={{ scale: 0.98 }}
-                  data-interactive="true"
-                  className="px-6 py-3.5 border border-white/20 text-white text-xs font-mono tracking-widest uppercase transition-all duration-300 rounded-full font-bold"
-                >
-                  View Services
-                </motion.a>
-              </motion.div>
-            </div>
           </div>
+
+          {/* Gradient Overlay for bottom text visibility */}
+          <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black via-black/60 to-transparent z-10 pointer-events-none" />
 
           {/* Client Logos Ticker - Staggered fade in */}
           <motion.div
