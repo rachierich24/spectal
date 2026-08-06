@@ -29,10 +29,10 @@ export default function Header() {
       transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
       className="fixed top-0 left-0 w-full z-50 pt-6 pointer-events-none"
     >
-      <div className="max-w-[1600px] mx-auto px-6 md:px-12 flex justify-between items-center relative">
+      <div className="max-w-[1600px] mx-auto px-6 md:px-12 flex justify-center md:justify-between items-center relative">
 
         {/* Left: Empty div to balance flexbox */}
-        <div className="flex-1"></div>
+        <div className="flex-1 hidden md:block"></div>
 
         {/* Center: Brand Logo */}
         <div className="flex-shrink-0 flex justify-center items-center pointer-events-auto">
