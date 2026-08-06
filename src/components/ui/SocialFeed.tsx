@@ -24,71 +24,57 @@ const INSTAGRAM_REELS: ReelItem[] = [
     id: "01",
     location: "New Delhi, DL",
     year: "2025",
-    title: "Mainstage Arena Showreel",
-    videoSrc: "/verticalformat.mp4",
-    poster: "/feed_delhi.png",
-    caption: "20,000+ voices screaming as one. Unfiltered mainstage energy from the capital. 🖤 #SpectalLive",
-    likes: "42.8K",
-    comments: "842",
-    views: "185K",
-    audioTrack: "Ritviz • Udd Gaye (Live Spectal Edit)",
-    url: "https://www.instagram.com/spectal.management/",
+    title: "Spectal Mainstage Experience",
+    videoSrc: "/real_reel_00001.mp4",
+    poster: "",
+    caption: "Feeling the heat on the mainstage! What a night this was with 20k+ screaming voices. Pure magic. ✨🚀",
+    likes: "12.4K",
+    comments: "342",
+    views: "215K",
+    audioTrack: "Original Audio • Spectal Live",
+    url: "https://www.instagram.com/reel/DYpOev-IoD4/?igsh=dzJ0dnQ3YW53c2Zv",
   },
   {
     id: "02",
     location: "Mumbai, MH",
     year: "2024",
-    title: "Bandra Jazz & Nightclub",
-    videoSrc: "/loader.mp4",
-    poster: "/feed_mumbai.png",
-    caption: "Intimate late-night jazz sessions after dark in Bandra. Pure soul and rhythm.",
-    likes: "28.2K",
-    comments: "418",
-    views: "94K",
-    audioTrack: "Nikhil D'Souza • After Dark Live",
-    url: "https://www.instagram.com/spectal.management/",
+    title: "After Dark & Jazz Nights",
+    videoSrc: "/real_reel_00002.mp4",
+    poster: "",
+    caption: "Intimate sessions in Bandra. When the lights go down, the groove comes alive. 🎷",
+    likes: "8.2K",
+    comments: "211",
+    views: "89K",
+    audioTrack: "Original Audio • Late Night Grooves",
+    url: "https://www.instagram.com/reel/DW82kJcE29p/?igsh=NGNiNXhvZnN5OTky",
   },
   {
     id: "03",
     location: "Bengaluru, KA",
     year: "2024",
     title: "BLR Festival Aftermovie",
-    videoSrc: "/verticalformat.mp4",
-    poster: "/feed_bengaluru.png",
-    caption: "Lights, lasers, and 30+ headliners taking over Bengaluru. What a weekend! 🚀",
-    likes: "51.5K",
-    comments: "1.2K",
-    views: "320K",
-    audioTrack: "Nucleya • Bass Raja (Arena Mix)",
-    url: "https://www.instagram.com/spectal.management/",
+    videoSrc: "/real_reel_00003.mp4",
+    poster: "",
+    caption: "Lasers, lights, and non-stop energy in Bengaluru. Thank you to everyone who made this special!",
+    likes: "15.1K",
+    comments: "530",
+    views: "340K",
+    audioTrack: "Original Audio • Festival Mix",
+    url: "https://www.instagram.com/reel/DOGurP4D5YI/?igsh=NG95cXF0MGFwcmJu",
   },
   {
     id: "04",
     location: "Goa, GA",
     year: "2023",
-    title: "Sunset Beach Fest Reel",
-    videoSrc: "/horizontalformat.mp4",
-    poster: "/feed_goa.png",
-    caption: "Golden hour beats by the ocean. Bringing festival energy to Goa's coastline.",
-    likes: "19.9K",
-    comments: "340",
-    views: "88K",
-    audioTrack: "When Chai Met Toast • Yellow Paper Daisy",
-    url: "https://www.instagram.com/spectal.management/",
-  },
-  {
-    id: "05",
-    location: "Pune, MH",
-    year: "2023",
-    title: "Campus Fest Mainstage",
-    videoSrc: "/verticalformat.mp4",
-    poster: "/feed_pune.png",
-    caption: "College festival mainstage packed to maximum capacity. Gen-Z energy at its peak!",
-    likes: "33.3K",
-    comments: "612",
-    views: "145K",
-    audioTrack: "Seedhe Maut • Nayaab Live Tour",
-    url: "https://www.instagram.com/spectal.management/",
+    title: "Sunset Sessions by the Beach",
+    videoSrc: "/real_reel_00004.mp4",
+    poster: "",
+    caption: "Golden hour beats. Bringing the ultimate festival vibes straight to the coastline.",
+    likes: "9.5K",
+    comments: "185",
+    views: "112K",
+    audioTrack: "Original Audio • Beach Vibes",
+    url: "https://www.instagram.com/reel/DNqNglJo_gR/?igsh=a3Qzd3EwZTZ0emJ6",
   },
 ];
 
@@ -132,7 +118,7 @@ function ReelCard({ reel, index, activeHover, setActiveHover }: {
       </div>
 
       {/* Playable Video Reel Container */}
-      <div className="relative w-full aspect-[9/16] overflow-hidden bg-zinc-900">
+      <div className="relative w-full aspect-[9/16] overflow-hidden bg-zinc-900 flex items-center justify-center">
         <video
           ref={videoRef}
           src={reel.videoSrc}
@@ -221,8 +207,8 @@ function ReelCard({ reel, index, activeHover, setActiveHover }: {
 export default function SocialFeed() {
   const [activeHover, setActiveHover] = useState<string | null>(null);
 
-  // Duplicated array for seamless infinite marquee loop
-  const marqueeReels = [...INSTAGRAM_REELS, ...INSTAGRAM_REELS];
+  // Triplicated array for seamless infinite marquee loop with 4 items
+  const marqueeReels = [...INSTAGRAM_REELS, ...INSTAGRAM_REELS, ...INSTAGRAM_REELS];
 
   return (
     <section className="w-full bg-black text-white py-24 md:py-32 border-t border-white/10 relative z-20 pointer-events-auto overflow-hidden">
@@ -244,8 +230,9 @@ export default function SocialFeed() {
             <span className="text-xs font-mono tracking-[0.4em] text-spectal-red mb-4 uppercase block">
               // REELS &amp; LIVE SHOWREELS
             </span>
-            <h2 className="text-4xl md:text-6xl font-boldonse font-medium tracking-tight leading-[1.0] text-white uppercase">
-              ENTER THE WORLD WE <span className="text-spectal-mint font-serif italic font-light">CREATE</span> AFTER DARK
+            <h2 className="text-4xl md:text-6xl font-boldonse font-medium tracking-tight leading-[1.1] md:leading-[1.15] text-white uppercase">
+              ENTER THE WORLD WE <br className="hidden md:block" />
+              <span className="text-spectal-mint font-serif italic font-light">CREATE</span> AFTER DARK
             </h2>
           </motion.div>
 
