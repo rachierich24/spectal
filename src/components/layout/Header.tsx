@@ -39,7 +39,7 @@ export default function Header() {
           <Link
             href="/"
             data-interactive="true"
-            className="group inline-flex flex-row items-center gap-3 transition-all duration-300 ease-out"
+            className="group inline-flex flex-row items-center gap-2 transition-all duration-300 ease-out"
           >
             <img 
               src="/spectallogo.jpg" 
@@ -49,7 +49,7 @@ export default function Header() {
             <img 
               src="/logotype-red-transparent-bg.svg" 
               alt="Spectal Logotype" 
-              className="h-8 md:h-10 w-auto object-contain ml-3 group-hover:opacity-80 transition-opacity duration-300"
+              className="h-8 md:h-10 w-auto object-contain group-hover:opacity-80 transition-opacity duration-300"
             />
           </Link>
         </div>
