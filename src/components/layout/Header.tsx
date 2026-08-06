@@ -46,14 +46,11 @@ export default function Header() {
               alt="Spectal" 
               className="h-9 md:h-11 w-auto object-contain rounded-[4px] group-hover:scale-105 transition-transform duration-300"
             />
-            <div className="flex items-center text-2xl md:text-3xl font-bold tracking-[0.2em] leading-none ml-1 mt-1">
-              <span className="inline-block text-spectal-red group-hover:-translate-y-0.5 transition-transform duration-300">
-                SPEC
-              </span>
-              <span className="inline-block text-spectal-mint group-hover:translate-y-0.5 transition-transform duration-300">
-                TAL
-              </span>
-            </div>
+            <img 
+              src="/logotype-red-transparent-bg.svg" 
+              alt="Spectal Logotype" 
+              className="h-5 md:h-7 w-auto object-contain ml-3 group-hover:opacity-80 transition-opacity duration-300"
+            />
           </Link>
         </div>
 
