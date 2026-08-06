@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
 
 // Inline SVG Icons (Zero dependency, fast & reliable)
 function IconInstagram({ className = "w-4 h-4" }: { className?: string }) {
@@ -72,71 +72,57 @@ const INSTAGRAM_REELS: ReelItem[] = [
     id: "01",
     location: "New Delhi, DL",
     year: "2025",
-    title: "Mainstage Arena Showreel",
-    videoSrc: "/verticalformat.mp4",
-    poster: "/feed_delhi.png",
-    caption: "20,000+ voices screaming as one. Unfiltered mainstage energy from the capital. 🖤 #SpectalLive",
-    likes: "42.8K",
-    comments: "842",
-    views: "185K",
-    audioTrack: "Ritviz • Udd Gaye (Live Spectal Edit)",
-    url: "https://www.instagram.com/spectal.management/",
+    title: "Spectal Mainstage Experience",
+    videoSrc: "/real_reel_00001.mp4",
+    poster: "",
+    caption: "Feeling the heat on the mainstage! What a night this was with 20k+ screaming voices. Pure magic. ✨🚀",
+    likes: "12.4K",
+    comments: "342",
+    views: "215K",
+    audioTrack: "Original Audio • Spectal Live",
+    url: "https://www.instagram.com/reel/DYpOev-IoD4/?igsh=dzJ0dnQ3YW53c2Zv",
   },
   {
     id: "02",
     location: "Mumbai, MH",
     year: "2024",
-    title: "Bandra Jazz & Nightclub",
-    videoSrc: "/loader.mp4",
-    poster: "/feed_mumbai.png",
-    caption: "Intimate late-night jazz sessions after dark in Bandra. Pure soul and rhythm.",
-    likes: "28.2K",
-    comments: "418",
-    views: "94K",
-    audioTrack: "Nikhil D'Souza • After Dark Live",
-    url: "https://www.instagram.com/spectal.management/",
+    title: "After Dark & Jazz Nights",
+    videoSrc: "/real_reel_00002.mp4",
+    poster: "",
+    caption: "Intimate sessions in Bandra. When the lights go down, the groove comes alive. 🎷",
+    likes: "8.2K",
+    comments: "211",
+    views: "89K",
+    audioTrack: "Original Audio • Late Night Grooves",
+    url: "https://www.instagram.com/reel/DW82kJcE29p/?igsh=NGNiNXhvZnN5OTky",
   },
   {
     id: "03",
     location: "Bengaluru, KA",
     year: "2024",
     title: "BLR Festival Aftermovie",
-    videoSrc: "/verticalformat.mp4",
-    poster: "/feed_bengaluru.png",
-    caption: "Lights, lasers, and 30+ headliners taking over Bengaluru. What a weekend! 🚀",
-    likes: "51.5K",
-    comments: "1.2K",
-    views: "320K",
-    audioTrack: "Nucleya • Bass Raja (Arena Mix)",
-    url: "https://www.instagram.com/spectal.management/",
+    videoSrc: "/real_reel_00003.mp4",
+    poster: "",
+    caption: "Lasers, lights, and non-stop energy in Bengaluru. Thank you to everyone who made this special!",
+    likes: "15.1K",
+    comments: "530",
+    views: "340K",
+    audioTrack: "Original Audio • Festival Mix",
+    url: "https://www.instagram.com/reel/DOGurP4D5YI/?igsh=NG95cXF0MGFwcmJu",
   },
   {
     id: "04",
     location: "Goa, GA",
     year: "2023",
-    title: "Sunset Beach Fest Reel",
-    videoSrc: "/horizontalformat.mp4",
-    poster: "/feed_goa.png",
-    caption: "Golden hour beats by the ocean. Bringing festival energy to Goa's coastline.",
-    likes: "19.9K",
-    comments: "340",
-    views: "88K",
-    audioTrack: "When Chai Met Toast • Yellow Paper Daisy",
-    url: "https://www.instagram.com/spectal.management/",
-  },
-  {
-    id: "05",
-    location: "Pune, MH",
-    year: "2023",
-    title: "Campus Fest Mainstage",
-    videoSrc: "/verticalformat.mp4",
-    poster: "/feed_pune.png",
-    caption: "College festival mainstage packed to maximum capacity. Gen-Z energy at its peak!",
-    likes: "33.3K",
-    comments: "612",
-    views: "145K",
-    audioTrack: "Seedhe Maut • Nayaab Live Tour",
-    url: "https://www.instagram.com/spectal.management/",
+    title: "Sunset Sessions by the Beach",
+    videoSrc: "/real_reel_00004.mp4",
+    poster: "",
+    caption: "Golden hour beats. Bringing the ultimate festival vibes straight to the coastline.",
+    likes: "9.5K",
+    comments: "185",
+    views: "112K",
+    audioTrack: "Original Audio • Beach Vibes",
+    url: "https://www.instagram.com/reel/DNqNglJo_gR/?igsh=a3Qzd3EwZTZ0emJ6",
   },
 ];
 
@@ -171,7 +157,8 @@ function ReelCard({
       rel="noopener noreferrer"
       onMouseEnter={() => setActiveHover(hoverId)}
       onMouseLeave={() => setActiveHover(null)}
-      className="flex-shrink-0 w-[280px] md:w-[320px] lg:w-[340px] group relative flex flex-col justify-between bg-zinc-950 border border-white/10 rounded-2xl overflow-hidden cursor-pointer hover:border-spectal-red/50 transition-all duration-500 shadow-2xl"
+      // cursor-none is important here so the default pointer doesn't show over our custom DRAG cursor
+      className="flex-shrink-0 w-[280px] md:w-[320px] lg:w-[340px] group relative flex flex-col justify-between bg-zinc-950 border border-white/10 rounded-2xl overflow-hidden hover:border-spectal-red/50 transition-all duration-500 shadow-2xl cursor-none"
     >
       {/* Reel Header (Location & Reel Tag) */}
       <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 text-[10px] font-mono tracking-widest uppercase text-white/60 bg-black/60 z-20">
@@ -185,7 +172,7 @@ function ReelCard({
       </div>
 
       {/* Playable Video Reel Container */}
-      <div className="relative w-full aspect-[9/16] overflow-hidden bg-zinc-900">
+      <div className="relative w-full aspect-[9/16] overflow-hidden bg-zinc-900 flex items-center justify-center">
         <video
           ref={videoRef}
           src={reel.videoSrc}
@@ -226,7 +213,8 @@ function ReelCard({
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 15 }}
               transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute inset-0 bg-black/88 backdrop-blur-md p-5 flex flex-col justify-between z-30"
+              // Keep pointer-events-none so the custom cursor tracks seamlessly without glitching on nested hovers
+              className="absolute inset-0 bg-black/88 backdrop-blur-md p-5 flex flex-col justify-between z-30 pointer-events-none"
             >
               {/* Overlay Header: Instagram User Pill */}
               <div className="flex items-center justify-between border-b border-white/10 pb-3">
@@ -273,12 +261,45 @@ function ReelCard({
 
 export default function SocialFeed() {
   const [activeHover, setActiveHover] = useState<string | null>(null);
+  const [isHoveringMarquee, setIsHoveringMarquee] = useState(false);
 
-  // Duplicated array for seamless infinite marquee loop
-  const marqueeReels = [...INSTAGRAM_REELS, ...INSTAGRAM_REELS];
+  // Framer Motion Custom Cursor Setup
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
+  const springConfig = { damping: 25, stiffness: 250, mass: 0.5 };
+  const cursorXSpring = useSpring(cursorX, springConfig);
+  const cursorYSpring = useSpring(cursorY, springConfig);
+
+  useEffect(() => {
+    const moveCursor = (e: MouseEvent) => {
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
+    };
+    window.addEventListener("mousemove", moveCursor);
+    return () => window.removeEventListener("mousemove", moveCursor);
+  }, [cursorX, cursorY]);
+
+  // Triplicated array for seamless infinite marquee loop with 4 items
+  const marqueeReels = [...INSTAGRAM_REELS, ...INSTAGRAM_REELS, ...INSTAGRAM_REELS];
 
   return (
     <section className="w-full bg-black text-white py-24 md:py-32 border-t border-white/10 relative z-20 pointer-events-auto overflow-hidden">
+      {/* Custom DRAG Cursor */}
+      <motion.div
+        className="fixed top-0 left-0 w-24 h-24 bg-spectal-red rounded-full flex items-center justify-center pointer-events-none z-[9999] shadow-2xl mix-blend-normal"
+        style={{
+          x: cursorXSpring,
+          y: cursorYSpring,
+          translateX: "-50%",
+          translateY: "-50%",
+          scale: isHoveringMarquee ? 1 : 0,
+          opacity: isHoveringMarquee ? 1 : 0,
+        }}
+        transition={{ scale: { duration: 0.2 }, opacity: { duration: 0.2 } }}
+      >
+        <span className="text-white text-xs font-bold tracking-[0.2em] font-sans">DRAG</span>
+      </motion.div>
+
       {/* Ambient Red & Mint Lighting */}
       <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-spectal-red/5 rounded-full blur-[160px] pointer-events-none z-0" />
 
@@ -295,8 +316,9 @@ export default function SocialFeed() {
             <span className="text-xs font-mono tracking-[0.4em] text-spectal-red mb-4 uppercase block">
               // REELS &amp; LIVE SHOWREELS
             </span>
-            <h2 className="text-4xl md:text-6xl font-boldonse font-medium tracking-tight leading-[1.0] text-white uppercase">
-              ENTER THE WORLD WE <span className="text-spectal-mint font-serif italic font-light">CREATE</span> AFTER DARK
+            <h2 className="text-4xl md:text-6xl font-boldonse font-medium tracking-tight leading-[1.1] md:leading-[1.15] text-white uppercase">
+              ENTER THE WORLD WE <br className="hidden md:block" />
+              <span className="text-spectal-mint font-serif italic font-light">CREATE</span> AFTER DARK
             </h2>
           </motion.div>
 
@@ -314,7 +336,11 @@ export default function SocialFeed() {
       </div>
 
       {/* Infinite Marquee Container of Playable Video Reels */}
-      <div className="w-full overflow-hidden relative select-none">
+      <div 
+        className="w-full overflow-hidden relative select-none cursor-none"
+        onMouseEnter={() => setIsHoveringMarquee(true)}
+        onMouseLeave={() => setIsHoveringMarquee(false)}
+      >
         {/* Left & Right Vignette Fades */}
         <div className="absolute top-0 bottom-0 left-0 w-24 bg-gradient-to-r from-black to-transparent z-30 pointer-events-none" />
         <div className="absolute top-0 bottom-0 right-0 w-24 bg-gradient-to-l from-black to-transparent z-30 pointer-events-none" />
