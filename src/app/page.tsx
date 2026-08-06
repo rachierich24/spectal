@@ -10,6 +10,7 @@ import RotatingArch from "@/components/ui/RotatingArch";
 import { CLIENT_LOGOS } from "@/components/ui/ClientLogos";
 import SocialFeed from "@/components/ui/SocialFeed";
 import FancyTeamCards from "@/components/ui/FancyTeamCards";
+import AboutSection from "@/components/ui/AboutSection";
 
 const MANIFESTO = ["WE", "DON'T", "JUST", "BOOK", "ARTISTS.", "WE", "BUILD", "CAREERS."];
 
@@ -263,13 +264,13 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Section 2: Services / What We Do */}
+        {/* Section 1: Services / What We Do */}
         <section id="showcase" className="w-full py-16 md:py-24 flex items-center justify-center relative z-20 pointer-events-auto border-t border-white/5 bg-black">
           <div className="max-w-7xl w-full mx-auto px-6 md:px-12 flex flex-col select-none">
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
               <div className="flex flex-col items-start">
                 <span className="text-xs font-mono tracking-[0.4em] text-spectal-red mb-3">
-                  04 // SERVICES
+                  01 // SERVICES
                 </span>
                 <h2 className="text-xl md:text-[1.8rem] lg:text-[2.2rem] font-boldonse font-medium tracking-tight text-white leading-[1.2] uppercase">
                   WHAT WE <span className="text-spectal-mint font-serif italic font-light">DO</span>
@@ -315,7 +316,7 @@ export default function Home() {
               >
                 <div className="flex flex-col gap-4 w-full md:w-auto">
                   <div className="flex items-center gap-8">
-                    <span className="text-sm font-mono text-spectal-red">03 / SERVICE</span>
+                    <span className="text-sm font-mono text-spectal-red">02 / SERVICE</span>
                     <h3 className="text-xl md:text-2xl font-boldonse font-medium text-white tracking-wide group-hover:text-spectal-red transition-colors duration-500">BRAND ACTIVATION</h3>
                   </div>
                   {/* Mobile-only inline preview image */}
@@ -331,6 +332,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* Section 2: About — Cultural Manifesto */}
+        <AboutSection />
 
         {/* Section 3: Brand Manifesto & Statistics */}
         <section id="stats" className="w-full py-16 md:py-24 flex flex-col items-center justify-center relative bg-black border-t border-white/5 z-20 pointer-events-auto">
