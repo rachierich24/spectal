@@ -59,20 +59,6 @@ function CountUp({ target, suffix, label }: { target: number; suffix: string; la
 }
 
 export default function Home() {
-  const [hoveredProjectImage, setHoveredProjectImage] = useState<string | null>(null);
-
-  // Motion values for the floating project preview (avoids re-rendering the entire Home page on mouse move!)
-  const previewX = useMotionValue(0);
-  const previewY = useMotionValue(0);
-
-  // Springs for buttery smooth follow animation
-  const previewXSpring = useSpring(previewX, { damping: 25, stiffness: 250, mass: 0.5 });
-  const previewYSpring = useSpring(previewY, { damping: 25, stiffness: 250, mass: 0.5 });
-
-  // Compute offset translations (preview is 256px wide by 160px tall, offset keeps it offset from cursor)
-  const previewTranslateX = useTransform(previewXSpring, (x) => x + 20);
-  const previewTranslateY = useTransform(previewYSpring, (y) => y - 120);
-
   // Mouse position motion values for parallax
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -438,31 +424,6 @@ export default function Home() {
         <Footer />
       </div>
 
-      {/* Floating Reveal on Hover Image Preview for Project Showcase */}
-      <AnimatePresence>
-        {hoveredProjectImage && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8, rotate: -4 }}
-            animate={{
-              opacity: 1,
-              scale: 1.05,
-              rotate: 3,
-            }}
-            style={{
-              x: previewTranslateX,
-              y: previewTranslateY,
-            }}
-            exit={{ opacity: 0, scale: 0.8, rotate: -4 }}
-            transition={{ type: "spring", stiffness: 350, damping: 25 }}
-            className="fixed top-0 left-0 pointer-events-none z-[800] w-64 h-40 bg-white/5 border border-white/20 rounded-2xl overflow-hidden shadow-[0_15px_35px_rgba(0,0,0,0.6)] backdrop-blur-sm will-change-transform"
-          >
-            <div
-              className="w-full h-full bg-cover bg-center"
-              style={{ backgroundImage: `url(${hoveredProjectImage})` }}
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
     </main>
   );
 }

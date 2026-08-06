@@ -39,13 +39,16 @@ export default function Header() {
           <Link
             href="/"
             data-interactive="true"
-            className="group text-3xl md:text-4xl font-bold tracking-[0.2em] leading-none transition-all duration-300 ease-out inline-block"
+            className="group flex items-center gap-3 transition-all duration-300 ease-out inline-block"
           >
             <img 
               src="/spectallogo.jpg" 
               alt="Spectal" 
-              className="h-10 md:h-12 w-auto object-contain rounded-md group-hover:scale-105 transition-transform duration-300"
+              className="h-9 md:h-11 w-auto object-contain rounded-[4px] group-hover:scale-105 transition-transform duration-300"
             />
+            <span className="text-xl md:text-2xl font-black font-sans tracking-[0.25em] text-white group-hover:text-spectal-mint transition-colors duration-300 uppercase mt-1">
+              SPECTAL
+            </span>
           </Link>
         </div>
 

@@ -183,11 +183,11 @@ export default function Footer() {
           }}
           className="mb-2 flex justify-center text-spectal-red drop-shadow-[0_0_15px_rgba(201,73,61,0.3)]"
         >
-          <svg width="100" height="50" viewBox="0 0 100 50" fill="none" className="w-16 md:w-20 h-auto">
-            {/* Geometric Summit star / double chevron */}
-            <path d="M50 5 L85 35 L72 35 L50 16 L28 35 L15 35 Z" fill="#C9493D" />
-            <path d="M50 20 L68 35 L59 35 L50 27 L41 35 L32 35 Z" fill="#DDECC4" />
-          </svg>
+          <img 
+            src="/spectallogo.jpg" 
+            alt="Spectal Logo" 
+            className="w-16 md:w-20 h-auto rounded-xl object-contain drop-shadow-[0_0_20px_rgba(201,73,61,0.5)]" 
+          />
         </motion.div>
 
         {/* Giant scroll-reveal letters */}
