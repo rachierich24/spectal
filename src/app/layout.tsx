@@ -16,8 +16,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Spectal | The Next Moment Could Be Yours",
-  description: "An immersive digital event experience.",
+  title: "Spectal | Crafting experiences that connect youth, culture and brands",
+  description:
+    "Spectal is a youth experiences agency built around India's next generation.",
 };
 
 export default function RootLayout({

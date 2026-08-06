@@ -9,16 +9,15 @@ import Footer from "@/components/layout/Footer";
 import RotatingArch from "@/components/ui/RotatingArch";
 import { CLIENT_LOGOS } from "@/components/ui/ClientLogos";
 import SocialFeed from "@/components/ui/SocialFeed";
-import FancyTeamCards from "@/components/ui/FancyTeamCards";
 import AboutSection from "@/components/ui/AboutSection";
 
-const MANIFESTO = ["WE", "DON'T", "JUST", "BOOK", "ARTISTS.", "WE", "BUILD", "CAREERS."];
+const MANIFESTO = ["CRAFTING", "EXPERIENCES", "THAT", "CONNECT", "YOUTH,", "CULTURE", "AND", "BRANDS."];
 
 const STATS = [
-  { target: 200, suffix: "+", label: "Events Produced" },
-  { target: 50, suffix: "+", label: "Artists Managed" },
-  { target: 30, suffix: "+", label: "Cities Covered" },
-  { target: 10, suffix: " YRS", label: "Years of Energy" },
+  { target: 350, suffix: "+", label: "Campus Festivals" },
+  { target: 2000, suffix: "+", label: "Campus Shows" },
+  { target: 250, suffix: "+", label: "Brand Experiences" },
+  { target: 10, suffix: "+ YRS", label: "In Youth Culture" },
 ];
 
 const ARTIST_MARQUEE = [
@@ -167,7 +166,7 @@ export default function Home() {
       {/* Foreground HTML overlay for scrolling and text content */}
       <div className="relative w-full z-10 flex flex-col pointer-events-none">
 
-        {/* Section 1: Arrival Hero Section */}
+        {/* Hero: Arrival Section (unnumbered) */}
         <section id="arrival" className="w-full h-screen flex items-center justify-center relative overflow-hidden bg-black mt-20 md:mt-24">
 
           {/* Background Video */}
@@ -196,7 +195,7 @@ export default function Home() {
           >
             <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row md:items-center justify-between gap-6">
               <span className="text-[9px] font-mono tracking-[0.27em] text-white/30 uppercase whitespace-nowrap">
-                TRUSTED BY LEADING BRANDS &amp; PARTNERS
+                BRANDS WE&apos;VE PARTNERED WITH
               </span>
 
               {/* Logo horizontal ticker */}
@@ -231,35 +230,35 @@ export default function Home() {
         {/* MDNT-Inspired Infinite Scrolling Marquee Banner */}
         <div className="w-full py-6 bg-black/60 border-y border-white/5 overflow-hidden flex select-none relative z-20">
           <div className="animate-marquee whitespace-nowrap flex items-center gap-8 pr-8">
-            <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">360° Talent Management</span>
+            <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">Brand Solutions</span>
             <span className="w-1.5 h-1.5 rounded-full bg-spectal-mint"></span>
-            <span className="text-xs font-mono tracking-widest text-white uppercase">College Festivals</span>
+            <span className="text-xs font-mono tracking-widest text-white uppercase">Campus Experiences</span>
             <span className="w-1.5 h-1.5 rounded-full bg-spectal-red"></span>
-            <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">Brand Activation</span>
+            <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">Landmark Events</span>
             <span className="w-1.5 h-1.5 rounded-full bg-spectal-mint"></span>
-            <span className="text-xs font-mono tracking-widest text-white uppercase">Live Performances</span>
+            <span className="text-xs font-mono tracking-widest text-white uppercase">Youth Culture</span>
             <span className="w-1.5 h-1.5 rounded-full bg-spectal-red"></span>
-            <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">Tour Curation</span>
+            <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">Gen-Z</span>
             <span className="w-1.5 h-1.5 rounded-full bg-spectal-mint"></span>
-            <span className="text-xs font-mono tracking-widest text-white uppercase">Music & Comedy</span>
+            <span className="text-xs font-mono tracking-widest text-white uppercase">Gen-Alpha</span>
             <span className="w-1.5 h-1.5 rounded-full bg-spectal-red"></span>
-            <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">Digital Content</span>
+            <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">Live Experiences</span>
             <span className="w-1.5 h-1.5 rounded-full bg-spectal-mint"></span>
 
             {/* Duplicated for seamless loop */}
-            <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">360° Talent Management</span>
+            <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">Brand Solutions</span>
             <span className="w-1.5 h-1.5 rounded-full bg-spectal-mint"></span>
-            <span className="text-xs font-mono tracking-widest text-white uppercase">College Festivals</span>
+            <span className="text-xs font-mono tracking-widest text-white uppercase">Campus Experiences</span>
             <span className="w-1.5 h-1.5 rounded-full bg-spectal-red"></span>
-            <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">Brand Activation</span>
+            <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">Landmark Events</span>
             <span className="w-1.5 h-1.5 rounded-full bg-spectal-mint"></span>
-            <span className="text-xs font-mono tracking-widest text-white uppercase">Live Performances</span>
+            <span className="text-xs font-mono tracking-widest text-white uppercase">Youth Culture</span>
             <span className="w-1.5 h-1.5 rounded-full bg-spectal-red"></span>
-            <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">Tour Curation</span>
+            <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">Gen-Z</span>
             <span className="w-1.5 h-1.5 rounded-full bg-spectal-mint"></span>
-            <span className="text-xs font-mono tracking-widest text-white uppercase">Music & Comedy</span>
+            <span className="text-xs font-mono tracking-widest text-white uppercase">Gen-Alpha</span>
             <span className="w-1.5 h-1.5 rounded-full bg-spectal-red"></span>
-            <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">Digital Content</span>
+            <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">Live Experiences</span>
             <span className="w-1.5 h-1.5 rounded-full bg-spectal-mint"></span>
           </div>
         </div>
@@ -270,14 +269,14 @@ export default function Home() {
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
               <div className="flex flex-col items-start">
                 <span className="text-xs font-mono tracking-[0.4em] text-spectal-red mb-3">
-                  01 // SERVICES
+                  01 // WHAT WE CREATE
                 </span>
                 <h2 className="text-xl md:text-[1.8rem] lg:text-[2.2rem] font-boldonse font-medium tracking-tight text-white leading-[1.2] uppercase">
-                  WHAT WE <span className="text-spectal-mint font-serif italic font-light">DO</span>
+                  WHAT WE <span className="text-spectal-mint font-serif italic font-light">CREATE</span>
                 </h2>
               </div>
               <p className="max-w-md text-xs font-mono text-spectal-mint/50 uppercase tracking-widest">
-                [ End-to-end solutions for artists, brands &amp; campuses ]
+                [ Built around India&apos;s next generation ]
               </p>
             </div>
             {/* List Table of Projects */}
@@ -291,17 +290,17 @@ export default function Home() {
               >
                 <div className="flex flex-col gap-4 w-full md:w-auto">
                   <div className="flex items-center gap-8">
-                    <span className="text-sm font-mono text-spectal-red">01 / SERVICE</span>
-                    <h3 className="text-xl md:text-2xl font-boldonse font-medium text-white tracking-wide group-hover:text-spectal-red transition-colors duration-500">TALENT MANAGEMENT</h3>
+                    <span className="text-sm font-mono text-spectal-red">01 / BRAND</span>
+                    <h3 className="text-xl md:text-2xl font-boldonse font-medium text-white tracking-wide group-hover:text-spectal-red transition-colors duration-500">BRAND SOLUTIONS</h3>
                   </div>
                   {/* Mobile-only inline preview image */}
                   <div className="w-full aspect-[16/10] rounded-xl overflow-hidden md:hidden border border-white/10 relative">
-                    <img src="/event_spatial.png" alt="Talent Management" className="w-full h-full object-cover" />
+                    <img src="/event_spatial.png" alt="Brand Solutions" className="w-full h-full object-cover" />
                   </div>
                 </div>
                 <div className="flex flex-col md:items-end gap-2 max-w-lg">
-                  <span className="text-sm text-spectal-mint font-light">Full 360° artist representation — live show bookings, brand deals, social media strategy, tour curation, and complete legal &amp; commercial affairs.</span>
-                  <span className="text-[10px] font-mono text-spectal-mint/40 uppercase tracking-wider">50+ Artists // Music // Comedy // Brand Associations</span>
+                  <span className="text-sm text-spectal-mint font-light">Campaigns, properties, and cultural interventions built around business objectives.</span>
+                  <span className="text-[10px] font-mono text-spectal-mint/40 uppercase tracking-wider">250+ Brand Experiences // Campaigns // Properties</span>
                 </div>
               </div>
 
@@ -316,17 +315,17 @@ export default function Home() {
               >
                 <div className="flex flex-col gap-4 w-full md:w-auto">
                   <div className="flex items-center gap-8">
-                    <span className="text-sm font-mono text-spectal-red">02 / SERVICE</span>
-                    <h3 className="text-xl md:text-2xl font-boldonse font-medium text-white tracking-wide group-hover:text-spectal-red transition-colors duration-500">BRAND ACTIVATION</h3>
+                    <span className="text-sm font-mono text-spectal-red">02 / CAMPUS</span>
+                    <h3 className="text-xl md:text-2xl font-boldonse font-medium text-white tracking-wide group-hover:text-spectal-red transition-colors duration-500">CAMPUS EXPERIENCES</h3>
                   </div>
                   {/* Mobile-only inline preview image */}
                   <div className="w-full aspect-[16/10] rounded-xl overflow-hidden md:hidden border border-white/10 relative">
-                    <img src="/event_hackathon.png" alt="Brand Activation" className="w-full h-full object-cover" />
+                    <img src="/event_hackathon.png" alt="Campus Experiences" className="w-full h-full object-cover" />
                   </div>
                 </div>
                 <div className="flex flex-col md:items-end gap-2 max-w-lg">
-                  <span className="text-sm text-spectal-mint font-light">Unique branded experiences and artist partnerships that connect young brands to engaged audiences. Digital content, social campaigns, and live integrations.</span>
-                  <span className="text-[10px] font-mono text-spectal-mint/40 uppercase tracking-wider">50+ Brand Experiences // Digital Content // Social Strategy</span>
+                  <span className="text-sm text-spectal-mint font-light">College festivals, freshers&apos; seasons, student communities, and campus-led properties shaped with institutions across India.</span>
+                  <span className="text-[10px] font-mono text-spectal-mint/40 uppercase tracking-wider">350+ Campus Festivals // 2,000+ Campus Shows</span>
                 </div>
               </div>
             </div>
@@ -336,7 +335,7 @@ export default function Home() {
         {/* Section 2: About — Cultural Manifesto */}
         <AboutSection />
 
-        {/* Section 3: Brand Manifesto & Statistics */}
+        {/* Section 3: Brand Belief & Statistics */}
         <section id="stats" className="w-full py-16 md:py-24 flex flex-col items-center justify-center relative bg-black border-t border-white/5 z-20 pointer-events-auto">
           <div className="max-w-7xl w-full mx-auto px-6 md:px-12 flex flex-col items-center">
 
@@ -348,7 +347,7 @@ export default function Home() {
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               className="text-[10px] font-mono tracking-[0.45em] text-spectal-red/70 uppercase mb-8 select-none"
             >
-              // OUR BELIEF
+              03 // WHO WE ARE
             </motion.span>
 
             {/* Word-by-word manifesto */}
@@ -382,20 +381,18 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Section: Leadership & Team */}
-        <FancyTeamCards />
-
-        {/* Instagram Hover Cards */}
+        {/* Section 4: Instagram Reels & Showreels */}
         <SocialFeed />
 
-        {/* Section 4: Registration & Contact Portal */}
+        {/* Section 5: Registration & Contact Portal */}
         <section id="silence" className="w-full flex flex-col items-center justify-center bg-black pointer-events-auto relative z-20 py-16 md:py-24 border-t border-white/5">
           <div className="max-w-xl w-full mx-auto px-6 text-center flex flex-col items-center select-none">
             <span className="text-xs font-mono tracking-[0.4em] text-spectal-red mb-6">
-              07 // CONTACT
+              05 // GET IN TOUCH
             </span>
             <h2 className="text-xl md:text-[1.8rem] lg:text-[2.2rem] font-serif text-white tracking-widest uppercase mb-12 leading-[1.2]">
-              BOOK WITH <span className="text-spectal-mint font-serif italic text-white/95">US</span>
+              WORK WITH US, BUILD WITH US, PARTNER WITH US,{" "}
+              <span className="text-spectal-mint font-serif italic text-white/95">BUT FIRST&hellip;</span>
             </h2>
 
             {/* Booking / Inquiry Form */}
@@ -419,7 +416,7 @@ export default function Home() {
               </div>
               <input
                 type="text"
-                placeholder="What are you looking for? (Talent booking, event, brand activation…)"
+                placeholder="What are you looking for? (Brand solutions, campus experiences, landmark events…)"
                 required
                 className="w-full bg-white/5 border border-white/10 rounded-lg px-5 py-4 text-sm text-white focus:outline-none focus:border-spectal-mint focus:ring-1 focus:ring-spectal-mint transition-all duration-300"
               />
@@ -428,7 +425,7 @@ export default function Home() {
                 data-interactive="true"
                 className="w-full py-4 bg-spectal-red text-spectal-charcoal text-xs font-mono tracking-widest uppercase hover:bg-white hover:shadow-[0_0_20px_rgba(201,73,61,0.3)] transition-all duration-500 rounded-lg font-bold text-center"
               >
-                Send Inquiry
+                Talk to us.
               </button>
             </form>
             <p className="text-[10px] font-mono text-spectal-mint/30 mt-6 tracking-wider uppercase">

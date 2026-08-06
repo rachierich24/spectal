@@ -56,7 +56,7 @@ export default function Footer() {
             {[
               { label: "HOME", href: "#arrival" },
               { label: "SERVICES", href: "#showcase" },
-              { label: "TEAM", href: "#team" },
+              { label: "REELS", href: "#reels" },
               { label: "CONTACT", href: "#silence" as string },
             ].map((link) => (
               <a

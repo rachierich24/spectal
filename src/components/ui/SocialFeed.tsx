@@ -287,7 +287,7 @@ export default function SocialFeed() {
   const marqueeReels = [...INSTAGRAM_REELS, ...INSTAGRAM_REELS, ...INSTAGRAM_REELS];
 
   return (
-    <section ref={sectionRef} className="w-full bg-black text-white py-24 md:py-32 border-t border-white/10 relative z-20 pointer-events-auto overflow-hidden">
+    <section id="reels" ref={sectionRef} className="w-full bg-black text-white py-24 md:py-32 border-t border-white/10 relative z-20 pointer-events-auto overflow-hidden">
       {/* Custom DRAG Cursor */}
       <motion.div
         className="fixed top-0 left-0 w-24 h-24 bg-spectal-red rounded-full flex items-center justify-center pointer-events-none z-[9999] shadow-2xl mix-blend-normal"
@@ -318,7 +318,7 @@ export default function SocialFeed() {
             className="max-w-3xl"
           >
             <span className="text-xs font-mono tracking-[0.4em] text-spectal-red mb-4 uppercase block">
-              // REELS &amp; LIVE SHOWREELS
+              04 // REELS &amp; LIVE SHOWREELS
             </span>
             <h2 className="text-4xl md:text-6xl font-boldonse font-medium tracking-tight leading-[1.1] md:leading-[1.15] text-white uppercase">
               ENTER THE WORLD WE <br className="hidden md:block" />
