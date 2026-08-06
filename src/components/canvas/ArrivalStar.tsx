@@ -110,9 +110,12 @@ export default function ArrivalStar() {
       const directions = [];
 
       const scale = 0.05;
+      
+      // Cut particle count by 4x on mobile devices to save GPU
+      const step = window.innerWidth < 768 ? 2 : 1;
 
-      for (let y = 0; y < size; y++) {
-        for (let x = 0; x < size; x++) {
+      for (let y = 0; y < size; y += step) {
+        for (let x = 0; x < size; x += step) {
           const i = (y * size + x) * 4;
           const r = imgData[i] / 255;
           const g = imgData[i + 1] / 255;
@@ -172,8 +175,10 @@ export default function ArrivalStar() {
     }
 
     if (pointsRef.current) {
-      // Visibility culling
-      const isVisible = scrollProgress < 1.5;
+      // Visibility culling: 
+      // scrollProgress goes from 0 to 1 based on the full page scroll.
+      // Since the ArrivalStar is only in the hero section, it should be culled very early.
+      const isVisible = scrollProgress < 0.2;
       pointsRef.current.visible = isVisible;
 
       if (!isVisible) return;

@@ -352,7 +352,7 @@ export default function Home() {
             </motion.span>
 
             {/* Word-by-word manifesto */}
-            <h2 className="max-w-4xl mx-auto px-6 text-center text-3xl md:text-5xl font-black uppercase leading-[1.2] tracking-tighter select-none mb-16">
+            <h2 className="max-w-5xl mx-auto px-4 md:px-6 text-center text-[2.2rem] md:text-5xl lg:text-7xl font-black uppercase leading-[1.1] md:leading-[1.2] tracking-tighter select-none mb-16">
               {MANIFESTO.map((word, i) => (
                 <motion.span
                   key={i}

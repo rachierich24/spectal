@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useSpring, useInView } from "framer-motion";
 
 // Inline SVG Icons (Zero dependency, fast & reliable)
 function IconInstagram({ className = "w-4 h-4" }: { className?: string }) {
@@ -126,27 +126,27 @@ const INSTAGRAM_REELS: ReelItem[] = [
   },
 ];
 
-function ReelCard({
-  reel,
-  index,
-  activeHover,
-  setActiveHover,
-}: {
+function ReelCard({ reel, index, activeHover, setActiveHover, isInView }: {
   reel: ReelItem;
   index: number;
   activeHover: string | null;
   setActiveHover: (id: string | null) => void;
+  isInView: boolean;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.muted = true;
-      videoRef.current.play().catch(() => {
-        // Autoplay policy fallback
-      });
+      if (isInView) {
+        videoRef.current.play().catch(() => {
+          // Autoplay policy fallback
+        });
+      } else {
+        videoRef.current.pause();
+      }
     }
-  }, []);
+  }, [isInView]);
 
   const hoverId = `${reel.id}-${index}`;
 
@@ -176,12 +176,13 @@ function ReelCard({
         <video
           ref={videoRef}
           src={reel.videoSrc}
-          autoPlay
           loop
           muted
           playsInline
           poster={reel.poster}
-          onCanPlay={(e) => e.currentTarget.play()}
+          onCanPlay={(e) => {
+            if (isInView) e.currentTarget.play();
+          }}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
         />
 
@@ -263,6 +264,9 @@ export default function SocialFeed() {
   const [activeHover, setActiveHover] = useState<string | null>(null);
   const [isHoveringMarquee, setIsHoveringMarquee] = useState(false);
 
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { margin: "200px 0px" });
+
   // Framer Motion Custom Cursor Setup
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
@@ -283,7 +287,7 @@ export default function SocialFeed() {
   const marqueeReels = [...INSTAGRAM_REELS, ...INSTAGRAM_REELS, ...INSTAGRAM_REELS];
 
   return (
-    <section className="w-full bg-black text-white py-24 md:py-32 border-t border-white/10 relative z-20 pointer-events-auto overflow-hidden">
+    <section ref={sectionRef} className="w-full bg-black text-white py-24 md:py-32 border-t border-white/10 relative z-20 pointer-events-auto overflow-hidden">
       {/* Custom DRAG Cursor */}
       <motion.div
         className="fixed top-0 left-0 w-24 h-24 bg-spectal-red rounded-full flex items-center justify-center pointer-events-none z-[9999] shadow-2xl mix-blend-normal"
@@ -353,6 +357,7 @@ export default function SocialFeed() {
               index={index}
               activeHover={activeHover}
               setActiveHover={setActiveHover}
+              isInView={isInView}
             />
           ))}
         </div>
