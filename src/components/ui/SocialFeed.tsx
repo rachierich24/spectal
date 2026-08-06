@@ -234,7 +234,7 @@ export default function SocialFeed() {
       
       {/* Custom DRAG Cursor */}
       <motion.div
-        className="fixed top-0 left-0 w-24 h-24 bg-white rounded-full flex items-center justify-center pointer-events-none z-[9999] shadow-2xl mix-blend-normal"
+        className="fixed top-0 left-0 w-24 h-24 bg-spectal-red rounded-full flex items-center justify-center pointer-events-none z-[9999] shadow-2xl mix-blend-normal"
         style={{
           x: cursorXSpring,
           y: cursorYSpring,
@@ -245,7 +245,7 @@ export default function SocialFeed() {
         }}
         transition={{ scale: { duration: 0.2 }, opacity: { duration: 0.2 } }}
       >
-        <span className="text-black text-xs font-bold tracking-[0.2em] font-sans">DRAG</span>
+        <span className="text-white text-xs font-bold tracking-[0.2em] font-sans">DRAG</span>
       </motion.div>
 
       {/* Ambient Red & Mint Lighting */}
