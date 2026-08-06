@@ -29,24 +29,28 @@ export default function Header() {
       transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
       className="fixed top-0 left-0 w-full z-50 pt-6 pointer-events-none"
     >
-      <div className="max-w-[1600px] mx-auto px-6 md:px-12 flex justify-between items-center relative">
+      <div className="max-w-[1600px] mx-auto px-6 md:px-12 flex justify-center md:justify-between items-center relative">
 
         {/* Left: Empty div to balance flexbox */}
-        <div className="flex-1"></div>
+        <div className="flex-1 hidden md:block"></div>
 
         {/* Center: Brand Logo */}
         <div className="flex-shrink-0 flex justify-center items-center pointer-events-auto">
           <Link
             href="/"
             data-interactive="true"
-            className="group text-3xl md:text-4xl font-bold tracking-[0.2em] leading-none transition-all duration-300 ease-out inline-block"
+            className="group inline-flex flex-row items-center gap-2 transition-all duration-300 ease-out"
           >
-            <span className="inline-block text-spectal-red group-hover:-translate-y-0.5 transition-transform duration-300">
-              SPEC
-            </span>
-            <span className="inline-block text-spectal-mint group-hover:translate-y-0.5 transition-transform duration-300">
-              TAL
-            </span>
+            <img 
+              src="/spectallogo.jpg" 
+              alt="Spectal" 
+              className="h-9 md:h-11 w-auto object-contain rounded-[4px] group-hover:scale-105 transition-transform duration-300"
+            />
+            <img 
+              src="/logotype-red-transparent-bg.svg" 
+              alt="Spectal Logotype" 
+              className="h-8 md:h-10 w-auto object-contain group-hover:opacity-80 transition-opacity duration-300"
+            />
           </Link>
         </div>
 

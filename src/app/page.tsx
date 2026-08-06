@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, useInView } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform, useInView } from "framer-motion";
 import Scene from "@/components/canvas/Scene";
 import SpectalExperience from "@/components/canvas/SpectalExperience";
 import Preloader from "@/components/ui/Preloader";
@@ -59,20 +59,6 @@ function CountUp({ target, suffix, label }: { target: number; suffix: string; la
 }
 
 export default function Home() {
-  const [hoveredProjectImage, setHoveredProjectImage] = useState<string | null>(null);
-
-  // Motion values for the floating project preview (avoids re-rendering the entire Home page on mouse move!)
-  const previewX = useMotionValue(0);
-  const previewY = useMotionValue(0);
-
-  // Springs for buttery smooth follow animation
-  const previewXSpring = useSpring(previewX, { damping: 25, stiffness: 250, mass: 0.5 });
-  const previewYSpring = useSpring(previewY, { damping: 25, stiffness: 250, mass: 0.5 });
-
-  // Compute offset translations (preview is 256px wide by 160px tall, offset keeps it offset from cursor)
-  const previewTranslateX = useTransform(previewXSpring, (x) => x + 20);
-  const previewTranslateY = useTransform(previewYSpring, (y) => y - 120);
-
   // Mouse position motion values for parallax
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -88,10 +74,6 @@ export default function Home() {
   const videoY = useTransform(springY, [-0.5, 0.5], [15, -15]);
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    // Floating project preview follow
-    previewX.set(e.clientX);
-    previewY.set(e.clientY);
-
     // Normalize coordinates around screen center (-0.5 to 0.5)
     const normX = (e.clientX / window.innerWidth) - 0.5;
     const normY = (e.clientY / window.innerHeight) - 0.5;
@@ -281,8 +263,6 @@ export default function Home() {
               <div
                 data-interactive="true"
                 data-cursor="EXPLORE"
-                onMouseEnter={() => setHoveredProjectImage("/event_spatial.png")}
-                onMouseLeave={() => setHoveredProjectImage(null)}
                 className="py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 group cursor-pointer hover:bg-white/[0.02] px-6 transition-all duration-300 pointer-events-auto"
               >
                 <div className="flex flex-col gap-4 w-full md:w-auto">
@@ -305,8 +285,6 @@ export default function Home() {
               <div
                 data-interactive="true"
                 data-cursor="EXPLORE"
-                onMouseEnter={() => setHoveredProjectImage("/event_hackathon.png")}
-                onMouseLeave={() => setHoveredProjectImage(null)}
                 className="py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 group cursor-pointer hover:bg-white/[0.02] px-6 transition-all duration-300 pointer-events-auto"
               >
                 <div className="flex flex-col gap-4 w-full md:w-auto">
@@ -321,6 +299,27 @@ export default function Home() {
                 <div className="flex flex-col md:items-end gap-2 max-w-lg">
                   <span className="text-sm text-spectal-mint font-light">College festivals, freshers&apos; seasons, student communities, and campus-led properties shaped with institutions across India.</span>
                   <span className="text-[10px] font-mono text-spectal-mint/40 uppercase tracking-wider">350+ Campus Festivals &bull; 2,000+ Campus Shows</span>
+                </div>
+              </div>
+
+              <div
+                data-interactive="true"
+                data-cursor="EXPLORE"
+                className="py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 group cursor-pointer hover:bg-white/[0.02] px-6 transition-all duration-300 pointer-events-auto"
+              >
+                <div className="flex flex-col gap-4 w-full md:w-auto">
+                  <div className="flex items-center gap-8">
+                    <span className="text-sm font-mono text-spectal-red">03 / EVENTS</span>
+                    <h3 className="text-xl md:text-2xl font-boldonse font-medium text-white tracking-wide group-hover:text-spectal-red transition-colors duration-500">LANDMARK EVENTS</h3>
+                  </div>
+                  {/* Mobile-only inline preview image */}
+                  <div className="w-full aspect-[16/10] rounded-xl overflow-hidden md:hidden border border-white/10 relative">
+                    <img src="/event_mainstage.png" alt="Landmark Events" className="w-full h-full object-cover" />
+                  </div>
+                </div>
+                <div className="flex flex-col md:items-end gap-2 max-w-lg">
+                  <span className="text-sm text-spectal-mint font-light">End-to-end live event creation across programming, production, partnerships, audience experience, and on-ground execution.</span>
+                  <span className="text-[10px] font-mono text-spectal-mint/40 uppercase tracking-wider">End-to-end Event Creation // Audience Experience</span>
                 </div>
               </div>
             </div>
@@ -419,31 +418,6 @@ export default function Home() {
         <Footer />
       </div>
 
-      {/* Floating Reveal on Hover Image Preview for Project Showcase */}
-      <AnimatePresence>
-        {hoveredProjectImage && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8, rotate: -4 }}
-            animate={{
-              opacity: 1,
-              scale: 1.05,
-              rotate: 3,
-            }}
-            style={{
-              x: previewTranslateX,
-              y: previewTranslateY,
-            }}
-            exit={{ opacity: 0, scale: 0.8, rotate: -4 }}
-            transition={{ type: "spring", stiffness: 350, damping: 25 }}
-            className="fixed top-0 left-0 pointer-events-none z-[800] w-64 h-40 bg-white/5 border border-white/20 rounded-2xl overflow-hidden shadow-[0_15px_35px_rgba(0,0,0,0.6)] backdrop-blur-sm will-change-transform"
-          >
-            <div
-              className="w-full h-full bg-cover bg-center"
-              style={{ backgroundImage: `url(${hoveredProjectImage})` }}
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
     </main>
   );
 }
