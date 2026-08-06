@@ -49,7 +49,7 @@ export default function Header() {
             <img 
               src="/logotype-red-transparent-bg.svg" 
               alt="Spectal Logotype" 
-              className="h-5 md:h-7 w-auto object-contain ml-3 group-hover:opacity-80 transition-opacity duration-300"
+              className="h-8 md:h-10 w-auto object-contain ml-3 group-hover:opacity-80 transition-opacity duration-300"
             />
           </Link>
         </div>
