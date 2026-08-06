@@ -33,7 +33,7 @@ export default function Preloader() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, ease: "easeOut" }}
-            className="flex flex-col items-center w-full max-w-md px-4"
+            className="w-full h-full"
           >
             <video 
               ref={videoRef}
@@ -41,7 +41,7 @@ export default function Preloader() {
               muted 
               playsInline 
               onEnded={handleVideoEnd}
-              className="w-full h-auto object-contain"
+              className="w-full h-full object-cover"
             >
               <source src="/logo-animate-color.mp4" type="video/mp4" />
             </video>
