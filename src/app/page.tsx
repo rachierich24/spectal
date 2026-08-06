@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, useInView } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform, useInView } from "framer-motion";
 import Scene from "@/components/canvas/Scene";
 import SpectalExperience from "@/components/canvas/SpectalExperience";
 import Preloader from "@/components/ui/Preloader";
@@ -74,10 +74,6 @@ export default function Home() {
   const videoY = useTransform(springY, [-0.5, 0.5], [15, -15]);
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    // Floating project preview follow
-    previewX.set(e.clientX);
-    previewY.set(e.clientY);
-
     // Normalize coordinates around screen center (-0.5 to 0.5)
     const normX = (e.clientX / window.innerWidth) - 0.5;
     const normY = (e.clientY / window.innerHeight) - 0.5;
@@ -270,8 +266,6 @@ export default function Home() {
               <div
                 data-interactive="true"
                 data-cursor="EXPLORE"
-                onMouseEnter={() => setHoveredProjectImage("/event_spatial.png")}
-                onMouseLeave={() => setHoveredProjectImage(null)}
                 className="py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 group cursor-pointer hover:bg-white/[0.02] px-6 transition-all duration-300 pointer-events-auto"
               >
                 <div className="flex flex-col gap-4 w-full md:w-auto">
@@ -295,8 +289,6 @@ export default function Home() {
               <div
                 data-interactive="true"
                 data-cursor="EXPLORE"
-                onMouseEnter={() => setHoveredProjectImage("/event_hackathon.png")}
-                onMouseLeave={() => setHoveredProjectImage(null)}
                 className="py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 group cursor-pointer hover:bg-white/[0.02] px-6 transition-all duration-300 pointer-events-auto"
               >
                 <div className="flex flex-col gap-4 w-full md:w-auto">
