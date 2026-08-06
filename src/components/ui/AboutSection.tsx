@@ -408,49 +408,40 @@ export default function AboutSection() {
       <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-16 lg:px-20 relative z-20 flex flex-col gap-20 sm:gap-28 md:gap-36">
         
         {/* =========================================================================
-            PHASE 1: THE INVITATION & PURPOSE (WE HELP BRANDS EARN THEIR PLACE)
+            PHASE 1: 01 / WHO WE ARE (PRIMARY STATEMENT)
            ========================================================================= */}
         <div className="relative pt-4 sm:pt-8 flex flex-col md:flex-row md:items-start justify-between gap-8">
           
           <div className="flex flex-col max-w-5xl">
-            {/* Metadata Bar + Eyebrow */}
+            {/* Metadata Bar + Section Number Eyebrow */}
             <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
               <StickerBurstShards />
               <div className="flex items-center gap-2.5 sm:gap-3 flex-wrap">
                 <span className="w-2 h-2 rounded-full bg-[#DE382B] animate-pulse" />
                 <motion.p
                   style={{ color: metaTextColor }}
-                  className="text-xl sm:text-2xl md:text-3xl font-instrument italic font-normal tracking-tight"
+                  className="text-xs sm:text-sm font-mono uppercase tracking-[0.25em] font-semibold"
                 >
-                  sounds good?
+                  01 / WHO WE ARE
                 </motion.p>
               </div>
             </div>
 
-            {/* Headline Line 1: WE HELP [Bandage] BRANDS [Sparkle] */}
+            {/* Headline: SPECTAL IS A YOUTH EXPERIENCES AGENCY BUILT AROUND INDIA'S NEXT GENERATION */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.65 }}
-              className="flex flex-wrap items-center gap-x-2 sm:gap-x-4 text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] 2xl:text-[6.2rem] font-syne font-extrabold uppercase text-[#DE382B] tracking-[-0.035em] leading-[0.92]"
+              className="flex flex-wrap items-center gap-x-2 sm:gap-x-4 text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.2rem] font-syne font-extrabold uppercase text-[#DE382B] tracking-[-0.035em] leading-[0.95]"
             >
-              <span>WE HELP</span>
+              <span>SPECTAL IS A</span>
               <IconCrossBadge />
-              <span>BRANDS</span>
+              <span>YOUTH EXPERIENCES</span>
               <StickerSparkle />
-            </motion.div>
-
-            {/* Headline Line 2: EARN THEIR PLACE [Lightning] */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.65, delay: 0.08 }}
-              className="flex flex-wrap items-center gap-x-2 sm:gap-x-4 text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] 2xl:text-[6.2rem] font-syne font-extrabold italic uppercase text-[#DE382B] tracking-[-0.035em] leading-[0.92] mt-1 sm:mt-2"
-            >
-              <span>EARN THEIR PLACE</span>
+              <span>AGENCY BUILT AROUND</span>
               <StickerLightning />
+              <span>INDIA&apos;S NEXT GEN.</span>
             </motion.div>
           </div>
 
@@ -461,36 +452,37 @@ export default function AboutSection() {
         </div>
 
         {/* =========================================================================
-            PHASE 2: THE CULTURAL IMPACT (IN CULTURE — NOT JUST SHOW UP!)
+            PHASE 2: THE PULSE OF YOUNG INDIA & CATCH THEM YOUNG
            ========================================================================= */}
         <div className="flex flex-col pt-8 sm:pt-12 border-t border-white/20">
 
-            {/* Headline Line 1: IN CULTURE — */}
+          {/* Narrative: We live on the pulse of young India as it keeps evolving... */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.65 }}
-            className="flex flex-wrap items-center gap-x-2 sm:gap-x-4 text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] 2xl:text-[6.2rem] font-syne font-bold uppercase text-[#C5F3A2] tracking-[-0.035em] leading-[0.92]"
+            className="flex flex-wrap items-center gap-x-2 sm:gap-x-4 text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-syne font-bold uppercase text-[#C5F3A2] tracking-[-0.035em] leading-[1.05]"
           >
-            <span>IN CULTURE —</span>
+            <span>WE LIVE ON THE PULSE</span>
+            <IconStarBadge />
+            <span>OF YOUNG INDIA AS IT KEEPS EVOLVING,</span>
           </motion.div>
 
-          {/* Headline Line 2: NOT JUST SHOW UP! [Star] [Sunburst] [MoonZZZ] */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.65, delay: 0.08 }}
-            className="flex flex-wrap items-center gap-x-2 sm:gap-x-3 text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] 2xl:text-[6.2rem] font-syne font-extrabold uppercase text-white tracking-[-0.035em] leading-[0.92] mt-1 sm:mt-2"
+            className="flex flex-wrap items-center gap-x-2 sm:gap-x-3 text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-syne font-extrabold uppercase text-white tracking-[-0.035em] leading-[1.05] mt-2 sm:mt-3"
           >
-            <span>NOT JUST SHOW UP!</span>
-            <IconStarBadge />
+            <span>TURNING CULTURE INTO EXPERIENCES</span>
             <IconSunburst />
+            <span>THEY REMEMBER &amp; RESONATE WITH.</span>
             <StickerMoonZzz />
           </motion.div>
 
-          {/* Bottom Bar: Angled Tile + Editorial Summary + Interactive Capsule Tags */}
+          {/* Bottom Bar: Goal Statement Card + Audience Tags */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -498,8 +490,8 @@ export default function AboutSection() {
             transition={{ duration: 0.65, delay: 0.15 }}
             className="mt-10 sm:mt-16 pt-6 sm:pt-8 border-t border-white/20 flex flex-col md:flex-row md:items-center justify-between gap-6 sm:gap-8"
           >
-            {/* Left: Black Angled Tile + Narrative */}
-            <div className="flex items-start sm:items-center gap-3.5 sm:gap-5 max-w-xl">
+            {/* Left: Highlighted Goal Statement Box */}
+            <div className="flex items-start sm:items-center gap-3.5 sm:gap-5 max-w-2xl bg-black/40 backdrop-blur-sm p-4 sm:p-6 rounded-2xl border border-white/15 shadow-xl">
               <div className="w-10 h-10 sm:w-12 sm:h-12 bg-black rounded-xl flex items-center justify-center flex-shrink-0 shadow-xl border border-white/15">
                 <svg
                   viewBox="0 0 24 24"
@@ -510,12 +502,17 @@ export default function AboutSection() {
                 </svg>
               </div>
 
-              <p className="text-xs sm:text-sm md:text-base font-sans font-light text-white/95 leading-relaxed">
-                A curation of experiences and cultural IP we&apos;ve built over the past decade connecting youth, culture &amp; brands across India.
-              </p>
+              <div className="flex flex-col gap-1">
+                <span className="text-[10px] font-mono tracking-widest uppercase text-spectal-mint font-semibold">
+                  OUR CORE MISSION
+                </span>
+                <p className="text-sm sm:text-base md:text-lg font-syne font-bold text-white leading-snug">
+                  Our goal is to catch them young. <span className="text-spectal-mint">Gen-Z.</span> <span className="text-[#DE382B]">Gen-Alpha.</span> <span className="text-white/80">Gen-whoever-comes-next.</span>
+                </p>
+              </div>
             </div>
 
-            {/* Right: Capability Tags Pills */}
+            {/* Right: Capability & Audience Tags */}
             <div className="flex flex-wrap items-center gap-1.5 sm:gap-2.5 max-w-lg">
               {PILLARS.map((tag, idx) => {
                 const isActive = activePill === idx;

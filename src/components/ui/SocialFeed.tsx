@@ -315,11 +315,16 @@ export default function SocialFeed() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-3xl"
+            className="max-w-3xl flex flex-col gap-2"
           >
+            <div className="flex items-center gap-3">
+              <span className="w-2 h-2 rounded-full bg-spectal-red animate-pulse" />
+              <span className="text-xs font-mono uppercase tracking-[0.25em] text-white/50">
+                04 / BUILT BY SPECTAL
+              </span>
+            </div>
             <h2 className="text-4xl md:text-6xl font-boldonse font-medium tracking-tight leading-[1.1] md:leading-[1.15] text-white uppercase">
-              ENTER THE WORLD WE <br className="hidden md:block" />
-              <span className="text-spectal-mint font-serif italic font-light">CREATE</span> AFTER DARK
+              BUILT BY <span className="text-spectal-mint font-serif italic font-light">SPECTAL</span>
             </h2>
           </motion.div>
 

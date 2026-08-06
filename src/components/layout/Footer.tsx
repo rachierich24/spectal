@@ -45,79 +45,8 @@ export default function Footer() {
 
   return (
     <footer
-      className="w-full bg-[#050505] text-spectal-mint pt-8 pb-0 border-t border-white/5 relative z-20 pointer-events-auto overflow-hidden flex flex-col justify-between"
+      className="w-full bg-[#050505] text-spectal-mint pt-8 pb-0 relative z-20 pointer-events-auto overflow-hidden flex flex-col justify-between"
     >
-      <div className="max-w-7xl w-full mx-auto px-6 md:px-12">
-        {/* Link Grid - Styled like Quoti */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-6 mb-6 text-left font-sans">
-
-          {/* Column 1: Agency Links */}
-          <div className="flex flex-col space-y-2">
-            {[
-              { label: "HOME", href: "#arrival" },
-              { label: "SERVICES", href: "#showcase" },
-              { label: "REELS", href: "#reels" },
-              { label: "CONTACT", href: "#silence" as string },
-            ].map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                data-interactive="true"
-                className="font-black tracking-widest text-[12px] uppercase text-spectal-mint hover:text-spectal-red transition-all duration-300 w-fit"
-              >
-                {link.label}
-              </a>
-            ))}
-          </div>
-
-          {/* Column 2: Social Links */}
-          <div className="flex flex-col space-y-2">
-            {[
-              { label: "INSTAGRAM", href: "https://www.instagram.com/spectal.management/" },
-              { label: "LINKEDIN", href: "https://in.linkedin.com/company/spectal-talent-management" },
-              { label: "FACEBOOK", href: "https://www.facebook.com/spectalmanagement/" },
-            ].map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-interactive="true"
-                className="font-black tracking-widest text-[12px] uppercase text-spectal-mint hover:text-spectal-red transition-all duration-300 w-fit"
-              >
-                {link.label}
-              </a>
-            ))}
-          </div>
-
-          {/* Column 3: Legal & Resources */}
-          <div className="flex flex-col space-y-2">
-            {[
-              { label: "TERMS", href: "#" },
-              { label: "PRIVACY", href: "#" },
-              { label: "BOOK NOW", href: "#silence" },
-            ].map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                data-interactive="true"
-                className="font-black tracking-widest text-[12px] uppercase text-spectal-mint hover:text-spectal-red transition-all duration-300 w-fit"
-              >
-                {link.label}
-              </a>
-            ))}
-          </div>
-
-          {/* Column 4: Credits & Copyright (Right side) */}
-          <div className="flex flex-col space-y-2 md:items-end text-left md:text-right">
-            <span className="font-black tracking-widest text-[12px] uppercase text-spectal-mint/60">
-              ©SPECTAL MANAGEMENT 2026 - ALL RIGHTS RESERVED.
-            </span>
-          </div>
-
-        </div>
-
-      </div>
 
 
       {/* Massive Scroll-Reveal 'spectal' Text */}

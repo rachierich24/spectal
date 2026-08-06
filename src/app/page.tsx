@@ -7,27 +7,32 @@ import SpectalExperience from "@/components/canvas/SpectalExperience";
 import Preloader from "@/components/ui/Preloader";
 import Footer from "@/components/layout/Footer";
 import RotatingArch from "@/components/ui/RotatingArch";
-import { CLIENT_LOGOS } from "@/components/ui/ClientLogos";
 import SocialFeed from "@/components/ui/SocialFeed";
 import AboutSection from "@/components/ui/AboutSection";
+import SpectalLogotype from "@/components/ui/SpectalLogotype";
 
 const MANIFESTO = ["CRAFTING", "EXPERIENCES", "THAT", "CONNECT", "YOUTH,", "CULTURE", "AND", "BRANDS."];
 
 const STATS = [
-  { target: 350, suffix: "+", label: "Campus Festivals" },
-  { target: 2000, suffix: "+", label: "Campus Shows" },
-  { target: 250, suffix: "+", label: "Brand Experiences" },
-  { target: 10, suffix: "+ YRS", label: "In Youth Culture" },
+  { target: 50, suffix: "+", label: "Brand Partners" },
+  { target: 270, suffix: "+", label: "Artists" },
+  { target: 1.4, decimals: 1, suffix: "k+", label: "Events Curated" },
+  { target: 3, suffix: "M+", label: "Youth Engaged" },
 ];
 
-const ARTIST_MARQUEE = [
-  "Ritviz", "Nucleya", "Prateek Kuhad", "When Chai Met Toast", "Seedhe Maut",
-  "Nikhil Dsouza", "Ankur Tewari", "The Local Train", "Taba Chake", "Mihail",
-  "Ritviz", "Nucleya", "Prateek Kuhad", "When Chai Met Toast", "Seedhe Maut",
-  "Nikhil Dsouza", "Ankur Tewari", "The Local Train", "Taba Chake", "Mihail",
-];
-
-function CountUp({ target, suffix, label }: { target: number; suffix: string; label: string }) {
+function CountUp({
+  target,
+  decimals = 0,
+  prefix = "",
+  suffix,
+  label,
+}: {
+  target: number;
+  decimals?: number;
+  prefix?: string;
+  suffix: string;
+  label: string;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-10%" });
   const [count, setCount] = useState(0);
@@ -40,7 +45,7 @@ function CountUp({ target, suffix, label }: { target: number; suffix: string; la
     const step = (now: number) => {
       const t = Math.min((now - start) / duration, 1);
       const eased = 1 - Math.pow(1 - t, 3);
-      setCount(Math.floor(eased * target));
+      setCount(eased * target);
       if (t < 1) raf = requestAnimationFrame(step);
       else setCount(target);
     };
@@ -50,10 +55,14 @@ function CountUp({ target, suffix, label }: { target: number; suffix: string; la
 
   return (
     <div ref={ref} className="flex flex-col items-center gap-3">
-      <span className="text-5xl md:text-7xl font-black tabular-nums text-spectal-mint drop-shadow-[0_0_20px_rgba(221,236,196,0.3)]">
-        {count}{suffix}
+      <span className="text-4xl sm:text-5xl md:text-7xl font-black tabular-nums text-spectal-mint drop-shadow-[0_0_20px_rgba(221,236,196,0.3)] font-syne">
+        {prefix}
+        {decimals > 0 ? count.toFixed(decimals) : Math.floor(count)}
+        {suffix}
       </span>
-      <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-white/40">{label}</span>
+      <span className="text-[10px] md:text-xs font-mono uppercase tracking-[0.25em] text-white/50 text-center">
+        {label}
+      </span>
     </div>
   );
 }
@@ -70,67 +79,13 @@ export default function Home() {
   // Parallax offsets
   const headlineX = useTransform(springX, [-0.5, 0.5], [-12, 12]);
   const headlineY = useTransform(springY, [-0.5, 0.5], [-12, 12]);
-  const videoX = useTransform(springX, [-0.5, 0.5], [15, -15]);
-  const videoY = useTransform(springY, [-0.5, 0.5], [15, -15]);
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    // Normalize coordinates around screen center (-0.5 to 0.5)
-    const normX = (e.clientX / window.innerWidth) - 0.5;
-    const normY = (e.clientY / window.innerHeight) - 0.5;
+    const normX = e.clientX / window.innerWidth - 0.5;
+    const normY = e.clientY / window.innerHeight - 0.5;
 
     mouseX.set(normX);
     mouseY.set(normY);
-  };
-
-  // Entrance animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      }
-    }
-  };
-
-  const wordVariants = {
-    hidden: { filter: "blur(12px)", y: 40, opacity: 0 },
-    visible: {
-      filter: "blur(0px)",
-      y: 0,
-      opacity: 1,
-      transition: { duration: 1.2, ease: [0.22, 1, 0.36, 1] as const }
-    }
-  };
-
-  const buttonVariants = {
-    hidden: { opacity: 0, scale: 0.95 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 1.2, ease: [0.22, 1, 0.36, 1] as const, delay: 0.8 }
-    }
-  };
-
-  const logosContainerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.08,
-        delayChildren: 1.0,
-      }
-    }
-  };
-
-  const logoItemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 1.0, ease: [0.22, 1, 0.36, 1] as const }
-    }
   };
 
   return (
@@ -148,9 +103,13 @@ export default function Home() {
       {/* Foreground HTML overlay for scrolling and text content */}
       <div className="relative w-full z-10 flex flex-col pointer-events-none">
 
-        {/* Hero: Arrival Section (unnumbered) */}
-        <section id="arrival" className="w-full h-screen flex items-center justify-center relative overflow-hidden bg-black mt-20 md:mt-24">
-
+        {/* =====================================================================
+            HERO: VIDEO WITH LOGO
+           ===================================================================== */}
+        <section
+          id="arrival"
+          className="w-full h-screen flex items-center justify-center relative overflow-hidden bg-black"
+        >
           {/* Background Video */}
           <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
             <video
@@ -165,52 +124,51 @@ export default function Home() {
             </video>
           </div>
 
-          {/* Gradient Overlay for bottom text visibility */}
-          <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black via-black/60 to-transparent z-10 pointer-events-none" />
-
-          {/* Client Logos Ticker - Staggered fade in */}
+          {/* Transparent Spectal Logo Over Video */}
           <motion.div
-            variants={logosContainerVariants}
-            initial="hidden"
-            animate="visible"
-            className="absolute bottom-6 left-0 w-full z-20 border-t border-white/5 pt-6 overflow-hidden pointer-events-auto"
+            style={{ x: headlineX, y: headlineY }}
+            initial={{ opacity: 0, scale: 0.9, y: 30 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+            className="absolute inset-x-0 bottom-20 md:bottom-24 z-20 flex items-center justify-center px-6 md:px-12 pointer-events-none select-none"
           >
-            <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row md:items-center justify-between gap-6">
-              <span className="text-[9px] font-mono tracking-[0.27em] text-white/30 uppercase whitespace-nowrap">
-                BRANDS WE&apos;VE PARTNERED WITH
-              </span>
-
-              {/* Logo horizontal ticker */}
-              <div className="flex-1 overflow-hidden relative w-full select-none">
-                <div className="animate-marquee whitespace-nowrap flex items-center gap-16 md:gap-24">
-                  {CLIENT_LOGOS.map((logo, idx) => (
-                    <motion.div
-                      key={idx}
-                      variants={logoItemVariants}
-                      whileHover={{ scale: 1.08 }}
-                      className="opacity-40 hover:opacity-100 transition-all duration-300 cursor-pointer flex-shrink-0"
-                    >
-                      <img src={logo.src} alt={logo.name} className="h-5 md:h-6 w-auto object-contain" />
-                    </motion.div>
-                  ))}
-                  {/* Duplicate logos for seamless infinite scroll */}
-                  {CLIENT_LOGOS.map((logo, idx) => (
-                    <motion.div
-                      key={`dup-${idx}`}
-                      whileHover={{ scale: 1.08 }}
-                      className="opacity-40 hover:opacity-100 transition-all duration-300 cursor-pointer flex-shrink-0"
-                    >
-                      <img src={logo.src} alt={logo.name} className="h-5 md:h-6 w-auto object-contain" />
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
+            <div className="w-full max-w-[550px] md:max-w-[750px] lg:max-w-[900px]">
+              <SpectalLogotype className="w-full h-auto text-white drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)]" />
             </div>
           </motion.div>
+
+          {/* Gradient Overlay for subtle bottom blend */}
+          <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-black/80 via-black/30 to-transparent z-10 pointer-events-none" />
         </section>
 
-        {/* MDNT-Inspired Infinite Scrolling Marquee Banner */}
-        <div className="w-full py-6 bg-black/60 border-y border-white/5 overflow-hidden flex select-none relative z-20">
+        {/* =====================================================================
+            TRANSITION / MANIFESTO: CRAFTING EXPERIENCES THAT CONNECT YOUTH...
+           ===================================================================== */}
+        <section className="w-full py-20 md:py-28 bg-black flex flex-col items-center justify-center relative z-20 pointer-events-auto border-t border-white/5">
+          <div className="max-w-6xl mx-auto px-6 md:px-12 text-center select-none">
+            <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-syne font-black uppercase leading-[1.08] tracking-tight">
+              {MANIFESTO.map((word, i) => (
+                <motion.span
+                  key={i}
+                  initial={{ opacity: 0, y: 24, filter: "blur(8px)" }}
+                  whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  viewport={{ once: true, margin: "-8%" }}
+                  transition={{ duration: 0.65, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                  className={`inline-block mr-[0.28em] ${
+                    i >= 4
+                      ? "text-spectal-mint drop-shadow-[0_0_30px_rgba(221,236,196,0.3)]"
+                      : "text-white"
+                  }`}
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </h2>
+          </div>
+        </section>
+
+        {/* Infinite Scrolling Marquee Banner */}
+        <div className="w-full py-5 bg-black/80 border-y border-white/5 overflow-hidden flex select-none relative z-20">
           <div className="animate-marquee whitespace-nowrap flex items-center gap-8 pr-8">
             <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">Brand Solutions</span>
             <span className="w-1.5 h-1.5 rounded-full bg-spectal-mint"></span>
@@ -245,21 +203,41 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Section 1: Services / What We Do */}
-        <section id="showcase" className="w-full py-16 md:py-24 flex items-center justify-center relative z-20 pointer-events-auto border-t border-white/5 bg-black">
+        {/* =====================================================================
+            01: WHO WE ARE
+           ===================================================================== */}
+        <AboutSection />
+
+        {/* =====================================================================
+            02: WHAT WE CREATE
+           ===================================================================== */}
+        <section
+          id="showcase"
+          className="w-full py-20 md:py-32 flex items-center justify-center relative z-20 pointer-events-auto border-t border-white/5 bg-black"
+        >
           <div className="max-w-7xl w-full mx-auto px-6 md:px-12 flex flex-col select-none">
+            {/* Header with 02 Eyebrow */}
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-              <div className="flex flex-col items-start">
-                <h2 className="text-xl md:text-[1.8rem] lg:text-[2.2rem] font-boldonse font-medium tracking-tight text-white leading-[1.2] uppercase">
+              <div className="flex flex-col items-start gap-2">
+                <div className="flex items-center gap-3">
+                  <span className="w-2 h-2 rounded-full bg-spectal-red animate-pulse" />
+                  <span className="text-xs font-mono uppercase tracking-[0.25em] text-white/50">
+                    02 / WHAT WE CREATE
+                  </span>
+                </div>
+                <h2 className="text-3xl md:text-5xl lg:text-6xl font-boldonse font-medium tracking-tight text-white leading-[1.1] uppercase">
                   WHAT WE <span className="text-spectal-mint font-serif italic font-light">CREATE</span>
                 </h2>
               </div>
-              <p className="max-w-md text-xs font-mono text-spectal-mint/50 uppercase tracking-widest">
+              <p className="max-w-md text-xs font-mono text-spectal-mint/60 uppercase tracking-widest">
                 [ Built around India&apos;s next generation ]
               </p>
             </div>
-            {/* List Table of Projects */}
-            <div className="w-full flex flex-col divide-y divide-white/10 mt-6">
+
+            {/* List of Services */}
+            <div className="w-full flex flex-col divide-y divide-white/10 mt-4">
+              
+              {/* Item 1: Brand Solutions */}
               <div
                 data-interactive="true"
                 data-cursor="EXPLORE"
@@ -267,7 +245,9 @@ export default function Home() {
               >
                 <div className="flex flex-col gap-4 w-full md:w-auto">
                   <div className="flex items-center gap-8">
-                    <h3 className="text-xl md:text-2xl font-boldonse font-medium text-white tracking-wide group-hover:text-spectal-red transition-colors duration-500">BRAND SOLUTIONS</h3>
+                    <h3 className="text-xl md:text-3xl font-boldonse font-medium text-white tracking-wide group-hover:text-spectal-red transition-colors duration-500">
+                      BRAND SOLUTIONS
+                    </h3>
                   </div>
                   {/* Mobile-only inline preview image */}
                   <div className="w-full aspect-[16/10] rounded-xl overflow-hidden md:hidden border border-white/10 relative">
@@ -275,13 +255,13 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="flex flex-col md:items-end gap-2 max-w-lg">
-                  <span className="text-sm text-spectal-mint font-light">Campaigns, properties, and cultural interventions built around business objectives.</span>
-                  <span className="text-[10px] font-mono text-spectal-mint/40 uppercase tracking-wider">250+ Brand Experiences &bull; Campaigns &bull; Properties</span>
+                  <span className="text-sm md:text-base text-spectal-mint font-light leading-relaxed">
+                    Campaigns, properties, and cultural interventions built around business objectives.
+                  </span>
                 </div>
               </div>
 
-
-
+              {/* Item 2: Campus Experiences */}
               <div
                 data-interactive="true"
                 data-cursor="EXPLORE"
@@ -289,7 +269,9 @@ export default function Home() {
               >
                 <div className="flex flex-col gap-4 w-full md:w-auto">
                   <div className="flex items-center gap-8">
-                    <h3 className="text-xl md:text-2xl font-boldonse font-medium text-white tracking-wide group-hover:text-spectal-red transition-colors duration-500">CAMPUS EXPERIENCES</h3>
+                    <h3 className="text-xl md:text-3xl font-boldonse font-medium text-white tracking-wide group-hover:text-spectal-red transition-colors duration-500">
+                      CAMPUS EXPERIENCES
+                    </h3>
                   </div>
                   {/* Mobile-only inline preview image */}
                   <div className="w-full aspect-[16/10] rounded-xl overflow-hidden md:hidden border border-white/10 relative">
@@ -297,11 +279,13 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="flex flex-col md:items-end gap-2 max-w-lg">
-                  <span className="text-sm text-spectal-mint font-light">College festivals, freshers&apos; seasons, student communities, and campus-led properties shaped with institutions across India.</span>
-                  <span className="text-[10px] font-mono text-spectal-mint/40 uppercase tracking-wider">350+ Campus Festivals &bull; 2,000+ Campus Shows</span>
+                  <span className="text-sm md:text-base text-spectal-mint font-light leading-relaxed">
+                    College festivals, freshers&apos; seasons, student communities, and campus-led properties shaped with institutions across India.
+                  </span>
                 </div>
               </div>
 
+              {/* Item 3: Landmark Events */}
               <div
                 data-interactive="true"
                 data-cursor="EXPLORE"
@@ -309,8 +293,9 @@ export default function Home() {
               >
                 <div className="flex flex-col gap-4 w-full md:w-auto">
                   <div className="flex items-center gap-8">
-                    <span className="text-sm font-mono text-spectal-red">03 / EVENTS</span>
-                    <h3 className="text-xl md:text-2xl font-boldonse font-medium text-white tracking-wide group-hover:text-spectal-red transition-colors duration-500">LANDMARK EVENTS</h3>
+                    <h3 className="text-xl md:text-3xl font-boldonse font-medium text-white tracking-wide group-hover:text-spectal-red transition-colors duration-500">
+                      LANDMARK EVENTS
+                    </h3>
                   </div>
                   {/* Mobile-only inline preview image */}
                   <div className="w-full aspect-[16/10] rounded-xl overflow-hidden md:hidden border border-white/10 relative">
@@ -318,67 +303,86 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="flex flex-col md:items-end gap-2 max-w-lg">
-                  <span className="text-sm text-spectal-mint font-light">End-to-end live event creation across programming, production, partnerships, audience experience, and on-ground execution.</span>
-                  <span className="text-[10px] font-mono text-spectal-mint/40 uppercase tracking-wider">End-to-end Event Creation // Audience Experience</span>
+                  <span className="text-sm md:text-base text-spectal-mint font-light leading-relaxed">
+                    End-to-end live event creation across programming, production, partnerships, audience experience, and on-ground execution.
+                  </span>
                 </div>
               </div>
+
             </div>
           </div>
         </section>
 
-        {/* Section 2: About — Cultural Manifesto */}
-        <AboutSection />
-
-        {/* Section 3: Brand Belief & Statistics */}
-        <section id="stats" className="w-full py-16 md:py-24 flex flex-col items-center justify-center relative bg-black border-t border-white/5 z-20 pointer-events-auto">
+        {/* =====================================================================
+            03: STATS / IMPACT
+           ===================================================================== */}
+        <section
+          id="stats"
+          className="w-full py-20 md:py-32 flex flex-col items-center justify-center relative bg-black border-t border-white/5 z-20 pointer-events-auto"
+        >
           <div className="max-w-7xl w-full mx-auto px-6 md:px-12 flex flex-col items-center">
-
-            {/* Word-by-word manifesto */}
-            <h2 className="max-w-5xl mx-auto px-4 md:px-6 text-center text-[2.2rem] md:text-5xl lg:text-7xl font-black uppercase leading-[1.1] md:leading-[1.2] tracking-tighter select-none mb-16">
-              {MANIFESTO.map((word, i) => (
-                <motion.span
-                  key={i}
-                  initial={{ opacity: 0, y: 24, filter: "blur(8px)" }}
-                  whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  viewport={{ once: true, margin: "-8%" }}
-                  transition={{ duration: 0.65, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                  className={`inline-block mr-[0.28em] ${i >= 6 ? "text-spectal-mint drop-shadow-[0_0_30px_rgba(221,236,196,0.3)]" : "text-white"}`}
-                >
-                  {word}
-                </motion.span>
-              ))}
-            </h2>
+            
+            {/* 03 Eyebrow */}
+            <div className="flex items-center gap-3 mb-12">
+              <span className="w-2 h-2 rounded-full bg-spectal-red animate-pulse" />
+              <span className="text-xs font-mono uppercase tracking-[0.25em] text-white/50">
+                03 / IMPACT &amp; SCALE
+              </span>
+            </div>
 
             {/* Stat counters */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-5%" }}
-              transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-16 w-full border-t border-white/10 pt-12 pointer-events-auto"
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-16 w-full pt-4 pointer-events-auto"
             >
               {STATS.map((s) => (
-                <CountUp key={s.label} target={s.target} suffix={s.suffix} label={s.label} />
+                <CountUp
+                  key={s.label}
+                  target={s.target}
+                  decimals={s.decimals}
+                  suffix={s.suffix}
+                  label={s.label}
+                />
               ))}
             </motion.div>
           </div>
         </section>
 
-        {/* Section 4: Instagram Reels & Showreels */}
+        {/* =====================================================================
+            04: BUILT BY SPECTAL (INSTAGRAM POSTS / REELS)
+           ===================================================================== */}
         <SocialFeed />
 
-        {/* Section 5: Registration & Contact Portal */}
-        <section id="silence" className="w-full flex flex-col items-center justify-center bg-black pointer-events-auto relative z-20 py-16 md:py-24 border-t border-white/5">
-          <div className="max-w-xl w-full mx-auto px-6 text-center flex flex-col items-center select-none">
-            <h2 className="text-xl md:text-[1.8rem] lg:text-[2.2rem] font-serif text-white tracking-widest uppercase mb-12 leading-[1.2]">
+        {/* =====================================================================
+            05: GET IN TOUCH
+           ===================================================================== */}
+        <section
+          id="silence"
+          className="w-full flex flex-col items-center justify-center bg-black pointer-events-auto relative z-20 py-20 md:py-32 border-t border-white/5"
+        >
+          <div className="max-w-2xl w-full mx-auto px-6 text-center flex flex-col items-center select-none">
+            {/* 05 Eyebrow */}
+            <div className="flex items-center gap-3 mb-6">
+              <span className="w-2 h-2 rounded-full bg-spectal-red animate-pulse" />
+              <span className="text-xs font-mono uppercase tracking-[0.25em] text-white/50">
+                05 / GET IN TOUCH
+              </span>
+            </div>
+
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-white tracking-widest uppercase mb-10 leading-[1.2]">
               WORK WITH US, BUILD WITH US, PARTNER WITH US,{" "}
-              <span className="text-spectal-mint font-serif italic text-white/95">BUT FIRST&hellip;</span>
+              <span className="text-spectal-mint font-serif italic text-white/95">
+                BUT FIRST&hellip;
+              </span>
             </h2>
 
             {/* Booking / Inquiry Form */}
             <form
               onSubmit={(e) => e.preventDefault()}
-              className="pointer-events-auto w-full flex flex-col space-y-4 mt-4 text-left"
+              className="pointer-events-auto w-full flex flex-col space-y-4 text-left"
             >
               <div className="flex flex-col sm:flex-row gap-3">
                 <input
@@ -408,16 +412,16 @@ export default function Home() {
                 Talk to us.
               </button>
             </form>
-            <p className="text-[10px] font-mono text-spectal-mint/30 mt-6 tracking-wider uppercase">
+            <p className="text-[10px] font-mono text-spectal-mint/40 mt-6 tracking-wider uppercase">
               Or email us directly at bookings@spectalmanagement.com
             </p>
           </div>
         </section>
 
+        {/* Rotating Arch & Footer */}
         <RotatingArch />
         <Footer />
       </div>
-
     </main>
   );
 }
