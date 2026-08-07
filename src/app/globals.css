@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Boldonse:wght@300;400;500;600;700&family=GFS+Didot&family=Instrument+Serif:ital@0;1&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Syne:wght@700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mozilla+Text:ital,wght@0,400;0,500;0,700;0,900;1,400;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,300;1,9..40,400;1,9..40,700&display=swap');
+@import "lenis/dist/lenis.css";
 @import "tailwindcss";
 
 :root {
@@ -15,22 +16,35 @@
   --color-spectal-red: var(--spectal-red);
   --color-spectal-mint: var(--spectal-mint);
   --color-spectal-charcoal: var(--spectal-charcoal);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-boldonse: 'Boldonse', sans-serif;
-  --font-serif: 'Playfair Display', Georgia, serif;
-  --font-instrument: 'Instrument Serif', Georgia, serif;
-  --font-syne: 'Syne', sans-serif;
+  --font-sans: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'DM Sans', monospace;
+  --font-heading: 'Mozilla Text', system-ui, sans-serif;
+  /* Map old font utility names → new fonts so no class changes needed in components */
+  --font-boldonse: 'Mozilla Text', system-ui, sans-serif;
+  --font-serif: 'Mozilla Text', system-ui, sans-serif;
+  --font-instrument: 'Mozilla Text', system-ui, sans-serif;
+  --font-syne: 'Mozilla Text', system-ui, sans-serif;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  font-family: 'DM Sans', system-ui, Arial, sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+}
+
+/* Headings globally use Mozilla Text */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Mozilla Text', system-ui, sans-serif;
+}
+
+/* Font mono utility override — DM Sans instead of Geist Mono */
+.font-mono {
+  font-family: 'DM Sans', monospace;
+  letter-spacing: 0.04em;
 }
 
 @media (pointer: fine) {

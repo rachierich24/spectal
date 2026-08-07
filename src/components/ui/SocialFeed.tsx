@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence, useMotionValue, useSpring, useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 
 // Inline SVG Icons (Zero dependency, fast & reliable)
 function IconInstagram({ className = "w-4 h-4" }: { className?: string }) {
@@ -16,22 +16,6 @@ function IconHeart({ className = "w-3 h-3" }: { className?: string }) {
   return (
     <svg className={className} fill="currentColor" viewBox="0 0 24 24">
       <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-    </svg>
-  );
-}
-
-function IconComment({ className = "w-3 h-3" }: { className?: string }) {
-  return (
-    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
-      <path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18zM18 14H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z" />
-    </svg>
-  );
-}
-
-function IconExternalLink({ className = "w-3 h-3" }: { className?: string }) {
-  return (
-    <svg className={className} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
     </svg>
   );
 }
@@ -74,7 +58,7 @@ const INSTAGRAM_REELS: ReelItem[] = [
     year: "2025",
     title: "Spectal Mainstage Experience",
     videoSrc: "/real_reel_00001.mp4",
-    poster: "",
+    poster: "/feed_delhi.png",
     caption: "Feeling the heat on the mainstage! What a night this was with 20k+ screaming voices. Pure magic. ✨🚀",
     likes: "12.4K",
     comments: "342",
@@ -88,7 +72,7 @@ const INSTAGRAM_REELS: ReelItem[] = [
     year: "2024",
     title: "After Dark & Jazz Nights",
     videoSrc: "/real_reel_00002.mp4",
-    poster: "",
+    poster: "/feed_mumbai.png",
     caption: "Intimate sessions in Bandra. When the lights go down, the groove comes alive. 🎷",
     likes: "8.2K",
     comments: "211",
@@ -102,7 +86,7 @@ const INSTAGRAM_REELS: ReelItem[] = [
     year: "2024",
     title: "BLR Festival Aftermovie",
     videoSrc: "/real_reel_00003.mp4",
-    poster: "",
+    poster: "/feed_bengaluru.png",
     caption: "Lasers, lights, and non-stop energy in Bengaluru. Thank you to everyone who made this special!",
     likes: "15.1K",
     comments: "530",
@@ -116,7 +100,7 @@ const INSTAGRAM_REELS: ReelItem[] = [
     year: "2023",
     title: "Sunset Sessions by the Beach",
     videoSrc: "/real_reel_00004.mp4",
-    poster: "",
+    poster: "/feed_goa.png",
     caption: "Golden hour beats. Bringing the ultimate festival vibes straight to the coastline.",
     likes: "9.5K",
     comments: "185",
@@ -126,42 +110,42 @@ const INSTAGRAM_REELS: ReelItem[] = [
   },
 ];
 
-function ReelCard({ reel, index, activeHover, setActiveHover, isInView }: {
+function ReelCard({
+  reel,
+  isInView,
+}: {
   reel: ReelItem;
-  index: number;
-  activeHover: string | null;
-  setActiveHover: (id: string | null) => void;
   isInView: boolean;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.muted = true;
-      if (isInView) {
-        videoRef.current.play().catch(() => {
-          // Autoplay policy fallback
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (isInView) {
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // Autoplay policy prevented playback, poster remains sharp
         });
-      } else {
-        videoRef.current.pause();
       }
+    } else {
+      video.pause();
     }
   }, [isInView]);
 
-  const hoverId = `${reel.id}-${index}`;
-
   return (
-    <motion.a
+    <a
       href={reel.url}
       target="_blank"
       rel="noopener noreferrer"
-      onMouseEnter={() => setActiveHover(hoverId)}
-      onMouseLeave={() => setActiveHover(null)}
-      // cursor-none is important here so the default pointer doesn't show over our custom DRAG cursor
-      className="flex-shrink-0 w-[280px] md:w-[320px] lg:w-[340px] group relative flex flex-col justify-between bg-zinc-950 border border-white/10 rounded-2xl overflow-hidden hover:border-spectal-red/50 transition-all duration-500 shadow-2xl cursor-none"
+      data-interactive="true"
+      data-cursor="WATCH"
+      className="flex-shrink-0 w-[270px] sm:w-[300px] md:w-[330px] group relative flex flex-col justify-between bg-zinc-950 border border-white/10 rounded-2xl overflow-hidden hover:border-spectal-red hover:shadow-[0_0_30px_rgba(201,73,61,0.25)] transition-all duration-300 transform-gpu"
     >
       {/* Reel Header (Location & Reel Tag) */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 text-[10px] font-mono tracking-widest uppercase text-white/60 bg-black/60 z-20">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 text-[10px] font-mono tracking-widest uppercase text-white/70 bg-black/70 backdrop-blur-sm z-20">
         <span className="flex items-center gap-1.5">
           <span className="w-2 h-2 rounded-full bg-spectal-red animate-pulse" />
           {reel.location}
@@ -171,159 +155,106 @@ function ReelCard({ reel, index, activeHover, setActiveHover, isInView }: {
         </span>
       </div>
 
-      {/* Playable Video Reel Container */}
+      {/* Video Reel Container */}
       <div className="relative w-full aspect-[9/16] overflow-hidden bg-zinc-900 flex items-center justify-center">
         <video
           ref={videoRef}
           src={reel.videoSrc}
+          poster={reel.poster}
           loop
           muted
           playsInline
-          poster={reel.poster}
-          onCanPlay={(e) => {
-            if (isInView) e.currentTarget.play();
-          }}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+          preload="none"
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out will-change-transform transform-gpu"
         />
 
-        {/* Dark Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent group-hover:opacity-30 transition-opacity duration-500 z-10" />
+        {/* Gradient Overlay for Readable Text */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent group-hover:from-black/95 transition-all duration-300 z-10 pointer-events-none" />
 
-        {/* Instagram Reels Watermark Badge */}
-        <div className="absolute top-4 right-4 z-20 bg-black/60 backdrop-blur-md p-2.5 rounded-full border border-white/10 text-white text-xs shadow-lg">
+        {/* Instagram Watermark Badge */}
+        <div className="absolute top-3.5 right-3.5 z-20 bg-black/60 backdrop-blur-md p-2 rounded-full border border-white/15 text-white text-xs shadow-lg group-hover:bg-spectal-red group-hover:border-spectal-red transition-colors duration-300">
           <IconInstagram className="w-3.5 h-3.5" />
         </div>
 
-        {/* Bottom Permanent Video Spec (Track & Views) */}
-        <div className="absolute bottom-4 left-4 right-4 z-20 flex flex-col gap-1 text-white">
+        {/* Top User Pill on Hover */}
+        <div className="absolute top-3.5 left-3.5 z-20 flex items-center gap-2 bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/15">
+          <div className="w-4 h-4 rounded-full bg-spectal-red flex items-center justify-center">
+            <span className="text-[7px] font-black text-white">S</span>
+          </div>
+          <span className="text-[9px] font-mono text-white/90">@spectal.management</span>
+        </div>
+
+        {/* Bottom Details & CTA Overlay */}
+        <div className="absolute bottom-0 inset-x-0 p-4 z-20 flex flex-col gap-2.5 text-white">
+          {/* Audio Spec */}
           <div className="flex items-center gap-2 text-[10px] font-mono text-spectal-mint uppercase tracking-wider truncate">
             <IconMusic className="w-2.5 h-2.5 animate-spin" style={{ animationDuration: "4s" }} />
             <span className="truncate">{reel.audioTrack}</span>
           </div>
-          <div className="flex items-center justify-between text-xs font-bold font-boldonse">
+
+          {/* Title & Views */}
+          <div className="flex items-center justify-between text-xs font-bold font-syne">
             <span className="truncate">{reel.title}</span>
-            <span className="text-[10px] font-mono text-white/60 ml-2">{reel.views} views</span>
+            <span className="text-[10px] font-mono text-white/60 ml-2 flex-shrink-0">{reel.views} views</span>
+          </div>
+
+          {/* Caption Snippet */}
+          <p className="text-[11px] text-white/70 font-light line-clamp-2 leading-relaxed">
+            {reel.caption}
+          </p>
+
+          {/* Hover CTA Bar */}
+          <div className="pt-2 border-t border-white/10 flex items-center justify-between text-xs font-mono">
+            <div className="flex items-center gap-3">
+              <span className="flex items-center gap-1 text-spectal-red font-bold text-[10px]">
+                <IconHeart className="w-3 h-3 text-spectal-red" /> {reel.likes}
+              </span>
+            </div>
+            <span className="text-[9px] uppercase tracking-widest text-spectal-mint font-bold group-hover:text-white transition-colors duration-200">
+              WATCH ON INSTAGRAM ↗
+            </span>
           </div>
         </div>
-
-        {/* Authentic Instagram Post Hover Overlay Reveal */}
-        <AnimatePresence>
-          {activeHover === hoverId && (
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 15 }}
-              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-              // Keep pointer-events-none so the custom cursor tracks seamlessly without glitching on nested hovers
-              className="absolute inset-0 bg-black/88 backdrop-blur-md p-5 flex flex-col justify-between z-30 pointer-events-none"
-            >
-              {/* Overlay Header: Instagram User Pill */}
-              <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                <div className="flex items-center gap-2">
-                  <div className="w-7 h-7 rounded-full p-[1.5px] bg-gradient-to-tr from-yellow-500 via-rose-500 to-purple-600">
-                    <div className="w-full h-full bg-black rounded-full flex items-center justify-center">
-                      <span className="text-[8px] font-black text-spectal-red">S</span>
-                    </div>
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="text-[10px] font-mono font-bold text-white leading-none">spectal.management</span>
-                    <span className="text-[8px] font-mono text-spectal-mint leading-none mt-0.5">Verified Instagram Reel</span>
-                  </div>
-                </div>
-                <IconExternalLink className="text-white/40 w-3.5 h-3.5" />
-              </div>
-
-              {/* Overlay Middle: Post Caption */}
-              <p className="text-xs text-white/90 font-light leading-relaxed my-3 line-clamp-5">
-                {reel.caption}
-              </p>
-
-              {/* Overlay Footer: Likes, Comments & CTA */}
-              <div className="pt-3 border-t border-white/10 flex items-center justify-between text-xs font-mono text-white/80">
-                <div className="flex items-center gap-4">
-                  <span className="flex items-center gap-1.5 text-spectal-red font-bold">
-                    <IconHeart className="w-3 h-3 text-spectal-red" /> {reel.likes}
-                  </span>
-                  <span className="flex items-center gap-1.5 text-spectal-mint">
-                    <IconComment className="w-3 h-3 text-spectal-mint" /> {reel.comments}
-                  </span>
-                </div>
-                <span className="text-[9px] uppercase tracking-widest text-spectal-mint font-bold group-hover:underline">
-                  WATCH REEL ↗
-                </span>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
-    </motion.a>
+    </a>
   );
 }
 
 export default function SocialFeed() {
-  const [activeHover, setActiveHover] = useState<string | null>(null);
-  const [isHoveringMarquee, setIsHoveringMarquee] = useState(false);
-
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { margin: "200px 0px" });
+  const isInView = useInView(sectionRef, { margin: "100px 0px" });
 
-  // Framer Motion Custom Cursor Setup
-  const cursorX = useMotionValue(-100);
-  const cursorY = useMotionValue(-100);
-  const springConfig = { damping: 25, stiffness: 250, mass: 0.5 };
-  const cursorXSpring = useSpring(cursorX, springConfig);
-  const cursorYSpring = useSpring(cursorY, springConfig);
-
-  useEffect(() => {
-    const moveCursor = (e: MouseEvent) => {
-      cursorX.set(e.clientX);
-      cursorY.set(e.clientY);
-    };
-    window.addEventListener("mousemove", moveCursor);
-    return () => window.removeEventListener("mousemove", moveCursor);
-  }, [cursorX, cursorY]);
-
-  // Triplicated array for seamless infinite marquee loop with 4 items
-  const marqueeReels = [...INSTAGRAM_REELS, ...INSTAGRAM_REELS, ...INSTAGRAM_REELS];
+  // Doubled array for seamless infinite marquee loop (2x is all that's needed)
+  const marqueeReels = [
+    ...INSTAGRAM_REELS,
+    ...INSTAGRAM_REELS,
+  ];
 
   return (
-    <section id="reels" ref={sectionRef} className="w-full bg-black text-white py-24 md:py-32 border-t border-white/10 relative z-20 pointer-events-auto overflow-hidden">
-      {/* Custom DRAG Cursor */}
-      <motion.div
-        className="fixed top-0 left-0 w-24 h-24 bg-spectal-red rounded-full flex items-center justify-center pointer-events-none z-[9999] shadow-2xl mix-blend-normal"
+    <section
+      id="reels"
+      ref={sectionRef}
+      className="w-full bg-black text-white py-20 md:py-32 border-t border-white/10 relative z-20 pointer-events-auto overflow-hidden"
+    >
+      {/* Ambient Red & Mint Background Glow */}
+      <div
+        className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none z-0 opacity-30"
         style={{
-          x: cursorXSpring,
-          y: cursorYSpring,
-          translateX: "-50%",
-          translateY: "-50%",
-          scale: isHoveringMarquee ? 1 : 0,
-          opacity: isHoveringMarquee ? 1 : 0,
+          background: "radial-gradient(circle, rgba(201, 73, 61, 0.25) 0%, rgba(0, 0, 0, 0) 70%)",
         }}
-        transition={{ scale: { duration: 0.2 }, opacity: { duration: 0.2 } }}
-      >
-        <span className="text-white text-xs font-bold tracking-[0.2em] font-sans">DRAG</span>
-      </motion.div>
+      />
 
-      {/* Ambient Red & Mint Lighting */}
-      <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-spectal-red/5 rounded-full blur-[160px] pointer-events-none z-0" />
-
-      <div className="max-w-[1600px] mx-auto px-6 md:px-12 relative z-10 mb-16">
+      <div className="max-w-[1600px] mx-auto px-6 md:px-12 relative z-10 mb-14">
         {/* Editorial Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-white/10 pb-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, margin: "-10%" }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="max-w-3xl flex flex-col gap-2"
           >
-            <div className="flex items-center gap-3">
-              <span className="w-2 h-2 rounded-full bg-spectal-red animate-pulse" />
-              <span className="text-xs font-mono uppercase tracking-[0.25em] text-white/50">
-                04 / BUILT BY SPECTAL
-              </span>
-            </div>
-            <h2 className="text-4xl md:text-6xl font-boldonse font-medium tracking-tight leading-[1.1] md:leading-[1.15] text-white uppercase">
+            <h2 className="text-4xl md:text-6xl font-syne font-bold tracking-tight leading-[1.1] md:leading-[1.15] text-white uppercase">
               BUILT BY <span className="text-spectal-mint font-serif italic font-light">SPECTAL</span>
             </h2>
           </motion.div>
@@ -342,23 +273,16 @@ export default function SocialFeed() {
       </div>
 
       {/* Infinite Marquee Container of Playable Video Reels */}
-      <div 
-        className="w-full overflow-hidden relative select-none cursor-none"
-        onMouseEnter={() => setIsHoveringMarquee(true)}
-        onMouseLeave={() => setIsHoveringMarquee(false)}
-      >
+      <div className="w-full overflow-hidden relative select-none">
         {/* Left & Right Vignette Fades */}
-        <div className="absolute top-0 bottom-0 left-0 w-24 bg-gradient-to-r from-black to-transparent z-30 pointer-events-none" />
-        <div className="absolute top-0 bottom-0 right-0 w-24 bg-gradient-to-l from-black to-transparent z-30 pointer-events-none" />
+        <div className="absolute top-0 bottom-0 left-0 w-20 md:w-32 bg-gradient-to-r from-black via-black/80 to-transparent z-30 pointer-events-none" />
+        <div className="absolute top-0 bottom-0 right-0 w-20 md:w-32 bg-gradient-to-l from-black via-black/80 to-transparent z-30 pointer-events-none" />
 
-        <div className="animate-marquee hover:[animation-play-state:paused] flex items-center gap-6 w-max py-4">
+        <div className="animate-marquee hover:[animation-play-state:paused] flex items-center gap-6 w-max py-4 will-change-transform transform-gpu">
           {marqueeReels.map((reel, index) => (
             <ReelCard
               key={`${reel.id}-${index}`}
               reel={reel}
-              index={index}
-              activeHover={activeHover}
-              setActiveHover={setActiveHover}
               isInView={isInView}
             />
           ))}

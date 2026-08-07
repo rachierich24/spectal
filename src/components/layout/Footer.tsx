@@ -53,7 +53,7 @@ export default function Footer() {
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.05 }}
+        viewport={{ once: false, margin: "-10%" }}
         className="w-full flex flex-col items-center justify-end overflow-hidden select-none relative z-10 pt-2 mt-0"
       >
 

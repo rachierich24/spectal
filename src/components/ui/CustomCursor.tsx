@@ -28,16 +28,15 @@ export default function CustomCursor() {
   const dotTranslateY = useTransform(dotY, (val) => val - 8);
 
   useEffect(() => {
-    const updateMousePosition = (e: MouseEvent) => {
+    const updateMousePosition = (e: PointerEvent) => {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
-    };
 
-    const handleMouseOver = (e: MouseEvent) => {
+      // Check interactivity on every move (not on every child element bubble)
       const target = e.target as HTMLElement | null;
       if (!target) return;
 
-      const isInteractive = 
+      const isInteractive =
         target.tagName?.toLowerCase() === "a" ||
         target.tagName?.toLowerCase() === "button" ||
         (typeof target.closest === "function" && (target.closest("a") || target.closest("button"))) ||
@@ -50,34 +49,19 @@ export default function CustomCursor() {
       setCursorText(closestCursorText || bodyCursorText || "");
     };
 
-    const interval = setInterval(() => {
-      const bodyCursorText = document.body.getAttribute("data-cursor-text");
-      if (bodyCursorText !== cursorText) {
-        setCursorText(bodyCursorText || "");
-      }
-    }, 100);
+    const handleMouseDown = () => setIsClicked(true);
+    const handleMouseUp = () => setIsClicked(false);
 
-    const handleMouseDown = () => {
-      setIsClicked(true);
-    };
-
-    const handleMouseUp = () => {
-      setIsClicked(false);
-    };
-
-    window.addEventListener("mousemove", updateMousePosition);
-    window.addEventListener("mouseover", handleMouseOver);
-    window.addEventListener("mousedown", handleMouseDown);
-    window.addEventListener("mouseup", handleMouseUp);
+    window.addEventListener("pointermove", updateMousePosition, { passive: true });
+    window.addEventListener("mousedown", handleMouseDown, { passive: true });
+    window.addEventListener("mouseup", handleMouseUp, { passive: true });
 
     return () => {
-      clearInterval(interval);
-      window.removeEventListener("mousemove", updateMousePosition);
-      window.removeEventListener("mouseover", handleMouseOver);
+      window.removeEventListener("pointermove", updateMousePosition);
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mouseup", handleMouseUp);
     };
-  }, [cursorText, cursorX, cursorY]);
+  }, [cursorX, cursorY]);
 
   return (
     <>

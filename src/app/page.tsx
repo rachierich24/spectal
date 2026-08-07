@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform, useInView } from "framer-motion";
 import Scene from "@/components/canvas/Scene";
 import SpectalExperience from "@/components/canvas/SpectalExperience";
@@ -34,8 +34,8 @@ function CountUp({
   label: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
+  const displayRef = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-10%" });
-  const [count, setCount] = useState(0);
 
   useEffect(() => {
     if (!isInView) return;
@@ -45,20 +45,27 @@ function CountUp({
     const step = (now: number) => {
       const t = Math.min((now - start) / duration, 1);
       const eased = 1 - Math.pow(1 - t, 3);
-      setCount(eased * target);
+      const current = eased * target;
+      // Write directly to DOM — zero React re-renders during animation
+      if (displayRef.current) {
+        displayRef.current.textContent =
+          prefix +
+          (decimals > 0 ? current.toFixed(decimals) : Math.floor(current).toString()) +
+          suffix;
+      }
       if (t < 1) raf = requestAnimationFrame(step);
-      else setCount(target);
     };
     raf = requestAnimationFrame(step);
     return () => cancelAnimationFrame(raf);
-  }, [isInView, target]);
+  }, [isInView, target, decimals, prefix, suffix]);
 
   return (
     <div ref={ref} className="flex flex-col items-center gap-3">
-      <span className="text-4xl sm:text-5xl md:text-7xl font-black tabular-nums text-spectal-mint drop-shadow-[0_0_20px_rgba(221,236,196,0.3)] font-syne">
-        {prefix}
-        {decimals > 0 ? count.toFixed(decimals) : Math.floor(count)}
-        {suffix}
+      <span
+        ref={displayRef}
+        className="text-4xl sm:text-5xl md:text-7xl font-black tabular-nums text-spectal-mint drop-shadow-[0_0_20px_rgba(221,236,196,0.3)] font-syne"
+      >
+        {prefix}0{suffix}
       </span>
       <span className="text-[10px] md:text-xs font-mono uppercase tracking-[0.25em] text-white/50 text-center">
         {label}
@@ -110,17 +117,17 @@ export default function Home() {
           id="arrival"
           className="w-full h-screen flex items-center justify-center relative overflow-hidden bg-black"
         >
-          {/* Background Video */}
+          {/* Background Video — single source; CSS positions for mobile/desktop */}
           <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
             <video
               autoPlay
               loop
               muted
               playsInline
+              preload="auto"
               className="w-full h-full object-cover"
             >
-              <source src="/horizontalformat.mp4" media="(min-width: 768px)" type="video/mp4" />
-              <source src="/verticalformat.mp4" media="(max-width: 767px)" type="video/mp4" />
+              <source src="/horizontalformat.mp4" type="video/mp4" />
             </video>
           </div>
 
@@ -143,6 +150,8 @@ export default function Home() {
 
         {/* =====================================================================
             TRANSITION / MANIFESTO: CRAFTING EXPERIENCES THAT CONNECT YOUTH...
+           ===================================================================== *        {/* =====================================================================
+            TRANSITION / MANIFESTO: CRAFTING EXPERIENCES THAT CONNECT YOUTH...
            ===================================================================== */}
         <section className="w-full py-20 md:py-28 bg-black flex flex-col items-center justify-center relative z-20 pointer-events-auto border-t border-white/5">
           <div className="max-w-6xl mx-auto px-6 md:px-12 text-center select-none">
@@ -150,10 +159,10 @@ export default function Home() {
               {MANIFESTO.map((word, i) => (
                 <motion.span
                   key={i}
-                  initial={{ opacity: 0, y: 24, filter: "blur(8px)" }}
+                  initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
                   whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  viewport={{ once: true, margin: "-8%" }}
-                  transition={{ duration: 0.65, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                  viewport={{ once: false, margin: "-10%" }}
+                  transition={{ duration: 0.65, delay: (i % 4) * 0.06, ease: [0.22, 1, 0.36, 1] }}
                   className={`inline-block mr-[0.28em] ${
                     i >= 4
                       ? "text-spectal-mint drop-shadow-[0_0_30px_rgba(221,236,196,0.3)]"
@@ -167,39 +176,27 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Infinite Scrolling Marquee Banner */}
-        <div className="w-full py-5 bg-black/80 border-y border-white/5 overflow-hidden flex select-none relative z-20">
-          <div className="animate-marquee whitespace-nowrap flex items-center gap-8 pr-8">
-            <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">Brand Solutions</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-spectal-mint"></span>
-            <span className="text-xs font-mono tracking-widest text-white uppercase">Campus Experiences</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-spectal-red"></span>
-            <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">Landmark Events</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-spectal-mint"></span>
-            <span className="text-xs font-mono tracking-widest text-white uppercase">Youth Culture</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-spectal-red"></span>
-            <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">Gen-Z</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-spectal-mint"></span>
-            <span className="text-xs font-mono tracking-widest text-white uppercase">Gen-Alpha</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-spectal-red"></span>
-            <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">Live Experiences</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-spectal-mint"></span>
+        {/* Infinite Scrolling Marquee Banner (What We Create Headings) */}
+        <div className="w-full py-5 bg-black/90 border-y border-white/10 overflow-hidden flex select-none relative z-20">
+          <div className="animate-marquee whitespace-nowrap flex items-center gap-8 pr-8 will-change-transform transform-gpu">
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="flex items-center gap-8">
+                <span className="text-xs md:text-sm font-mono tracking-[0.25em] text-spectal-red uppercase font-bold">
+                  Brand Solutions
+                </span>
+                <span className="w-1.5 h-1.5 rounded-full bg-spectal-mint"></span>
 
-            {/* Duplicated for seamless loop */}
-            <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">Brand Solutions</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-spectal-mint"></span>
-            <span className="text-xs font-mono tracking-widest text-white uppercase">Campus Experiences</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-spectal-red"></span>
-            <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">Landmark Events</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-spectal-mint"></span>
-            <span className="text-xs font-mono tracking-widest text-white uppercase">Youth Culture</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-spectal-red"></span>
-            <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">Gen-Z</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-spectal-mint"></span>
-            <span className="text-xs font-mono tracking-widest text-white uppercase">Gen-Alpha</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-spectal-red"></span>
-            <span className="text-xs font-mono tracking-widest text-spectal-red uppercase">Live Experiences</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-spectal-mint"></span>
+                <span className="text-xs md:text-sm font-mono tracking-[0.25em] text-white uppercase font-bold">
+                  Campus Experiences
+                </span>
+                <span className="w-1.5 h-1.5 rounded-full bg-spectal-red"></span>
+
+                <span className="text-xs md:text-sm font-mono tracking-[0.25em] text-spectal-mint uppercase font-bold">
+                  Landmark Events
+                </span>
+                <span className="w-1.5 h-1.5 rounded-full bg-white"></span>
+              </div>
+            ))}
           </div>
         </div>
 
@@ -216,15 +213,15 @@ export default function Home() {
           className="w-full py-20 md:py-32 flex items-center justify-center relative z-20 pointer-events-auto border-t border-white/5 bg-black"
         >
           <div className="max-w-7xl w-full mx-auto px-6 md:px-12 flex flex-col select-none">
-            {/* Header with 02 Eyebrow */}
-            <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+            {/* Header */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, margin: "-10%" }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6"
+            >
               <div className="flex flex-col items-start gap-2">
-                <div className="flex items-center gap-3">
-                  <span className="w-2 h-2 rounded-full bg-spectal-red animate-pulse" />
-                  <span className="text-xs font-mono uppercase tracking-[0.25em] text-white/50">
-                    02 / WHAT WE CREATE
-                  </span>
-                </div>
                 <h2 className="text-3xl md:text-5xl lg:text-6xl font-boldonse font-medium tracking-tight text-white leading-[1.1] uppercase">
                   WHAT WE <span className="text-spectal-mint font-serif italic font-light">CREATE</span>
                 </h2>
@@ -232,13 +229,17 @@ export default function Home() {
               <p className="max-w-md text-xs font-mono text-spectal-mint/60 uppercase tracking-widest">
                 [ Built around India&apos;s next generation ]
               </p>
-            </div>
+            </motion.div>
 
             {/* List of Services */}
             <div className="w-full flex flex-col divide-y divide-white/10 mt-4">
               
               {/* Item 1: Brand Solutions */}
-              <div
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, margin: "-10%" }}
+                transition={{ duration: 0.7, delay: 0.05 }}
                 data-interactive="true"
                 data-cursor="EXPLORE"
                 className="py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 group cursor-pointer hover:bg-white/[0.02] px-6 transition-all duration-300 pointer-events-auto"
@@ -259,10 +260,14 @@ export default function Home() {
                     Campaigns, properties, and cultural interventions built around business objectives.
                   </span>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Item 2: Campus Experiences */}
-              <div
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, margin: "-10%" }}
+                transition={{ duration: 0.7, delay: 0.1 }}
                 data-interactive="true"
                 data-cursor="EXPLORE"
                 className="py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 group cursor-pointer hover:bg-white/[0.02] px-6 transition-all duration-300 pointer-events-auto"
@@ -283,10 +288,14 @@ export default function Home() {
                     College festivals, freshers&apos; seasons, student communities, and campus-led properties shaped with institutions across India.
                   </span>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Item 3: Landmark Events */}
-              <div
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, margin: "-10%" }}
+                transition={{ duration: 0.7, delay: 0.15 }}
                 data-interactive="true"
                 data-cursor="EXPLORE"
                 className="py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 group cursor-pointer hover:bg-white/[0.02] px-6 transition-all duration-300 pointer-events-auto"
@@ -307,7 +316,7 @@ export default function Home() {
                     End-to-end live event creation across programming, production, partnerships, audience experience, and on-ground execution.
                   </span>
                 </div>
-              </div>
+              </motion.div>
 
             </div>
           </div>
@@ -322,20 +331,12 @@ export default function Home() {
         >
           <div className="max-w-7xl w-full mx-auto px-6 md:px-12 flex flex-col items-center">
             
-            {/* 03 Eyebrow */}
-            <div className="flex items-center gap-3 mb-12">
-              <span className="w-2 h-2 rounded-full bg-spectal-red animate-pulse" />
-              <span className="text-xs font-mono uppercase tracking-[0.25em] text-white/50">
-                03 / IMPACT &amp; SCALE
-              </span>
-            </div>
-
             {/* Stat counters */}
             <motion.div
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-5%" }}
-              transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              viewport={{ once: false, margin: "-10%" }}
+              transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
               className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-16 w-full pt-4 pointer-events-auto"
             >
               {STATS.map((s) => (
@@ -363,15 +364,13 @@ export default function Home() {
           id="silence"
           className="w-full flex flex-col items-center justify-center bg-black pointer-events-auto relative z-20 py-20 md:py-32 border-t border-white/5"
         >
-          <div className="max-w-2xl w-full mx-auto px-6 text-center flex flex-col items-center select-none">
-            {/* 05 Eyebrow */}
-            <div className="flex items-center gap-3 mb-6">
-              <span className="w-2 h-2 rounded-full bg-spectal-red animate-pulse" />
-              <span className="text-xs font-mono uppercase tracking-[0.25em] text-white/50">
-                05 / GET IN TOUCH
-              </span>
-            </div>
-
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, margin: "-10%" }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="max-w-2xl w-full mx-auto px-6 text-center flex flex-col items-center select-none"
+          >
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-white tracking-widest uppercase mb-10 leading-[1.2]">
               WORK WITH US, BUILD WITH US, PARTNER WITH US,{" "}
               <span className="text-spectal-mint font-serif italic text-white/95">
@@ -415,7 +414,7 @@ export default function Home() {
             <p className="text-[10px] font-mono text-spectal-mint/40 mt-6 tracking-wider uppercase">
               Or email us directly at bookings@spectalmanagement.com
             </p>
-          </div>
+          </motion.div>
         </section>
 
         {/* Rotating Arch & Footer */}

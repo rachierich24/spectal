@@ -70,7 +70,7 @@ export default function FancyTeamCards() {
               key={member.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, margin: "-10%" }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="group flex flex-col justify-between cursor-pointer border-b border-white/10 pb-8"
             >

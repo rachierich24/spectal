@@ -51,54 +51,20 @@ export default function ConstellationGalaxy() {
     starsRef.current.instanceMatrix.needsUpdate = true;
   }, [particles, dummy]);
 
-  useFrame((state) => {
+  useFrame((state, delta) => {
+    if (!groupRef.current) return;
+
     const scrollProgress = scrollStore.progress;
+    const isVisible = scrollProgress > 3.0 && scrollProgress < 7.0;
 
-    if (groupRef.current) {
-      const isVisible = scrollProgress > 3.0 && scrollProgress < 7.0;
-      groupRef.current.visible = isVisible;
+    // Hide/show without expensive logic when not in range
+    groupRef.current.visible = isVisible;
+    if (!isVisible) return; // skip ALL math when not visible
 
-      if (!isVisible) return;
-
-      const targetZ = (scrollProgress - 5.0) * 80;
-      groupRef.current.position.z = THREE.MathUtils.lerp(groupRef.current.position.z, targetZ, 0.08); // smoother scroll follow
-      groupRef.current.rotation.z += 0.0005; // slower rotation for cinematic space depth
-
-      // Dynamic real-time star scale/twinkle updates
-      if (starsRef.current) {
-        const time = state.clock.getElapsedTime();
-
-        // Smoothly fade in/out based on scrollProgress
-        let opacity = 0;
-        if (scrollProgress >= 3.0 && scrollProgress < 3.4) {
-          opacity = ((scrollProgress - 3.0) / 0.4) * 0.15; // Fade in from 3.0 to 3.4
-        } else if (scrollProgress >= 3.4 && scrollProgress <= 6.2) {
-          opacity = 0.15;
-        } else if (scrollProgress > 6.2) {
-          opacity = Math.max(0, ((7.0 - scrollProgress) / 0.8) * 0.15); // Fade out at the very end
-        }
-
-        const material = starsRef.current.material as THREE.MeshBasicMaterial;
-        if (material) {
-          material.opacity = opacity;
-        }
-        particles.forEach((particle, i) => {
-          // Unique sine-wave twinkle per star using its phase and speed
-          const twinkle = 0.7 + Math.sin(time * particle.speed + particle.phase) * 0.3;
-
-          dummy.position.set(particle.x, particle.y, particle.z);
-
-          // Apply twinkling to the base scale
-          const baseScale = 0.4 + (i % 5 === 0 ? 0.8 : 0.3);
-          const scale = baseScale * twinkle;
-          dummy.scale.set(scale, scale, scale);
-
-          dummy.updateMatrix();
-          starsRef.current!.setMatrixAt(i, dummy.matrix);
-        });
-        starsRef.current.instanceMatrix.needsUpdate = true;
-      }
-    }
+    const targetZ = (scrollProgress - 5.0) * 80;
+    groupRef.current.position.z = THREE.MathUtils.lerp(groupRef.current.position.z, targetZ, 0.08);
+    groupRef.current.rotation.z += delta * 0.04;
+    groupRef.current.rotation.y += delta * 0.02;
   });
 
   return (
