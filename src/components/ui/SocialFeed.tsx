@@ -164,7 +164,7 @@ function ReelCard({
           loop
           muted
           playsInline
-          preload="none"
+          preload="metadata"
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out will-change-transform transform-gpu"
         />
 
@@ -222,7 +222,7 @@ function ReelCard({
 
 export default function SocialFeed() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { margin: "100px 0px" });
+  const isInView = useInView(sectionRef, { margin: "300px 0px" });
 
   // Doubled array for seamless infinite marquee loop (2x is all that's needed)
   const marqueeReels = [
