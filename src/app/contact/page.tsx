@@ -32,12 +32,26 @@ export default function ContactPage() {
                 Tell us what you're working on. We'll show you what's possible. Let's build something together.
               </p>
               <div className="space-y-6 text-sm font-mono tracking-widest uppercase text-spectal-mint/60">
-                <p>Email: hello@spectal.com</p>
-                <p>HQ: Nashville, TN</p>
+                <p>
+                  Email:{" "}
+                  <a
+                    href="mailto:bookings@spectalmanagement.com"
+                    className="text-spectal-mint hover:text-white hover:underline font-bold transition-colors"
+                  >
+                    bookings@spectalmanagement.com
+                  </a>
+                </p>
+                <p>HQ: New Delhi, IN</p>
               </div>
             </div>
 
-            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+            <form
+              className="space-y-6"
+              onSubmit={(e) => {
+                e.preventDefault();
+                window.location.href = "mailto:bookings@spectalmanagement.com";
+              }}
+            >
               <div>
                 <input type="text" placeholder="NAME" className="w-full bg-transparent border-b border-white/20 py-4 text-white placeholder:text-white/40 focus:outline-none focus:border-spectal-red transition-colors" />
               </div>

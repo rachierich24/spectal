@@ -31,10 +31,10 @@ export default function WorkWithUsPage() {
               We are always looking for passionate individuals who understand the power of experiential marketing. If you thrive in fast-paced environments and love creating unforgettable moments, you belong here.
             </p>
             <a
-              href="/contact"
+              href="mailto:bookings@spectalmanagement.com"
               className="inline-block px-8 py-4 border border-white/20 text-xs font-mono tracking-widest uppercase hover:bg-white hover:text-black transition-colors duration-300"
             >
-              View Open Roles
+              Contact Us &bull; bookings@spectalmanagement.com
             </a>
           </div>
         </div>

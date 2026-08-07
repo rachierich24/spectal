@@ -357,65 +357,7 @@ export default function Home() {
            ===================================================================== */}
         <SocialFeed />
 
-        {/* =====================================================================
-            05: GET IN TOUCH
-           ===================================================================== */}
-        <section
-          id="silence"
-          className="w-full flex flex-col items-center justify-center bg-black pointer-events-auto relative z-20 py-20 md:py-32 border-t border-white/5"
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, margin: "-10%" }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="max-w-2xl w-full mx-auto px-6 text-center flex flex-col items-center select-none"
-          >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-white tracking-widest uppercase mb-10 leading-[1.2]">
-              WORK WITH US, BUILD WITH US, PARTNER WITH US,{" "}
-              <span className="text-spectal-mint font-serif italic text-white/95">
-                BUT FIRST&hellip;
-              </span>
-            </h2>
 
-            {/* Booking / Inquiry Form */}
-            <form
-              onSubmit={(e) => e.preventDefault()}
-              className="pointer-events-auto w-full flex flex-col space-y-4 text-left"
-            >
-              <div className="flex flex-col sm:flex-row gap-3">
-                <input
-                  type="text"
-                  placeholder="Your name"
-                  required
-                  className="flex-grow bg-white/5 border border-white/10 rounded-lg px-5 py-4 text-sm text-white focus:outline-none focus:border-spectal-mint focus:ring-1 focus:ring-spectal-mint transition-all duration-300"
-                />
-                <input
-                  type="email"
-                  placeholder="Email address"
-                  required
-                  className="flex-grow bg-white/5 border border-white/10 rounded-lg px-5 py-4 text-sm text-white focus:outline-none focus:border-spectal-mint focus:ring-1 focus:ring-spectal-mint transition-all duration-300"
-                />
-              </div>
-              <input
-                type="text"
-                placeholder="What are you looking for? (Brand solutions, campus experiences, landmark events…)"
-                required
-                className="w-full bg-white/5 border border-white/10 rounded-lg px-5 py-4 text-sm text-white focus:outline-none focus:border-spectal-mint focus:ring-1 focus:ring-spectal-mint transition-all duration-300"
-              />
-              <button
-                type="submit"
-                data-interactive="true"
-                className="w-full py-4 bg-spectal-red text-spectal-charcoal text-xs font-mono tracking-widest uppercase hover:bg-white hover:shadow-[0_0_20px_rgba(201,73,61,0.3)] transition-all duration-500 rounded-lg font-bold text-center"
-              >
-                Talk to us.
-              </button>
-            </form>
-            <p className="text-[10px] font-mono text-spectal-mint/40 mt-6 tracking-wider uppercase">
-              Or email us directly at bookings@spectalmanagement.com
-            </p>
-          </motion.div>
-        </section>
 
         {/* Rotating Arch & Footer */}
         <RotatingArch />

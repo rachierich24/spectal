@@ -47,6 +47,19 @@ export default function Footer() {
     <footer
       className="w-full bg-[#050505] text-spectal-mint pt-8 pb-0 relative z-20 pointer-events-auto overflow-hidden flex flex-col justify-between"
     >
+      {/* Contact & Email Direct Link Bar */}
+      <div className="w-full flex items-center justify-center pb-6 border-b border-white/10 relative z-20">
+        <a
+          href="mailto:bookings@spectalmanagement.com"
+          data-interactive="true"
+          className="inline-flex items-center gap-2.5 text-xs sm:text-sm font-mono tracking-widest text-spectal-mint hover:text-white hover:underline transition-colors duration-300 uppercase"
+        >
+          <svg className="w-4 h-4 fill-current text-spectal-red" viewBox="0 0 24 24">
+            <path d="M1.5 4.5a3 3 0 013-3h15a3 3 0 013 3v15a3 3 0 01-3 3h-15a3 3 0 01-3-3v-15zm3 0v.656l7.5 4.687 7.5-4.687V4.5a1.5 1.5 0 00-1.5-1.5h-15a1.5 1.5 0 00-1.5 1.5zm16.5 2.844l-7.062 4.414a.75.75 0 01-.876 0L4.5 7.344V19.5a1.5 1.5 0 001.5 1.5h15a1.5 1.5 0 001.5-1.5V7.344z" />
+          </svg>
+          <span>bookings@spectalmanagement.com</span>
+        </a>
+      </div>
 
 
       {/* Massive Scroll-Reveal 'spectal' Text */}

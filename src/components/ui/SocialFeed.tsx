@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 
 // Inline SVG Icons (Zero dependency, fast & reliable)
@@ -16,14 +16,6 @@ function IconHeart({ className = "w-3 h-3" }: { className?: string }) {
   return (
     <svg className={className} fill="currentColor" viewBox="0 0 24 24">
       <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-    </svg>
-  );
-}
-
-function IconMusic({ className = "w-3 h-3", style }: { className?: string; style?: React.CSSProperties }) {
-  return (
-    <svg className={className} style={style} fill="currentColor" viewBox="0 0 24 24">
-      <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
     </svg>
   );
 }
@@ -144,12 +136,8 @@ function ReelCard({
       data-cursor="WATCH"
       className="flex-shrink-0 w-[270px] sm:w-[300px] md:w-[330px] group relative flex flex-col justify-between bg-zinc-950 border border-white/10 rounded-2xl overflow-hidden hover:border-spectal-red hover:shadow-[0_0_30px_rgba(201,73,61,0.25)] transition-all duration-300 transform-gpu"
     >
-      {/* Reel Header (Location & Reel Tag) */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 text-[10px] font-mono tracking-widest uppercase text-white/70 bg-black/70 backdrop-blur-sm z-20">
-        <span className="flex items-center gap-1.5">
-          <span className="w-2 h-2 rounded-full bg-spectal-red animate-pulse" />
-          {reel.location}
-        </span>
+      {/* Reel Header (Reel Tag) */}
+      <div className="flex items-center justify-end px-4 py-3 border-b border-white/10 text-[10px] font-mono tracking-widest uppercase text-white/70 bg-black/70 backdrop-blur-sm z-20">
         <span className="text-spectal-mint font-bold flex items-center gap-1">
           <IconPlay className="w-2 h-2" /> REEL
         </span>
@@ -185,26 +173,9 @@ function ReelCard({
         </div>
 
         {/* Bottom Details & CTA Overlay */}
-        <div className="absolute bottom-0 inset-x-0 p-4 z-20 flex flex-col gap-2.5 text-white">
-          {/* Audio Spec */}
-          <div className="flex items-center gap-2 text-[10px] font-mono text-spectal-mint uppercase tracking-wider truncate">
-            <IconMusic className="w-2.5 h-2.5 animate-spin" style={{ animationDuration: "4s" }} />
-            <span className="truncate">{reel.audioTrack}</span>
-          </div>
-
-          {/* Title & Views */}
-          <div className="flex items-center justify-between text-xs font-bold font-syne">
-            <span className="truncate">{reel.title}</span>
-            <span className="text-[10px] font-mono text-white/60 ml-2 flex-shrink-0">{reel.views} views</span>
-          </div>
-
-          {/* Caption Snippet */}
-          <p className="text-[11px] text-white/70 font-light line-clamp-2 leading-relaxed">
-            {reel.caption}
-          </p>
-
+        <div className="absolute bottom-0 inset-x-0 p-4 z-20 flex flex-col text-white">
           {/* Hover CTA Bar */}
-          <div className="pt-2 border-t border-white/10 flex items-center justify-between text-xs font-mono">
+          <div className="flex items-center justify-between text-xs font-mono">
             <div className="flex items-center gap-3">
               <span className="flex items-center gap-1 text-spectal-red font-bold text-[10px]">
                 <IconHeart className="w-3 h-3 text-spectal-red" /> {reel.likes}

@@ -49,7 +49,7 @@ export default function RotatingArch() {
             </span>
           </h2>
           <a
-            href="/contact"
+            href="mailto:bookings@spectalmanagement.com"
             data-interactive="true"
             className="group px-6 py-3 sm:px-8 sm:py-3.5 bg-white text-black text-[11px] sm:text-xs font-bold tracking-widest uppercase hover:bg-spectal-red hover:text-white transition-all duration-300 rounded-sm inline-flex items-center shadow-2xl"
           >

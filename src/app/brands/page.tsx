@@ -171,7 +171,7 @@ export default function BrandsPage() {
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center items-center">
               <a
-                href="/contact"
+                href="mailto:bookings@spectalmanagement.com"
                 className="px-8 py-3.5 bg-spectal-red text-white text-xs font-mono tracking-widest uppercase hover:bg-white hover:text-black transition-all duration-300 rounded-sm"
               >
                 Get In Touch
@@ -289,7 +289,7 @@ export default function BrandsPage() {
                   </p>
                 </div>
                 <div className="flex items-center gap-2 text-[10px] font-mono text-spectal-mint hover:text-white transition-colors duration-300">
-                  <a href="/contact">DISCUSS PROJECT &rarr;</a>
+                  <a href="mailto:bookings@spectalmanagement.com">DISCUSS PROJECT &rarr;</a>
                 </div>
               </motion.div>
             ))}
@@ -309,7 +309,7 @@ export default function BrandsPage() {
               </p>
             </div>
             <a
-              href="/contact"
+              href="mailto:bookings@spectalmanagement.com"
               className="px-6 py-3 bg-white text-black hover:bg-spectal-red hover:text-white transition-colors duration-300 text-[10px] font-mono tracking-widest uppercase rounded-sm flex-shrink-0"
             >
               Get In Touch
@@ -437,7 +437,7 @@ export default function BrandsPage() {
 
           <div className="mt-8">
             <a
-              href="/contact"
+              href="mailto:bookings@spectalmanagement.com"
               className="px-10 py-4 bg-spectal-mint text-black font-mono text-[10px] tracking-widest uppercase hover:bg-white transition-colors duration-300 rounded-sm"
             >
               Get In Touch
