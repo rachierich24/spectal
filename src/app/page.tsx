@@ -250,10 +250,6 @@ export default function Home() {
                       BRAND SOLUTIONS
                     </h3>
                   </div>
-                  {/* Mobile-only inline preview image */}
-                  <div className="w-full aspect-[16/10] rounded-xl overflow-hidden md:hidden border border-white/10 relative">
-                    <img src="/event_spatial.png" alt="Brand Solutions" className="w-full h-full object-cover" />
-                  </div>
                 </div>
                 <div className="flex flex-col md:items-end gap-2 max-w-lg">
                   <span className="text-sm md:text-base text-spectal-mint font-light leading-relaxed">
@@ -278,10 +274,6 @@ export default function Home() {
                       CAMPUS EXPERIENCES
                     </h3>
                   </div>
-                  {/* Mobile-only inline preview image */}
-                  <div className="w-full aspect-[16/10] rounded-xl overflow-hidden md:hidden border border-white/10 relative">
-                    <img src="/event_hackathon.png" alt="Campus Experiences" className="w-full h-full object-cover" />
-                  </div>
                 </div>
                 <div className="flex flex-col md:items-end gap-2 max-w-lg">
                   <span className="text-sm md:text-base text-spectal-mint font-light leading-relaxed">
@@ -305,10 +297,6 @@ export default function Home() {
                     <h3 className="text-xl md:text-3xl font-boldonse font-medium text-white tracking-wide group-hover:text-spectal-red transition-colors duration-500">
                       LANDMARK EVENTS
                     </h3>
-                  </div>
-                  {/* Mobile-only inline preview image */}
-                  <div className="w-full aspect-[16/10] rounded-xl overflow-hidden md:hidden border border-white/10 relative">
-                    <img src="/event_mainstage.png" alt="Landmark Events" className="w-full h-full object-cover" />
                   </div>
                 </div>
                 <div className="flex flex-col md:items-end gap-2 max-w-lg">
