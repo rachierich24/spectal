@@ -42,18 +42,19 @@ export default function RotatingArch() {
 
         {/* Inner Content (Heading & CTA Button) */}
         <div className="relative z-10 text-center flex flex-col items-center justify-end pb-4 sm:pb-8 md:pb-14 px-6 pointer-events-auto">
-          <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-black tracking-tight text-white mb-4 sm:mb-6 max-w-2xl leading-[1.1] md:leading-[0.92] font-heading uppercase">
-            Tell us what you&apos;re working on.<br className="hidden sm:inline" />{" "}
-            <span className="text-spectal-mint font-serif italic font-light lowercase text-base sm:text-2xl md:text-3xl lg:text-4xl">
-              we&apos;ll show you what&apos;s possible.
+          <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-white mb-4 sm:mb-6 max-w-3xl leading-[1.1] md:leading-[0.95] uppercase">
+            Get In Touch<br />
+            <span className="text-spectal-mint font-serif italic font-light lowercase text-base sm:text-2xl md:text-3xl lg:text-4xl block mt-2">
+              Work with us, build with us, partner with us, but first…
             </span>
           </h2>
           <a
+            id="bookings"
             href="mailto:bookings@spectalmanagement.com"
             data-interactive="true"
             className="group px-6 py-3 sm:px-8 sm:py-3.5 bg-white text-black text-[11px] sm:text-xs font-bold tracking-widest uppercase hover:bg-spectal-red hover:text-white transition-all duration-300 rounded-sm inline-flex items-center shadow-2xl"
           >
-            GET IN TOUCH
+            Talk to us
             <span className="text-spectal-red group-hover:text-white ml-2.5 sm:ml-3 inline-block animate-pulse text-[10px]">●</span>
           </a>
         </div>
